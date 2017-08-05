@@ -1,0 +1,17 @@
+4		  ! Physics Model (1=AO,4=MAID98,5=MAID2000)
+.20 .12 .20 .20   ! the sizes of the integration regions
+4	          ! npart
+1	          ! 1: pi0 , 3:pi+
+.2                ! a limit on the error in (mm)**2
+4.0               ! target cell length (cm)
+.43               ! radius of target cyclinder
+.082              ! x-coord of beam position
+-.449             ! y-coord of beam position
+-.139             ! z-coord of beam positio
+4.045             ! beam energy
+1.2 4.0           ! Q2_min, Q2_max
+1.0 3.3           ! scattered electron momentum min and max
+.005              ! minimum photon energy for integration
+250000	          ! number of events
+0.	          ! a multiplication factor for sigr_max
+.005              ! sigr_max
