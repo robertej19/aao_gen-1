@@ -13,8 +13,20 @@ C------------------------------------------------------------------------------
         real vec_f(max_mp)
         real factor
         integer i
-
+        if (w.le.1.1) w = 1.1 
+        if (q2.le.5.and.w.le.2) then
         call interp(Q2,W,vec_f)
+        endif
+        if (q2.gt.5.and.w.le.2) then
+        call interp(5.0,W,vec_f)
+        endif
+        if (q2.le.5.and.w.gt.2) then
+        call interp(Q2,2.0,vec_f)
+        endif
+        if (q2.gt.5.and.w.gt.2) then
+        call interp(5.0,2.0,vec_f)
+        endif
+c        call interp(Q2,W,vec_f)
         factor = 0.141383e0     ! Convert from 10**-3/m_pi+ to sqrt(microbarns)
 c
 c	nu_cm * S = qv_mag_cm * L

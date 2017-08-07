@@ -106,3 +106,4 @@ c     print *, 'dsigma.F:',sig0, fkt, opt1
       endif
 c     
       end
+em

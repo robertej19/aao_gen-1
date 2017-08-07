@@ -282,8 +282,9 @@ c     1      'spp_tbl/maid2000-PPpi.tbl',data_file)
         endif
         if (channel_opt.eq.3) then
           if (resonance_opt.eq.0) then
-            call revinm('CLAS_PARMS',
-     1      'spp_tbl/maid2000-PNpi.tbl',data_file)
+            data_file = '/group/clas/parms/spp_tbl/maid07-PNpi.tbl';
+c            call revinm('CLAS_PARMS',
+c     1      'spp_tbl/maid2000-PNpi.tbl',data_file)
           elseif (resonance_opt.eq.1) then
             call revinm('CLAS_PARMS',
      1      'spp_tbl/maid2000_p33_on-PNpi.tbl',data_file)
