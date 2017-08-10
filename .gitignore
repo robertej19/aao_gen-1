@@ -2,6 +2,7 @@ build
 *~
 depends
 *.root
+*.hbook
 *.rz
 *.out
 *.lund

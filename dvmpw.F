@@ -48,20 +48,22 @@ c
       S_LTP = 0.0
       IF(.NOT.CHECK_KINE(COST,W,Q2,E,del2,xb,JACG,JACR)) RETURN 
        EPS=EPSILON(XB,q2,e)
-       S_T  =  SIGMA_T   (COST,W,Q2,E)
-       S_L  =  SIGMA_L   (COST,W,Q2,E)
-       S_LT =  2.0*SIGMA_LT  (COST,W,Q2,E)
-       S_TT =  SIGMA_TT  (COST,W,Q2,E)
-       S_LTP = 2.0*SIGMA_LTP (COST,W,Q2,E)
+       S_T  =  0.001/(2.*PI)*SIGMA_T   (COST,W,Q2,E)
+       S_L  =  0.001/(2.*PI)*SIGMA_L   (COST,W,Q2,E)
+       S_LT =  0.001/(2.*PI)*2.0*SIGMA_LT  (COST,W,Q2,E)
+       S_TT =  0.001/(2.*PI)*SIGMA_TT  (COST,W,Q2,E)
+       S_LTP = 0.001/(2.*PI)*2.0*SIGMA_LTP (COST,W,Q2,E)
 
 c
-       sigma0 =FLUXW(xb,Q2,E)/(2.*PI)*JACG*(
+c       sigma0 =0.000001*FLUXW(xb,Q2,E)/(2.*PI)*JACG*(
+       sigma0 =1/(2.*PI)*(                                                                                                                             
+
      *                       S_T   + EPS*S_L          + 
      * EPS                  *S_TT  * COS(2*PHI_G)       + 
      * SQRT(2.*EPS*(1.+EPS))*S_LT  * COS(PHI_G)     +
      * HELI*SQRT(2.*EPS*(1.-EPS))*S_LTP * SIN(2*PHI_G)     
      * )
-      
+
        IF (sigma0.LT.0.0) then
          sigma0=0.0
          S_T = 0.0 
