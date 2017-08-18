@@ -52,6 +52,8 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
      1        + vlt*sigma_lt*cos(phicm_rad))
 c
       sigma_p  = fkt*vltp*sigma_ltp*sin(phicm_rad)
+      if (q2.ge.5) sigma_u = sigma_u/(q2 - 4)
+      if (q2.ge.5) sigma_p = sigma_p/(q2 - 4)
 
       sigma_0  = sigma_u + e_hel*sigma_p
 c
