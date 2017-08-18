@@ -69,7 +69,7 @@ c
      1   call daresbury(q2,w,eps,cscm,phicm,1,sig0)
       if(opt1.eq.4.or.opt1.eq.5) then
 c
-        if(w.gt.2.0 .and. opt2.eq.1) then
+        if(w.gt.1.82 .and. opt2.eq.1) then
 
 c
         amp2 = 0.93827**2
