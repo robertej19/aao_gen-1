@@ -1,0 +1,11 @@
+build
+*~
+depends
+*.root
+*.rz
+*.out
+*.lund
+*.s
+.sconsign.dblite
+*.sum
+
