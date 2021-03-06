@@ -89,7 +89,7 @@ def compare_raw_to_filt(args,num_desired_events):
         with open(filtered_lund,"r") as f:
             filtered_num = len(f.readlines())/5
         ratio = filtered_num/num_desired_events
-        print("Only produced {} of desired number of events in kinematic range".format(ratio))
+        print(r"Produced {}% of desired number of events in kinematic range".format(100*ratio))
         return ratio
     except OSError as e:
         print("\nError extracting filtering ratio")
