@@ -54,7 +54,9 @@ def gen_input_file(args):
 
 def run_generator(args):
     try:
-        subprocess.run([args.generator_exe_path,"<",args.outdir+"aao_input.inp"])
+        runstring = "{} < {}aao_input.inp".format(args.generator_exe_path,args.outdir)
+        print(runstring)
+        subprocess.Popen(runstring,shell=True)
         shutil.move("aao_norad.lund", args.outdir+"aao_norad.lund")
         return 0
     except OSError as e:
@@ -189,7 +191,7 @@ if __name__ == "__main__":
     parser.add_argument("--epmax",help="maximum scattered electron energy limits in GeV",default=10.6)
     parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=1.0)
     parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=1)
-    parser.add_argument("--trig",help="number of generated events",default=10000)
+    parser.add_argument("--trig",type=int,help="number of generated events",default=10000)
 
     #For step2: (optional) set path to aao_norad generator
     parser.add_argument("--generator_exe_path",help="Path to generator executable",default=aao_norad_path)
