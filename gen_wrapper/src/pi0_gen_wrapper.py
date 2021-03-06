@@ -31,7 +31,7 @@ import shutil
 
 def gen_input_file(args):
     try:
-        subprocess.call([args.input_exe_path,
+        subprocess.run([args.input_exe_path,
             "--physics_model",str(args.physics_model),
             "--flag_ehel", str(args.flag_ehel),
             "--npart", str(args.npart),
@@ -54,7 +54,7 @@ def gen_input_file(args):
 
 def run_generator(args):
     try:
-        subprocess.call([args.generator_exe_path,"<",args.outdir+"aao_input.inp"])
+        subprocess.run([args.generator_exe_path,"<",args.outdir+"aao_input.inp"])
         shutil.move("aao_norad.lund", args.outdir+"aao_norad.lund")
         return 0
     except OSError as e:
@@ -65,7 +65,7 @@ def run_generator(args):
 
 def filter_lund(args):
     try:
-        subprocess.call([args.filter_exe_path,"--infile",args.outdir+"aao_norad.lund","--outfile",args.outdir+"pi0_gen.dat"])
+        subprocess.run([args.filter_exe_path,"--infile",args.outdir+"aao_norad.lund","--outfile",args.outdir+"pi0_gen.dat"])
         return 0
     except OSError as e:
         print("\nError filtering generated events")
