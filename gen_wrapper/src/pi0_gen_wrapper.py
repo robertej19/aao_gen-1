@@ -52,11 +52,11 @@ def gen_input_file(args):
         print("Exiting\n")
         return -1
 
-def run_generator(args):
+def run_generator(args,repo_base_dir):
     try:
         runstring = "{} < {}aao_input.inp".format(args.generator_exe_path,args.outdir)
         subprocess.Popen(runstring,shell=True)
-        shutil.move("aao_norad.lund", args.outdir+"aao_norad.lund")
+        shutil.move(repo_base_dir+"aao_norad.lund", args.outdir+"aao_norad.lund")
         print("Moved lund file to new directory")
         return 0
     except OSError as e:
@@ -97,7 +97,7 @@ def compare_raw_to_filt(args,num_desired_events):
         print("Exiting\n")  
         return -1
 
-def gen_events(args):
+def gen_events(args,repo_base_dir):
 
     num_desired_events = args.trig
     #If the number of events is not close enough to the desired number, generate recursively.
@@ -112,7 +112,7 @@ def gen_events(args):
         gen_input_file(args)
         print("Created generator input file, now trying to run generator")
 
-        run_generator(args)
+        run_generator(args,repo_base_dir)
         print("Event generation complete, now trying to filter")
         print("Note: currently, filtering only works for aao_norad with 4 generated particles (e,p,g,g)")
         
@@ -242,4 +242,4 @@ if __name__ == "__main__":
             subprocess.call(['mkdir','-p',args.outdir])
     
     print("Generating {} DVPiP Events".format(args.trig))
-    gen_events(args)
+    gen_events(args,repo_base_dir)
