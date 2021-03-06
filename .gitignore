@@ -12,4 +12,4 @@ depends
 *.s
 .sconsign.dblite
 *.sum
-
+output/*
