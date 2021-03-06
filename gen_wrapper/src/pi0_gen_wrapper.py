@@ -55,7 +55,6 @@ def gen_input_file(args):
 def run_generator(args):
     try:
         runstring = "{} < {}aao_input.inp".format(args.generator_exe_path,args.outdir)
-        print(runstring)
         subprocess.Popen(runstring,shell=True)
         shutil.move("aao_norad.lund", args.outdir+"aao_norad.lund")
         return 0
@@ -67,7 +66,15 @@ def run_generator(args):
 
 def filter_lund(args):
     try:
-        subprocess.run([args.filter_exe_path,"--infile",args.outdir+"aao_norad.lund","--outfile",args.outdir+"pi0_gen.dat"])
+        subprocess.run([args.filter_exe_path,
+                    "--infile",args.outdir+"aao_norad.lund",
+                    "--outfile",args.outdir+"pi0_gen.dat",
+                    "--q2min", str(args.q2min),
+                    "--q2max", str(args.q2max),
+                    "--xBmin", str(args.xBmin),
+                    "--xBmax", str(args.xBmax),
+                    "--w2min", str(args.w2min),
+                    "--w2max", str(args.w2max)])
         return 0
     except OSError as e:
         print("\nError filtering generated events")
@@ -196,8 +203,12 @@ if __name__ == "__main__":
     #For step2: (optional) set path to aao_norad generator
     parser.add_argument("--generator_exe_path",help="Path to generator executable",default=aao_norad_path)
 
-    #For step3: (optional) set path to lund filter script
+    #For step3: (optional) set path to lund filter script and get filtering arguemnets
     parser.add_argument("--filter_exe_path",help="Path to lund filter executable",default=lund_filter_path)
+    parser.add_argument("--xBmin",type=float,help='minimum Bjorken X value',default=-1)
+    parser.add_argument("--xBmax",type=float,help='maximum Bjorken X value',default=10)
+    parser.add_argument("--w2min",type=float,help='minimum w2 value, in GeV^2',default=-1)
+    parser.add_argument("--w2max",type=float,help='maximum w2 value, in GeV^2',default=100)
 
     #Specify output directory for lund file
     parser.add_argument("--outdir",help="Specify full or relative path to output directory final lund file",default=output_file_path)
