@@ -57,6 +57,7 @@ def run_generator(args):
         runstring = "{} < {}aao_input.inp".format(args.generator_exe_path,args.outdir)
         subprocess.Popen(runstring,shell=True)
         shutil.move("aao_norad.lund", args.outdir+"aao_norad.lund")
+        print("Moved lund file to new directory")
         return 0
     except OSError as e:
         print("\nError using event generator")
@@ -105,7 +106,7 @@ def gen_events(args):
     #This wouldn't bias things. If someone can verify that it doesn't bias anything, then this part of code should be restructured.
     ratio = 0
 
-    max_num_loops = 3
+    max_num_loops = 1
     for loop_counter in range(0,max_num_loops+1):
         print("generating {} raw events".format(args.trig))
         gen_input_file(args)
