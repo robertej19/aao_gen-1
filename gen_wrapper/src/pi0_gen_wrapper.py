@@ -56,7 +56,7 @@ def run_generator(args,repo_base_dir):
     try:
         runstring = "{} < {}aao_input.inp".format(args.generator_exe_path,args.outdir)
         subprocess.Popen(runstring,shell=True)
-        shutil.move(repo_base_dir+"aao_norad.lund", args.outdir+"aao_norad.lund")
+        shutil.move(repo_base_dir+"/aao_norad.lund", args.outdir+"aao_norad.lund")
         print("Moved lund file to new directory")
         return 0
     except OSError as e:
