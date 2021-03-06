@@ -73,16 +73,13 @@ def filter_lund(args):
         print("Exiting\n")
         return -1
 
-def compare_raw_to_filt(args):
+def compare_raw_to_filt(args,num_desired_events):
     try:
-        raw_lund = args.outdir+"aao_norad.lund"
         filtered_lund = args.outdir+"pi0_gen.dat"
-        with open(raw_lund,"r") as f:
-            raw_num = len(f.readlines())/5
         with open(filtered_lund,"r") as f:
             filtered_num = len(f.readlines())/5
-        ratio = filtered_num/raw_num
-        print(ratio)
+        ratio = filtered_num/num_desired_events
+        print("Only produced {} of desired number of events in kinematic range".format(ratio))
         return ratio
     except OSError as e:
         print("\nError extracting filtering ratio")
@@ -92,15 +89,16 @@ def compare_raw_to_filt(args):
 
 def gen_events(args):
 
-
+    num_desired_events = args.trig
     #If the number of events is not close enough to the desired number, generate recursively.
     #It would be computationally better to just run the generator again and again until more than enough events are created,
     #And then just cut out the last few events to get exactly the desired number of events, but I'm not sure that 
     #This wouldn't bias things. If someone can verify that it doesn't bias anything, then this part of code should be restructured.
     ratio = 0
-    while ratio 
-            
 
+    max_num_loops = 3
+    for loop_counter in range(0,max_num_loops+1):
+        print("generating {} raw events".format(args.trig))
         gen_input_file(args)
         print("Created generator input file, now trying to run generator")
 
@@ -111,15 +109,24 @@ def gen_events(args):
         filter_lund(args)
         print("Lund file filtered, now comparing event sizes")
 
-        print("Now count the effect of filtering")
-        ratio = compare_raw_to_filt(args)
-
-   
-    
-
+        print("Now counting the effect of filtering")
+        ratio = compare_raw_to_filt(args,num_desired_events)
         
-
-#Make extrapolation function for multiplaction factor for a given W2, Q2 (and also xB?) range
+        if abs(ratio-1) < 0.1:
+            break
+        elif loop_counter == max_num_loops:
+            print("WARNING: Could not produce desired number of events after {} iterations".format(loop_counter))
+            print("Produced only {} events".format(round(ratio*num_desired_events)))
+        else:
+            if ratio == 0:
+                #This means no events made it past filtering, and we need to increase our stastics by a large factor
+                args.trig = round(100* args.trig)
+            else:
+                args.trig = round(args.trig/ratio)
+            print("Due to filtering, need to rerun and produce {} raw events, to end up with {} filtered events".format(args.trig,num_desired_events))
+        
+        
+        
 #Make filtering more general for other processes, and include e.g. basic kinematics
 #Include aao_rad functionality
 
