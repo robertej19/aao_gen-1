@@ -63,7 +63,6 @@ cp {3} gen_wrapper/run/
 --xBmax {} \
 --w2min {} \
 --w2max {} \
---outdir {} \
 --seed {} \
 --docker {}
 """.format(args.physics_model,
@@ -71,7 +70,7 @@ cp {3} gen_wrapper/run/
     args.q2min,args.q2max,args.epmin,args.epmax,args.fmcall,
     args.boso,args.trig,args.precision,args.maxloops,
     args.xBmin,args.xBmax,args.w2min,args.w2max,
-    args.outdir,args.seed,args.docker)
+    args.seed,args.docker)
 
     footer = """
 SINGLE_JOB: true
