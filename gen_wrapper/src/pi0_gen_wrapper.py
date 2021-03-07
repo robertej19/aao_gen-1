@@ -109,7 +109,7 @@ def gen_events(args,repo_base_dir):
     #This wouldn't bias things. If someone can verify that it doesn't bias anything, then this part of code should be restructured.
     ratio = 0
 
-    max_num_loops = 1
+    max_num_loops = args.maxloops
     for loop_counter in range(0,max_num_loops+1):
         print("generating {} raw events".format(args.trig))
         gen_input_file(args)
@@ -204,6 +204,7 @@ if __name__ == "__main__":
     parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=1)
     parser.add_argument("--trig",type=int,help="number of generated events",default=10000)
     parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=10)
+    parser.add_argument("--maxloops",type=int,help="Enter the number of generation iteration loops permitted to converge to desired number of events",default=10)
 
     #For step2: (optional) set path to aao_norad generator
     parser.add_argument("--generator_exe_path",help="Path to generator executable",default=aao_norad_path)
