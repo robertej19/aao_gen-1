@@ -27,6 +27,7 @@ import sys
 import os, subprocess
 import argparse
 import shutil
+import time
 
 
 def gen_input_file(args):
@@ -110,12 +111,20 @@ def gen_events(args,repo_base_dir):
     ratio = 0
 
     max_num_loops = args.maxloops
+    gen_rate = 0.001 #seconds per event for aao_norad
     for loop_counter in range(0,max_num_loops+1):
         print("generating {} raw events".format(args.trig))
         gen_input_file(args)
         print("Created generator input file, now trying to run generator")
 
+        start_time = time.time()
+        print("Generator starting at {} ".format(start_time))
+        print("Estimated finish time at {}".format(start_time+gen_rate*args.trig))
         run_generator(args,repo_base_dir)
+        seconds_elapsed = time.time() - start_time
+        gen_rate = seconds_elapsed/args.trig
+        print("Generator took {} seconds to run".format(seconds_elapsed))
+
         print("Event generation complete, now trying to filter")
         print("Note: currently, filtering only works for aao_norad with 4 generated particles (e,p,g,g)")
         
