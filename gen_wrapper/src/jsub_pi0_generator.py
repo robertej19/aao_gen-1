@@ -22,6 +22,8 @@ TRACK: {1}
 DISK_SPACE: 4 GB
 
 MEMORY: 1024 MB
+
+COMMAND:
 """.format(count,args.track)
 
     setup = """
@@ -39,38 +41,36 @@ cp {3} gen_wrapper/run/
 
     run_command = """
 ./gen_wrapper/run/pi0_gen_wrapper.exe \
---rad {0} \
 --input_exe_path gen_wrapper/run/ \
---physics_model {1} \
---flag_ehel {2} \
---npart {3} \
---epirea {4} \
---ebeam {5} \
---q2min {6} \
---q2max {7} \
---epmin {8} \
---epmax {9} \
---fmcall {10} \
---boso {11} \
---trig {12} \
---precision {13} \
---maxloops {14} \
+--physics_model {} \
+--flag_ehel {} \
+--npart {} \
+--epirea {} \
+--ebeam {} \
+--q2min {} \
+--q2max {} \
+--epmin {} \
+--epmax {} \
+--fmcall {} \
+--boso {} \
+--trig {} \
+--precision {} \
+--maxloops {} \
 --generator_exe_path aao_norad/build/ \
 --filter_exe_path gen_wrapper/run/ \
---xBmin {15} \
---xBmax {16} \
---w2min {17} \
---w2max {18} \
---outdir {19} \
---r {20} \
---seed {21} \
---docker {22}
-""".format(args.rad,args.physics_model,
+--xBmin {} \
+--xBmax {} \
+--w2min {} \
+--w2max {} \
+--outdir {} \
+--seed {} \
+--docker {}
+""".format(args.physics_model,
     args.flag_ehel,args.npart,args.epirea,args.ebeam,
     args.q2min,args.q2max,args.epmin,args.epmax,args.fmcall,
     args.boso,args.trig,args.precision,args.maxloops,
     args.xBmin,args.xBmax,args.w2min,args.w2max,
-    args.outdir,args.r,args.seed,args.docker)
+    args.outdir,args.seed,args.docker)
 
     footer = """
 SINGLE_JOB: true
@@ -82,6 +82,7 @@ OUTPUT_TEMPLATE:{0}pi0_gen{1}.lund
     outfile.write(header+setup+run_command+footer)
     outfile.close()
 
+#Currently not using the args.rad or args.r flags
 
 if __name__ == "__main__":
     # The following is needed since an executable does not have __file__ defined, but when working in interpreted mode,
