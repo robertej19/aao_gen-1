@@ -125,11 +125,11 @@ def gen_events(args,repo_base_dir):
         print("Now counting the effect of filtering")
         ratio = compare_raw_to_filt(args,num_desired_events)
         
-        if abs(ratio-1) < 0.1:
+        if abs(ratio-1) < args.precision/100:
             break
         elif loop_counter == max_num_loops:
             print("WARNING: Could not produce desired number of events after {} iterations".format(loop_counter))
-            print("Produced only {} events".format(round(ratio*num_desired_events)))
+            print("Produced {} events".format(round(ratio*num_desired_events)))
         else:
             if ratio == 0:
                 #This means no events made it past filtering, and we need to increase our stastics by a large factor
@@ -187,7 +187,7 @@ if __name__ == "__main__":
                                 4.) Returns .dat data file""",formatter_class=argparse.ArgumentDefaultsHelpFormatter)
    
     #General options
-    parser.add_argument("--rad",help="Uses radiative generator instead of nonradiative one",default=False,action='store_true')
+    parser.add_argument("--rad",help="Uses radiative generator instead of nonradiative one, CURRENTLY NOT WORKING",default=False,action='store_true')
 
     #For step 1: input_file_maker_aao_norad
     parser.add_argument("--input_exe_path",help="Path to input file maker executable",default=input_file_maker_path)
@@ -203,6 +203,7 @@ if __name__ == "__main__":
     parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=1.0)
     parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=1)
     parser.add_argument("--trig",type=int,help="number of generated events",default=10000)
+    parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=10)
 
     #For step2: (optional) set path to aao_norad generator
     parser.add_argument("--generator_exe_path",help="Path to generator executable",default=aao_norad_path)
