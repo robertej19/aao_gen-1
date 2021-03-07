@@ -28,7 +28,7 @@ import os, subprocess
 import argparse
 import shutil
 import time
-
+import datetime 
 
 def gen_input_file(args):
     try:
@@ -118,8 +118,11 @@ def gen_events(args,repo_base_dir):
         print("Created generator input file, now trying to run generator")
 
         start_time = time.time()
-        print("Generator starting at {} ".format(start_time))
-        print("Estimated finish time at {}".format(start_time+gen_rate*args.trig))
+        start_time_hr = datetime.datetime.fromtimestamp(start_time).strftime('%d %B %Y %H:%M:%S')
+        end_time = start_time+gen_rate*args.trig
+        end_time_hr = datetime.datetime.fromtimestamp(end_time).strftime('%d %B %Y %H:%M:%S')
+        print("Generator starting at {} ".format(start_time_hr))
+        print("Estimated finish time at {}".format(end_time_hr))
         run_generator(args,repo_base_dir)
         seconds_elapsed = time.time() - start_time
         gen_rate = seconds_elapsed/args.trig
