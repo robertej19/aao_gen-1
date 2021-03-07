@@ -41,7 +41,7 @@ cp {3} gen_wrapper/run/
 
     run_command = """
 ./gen_wrapper/run/pi0_gen_wrapper.exe \
---input_exe_path gen_wrapper/run/ \
+--input_exe_path gen_wrapper/run/input_file_maker_aao_norad.exe \
 --physics_model {} \
 --flag_ehel {} \
 --npart {} \
@@ -56,8 +56,8 @@ cp {3} gen_wrapper/run/
 --trig {} \
 --precision {} \
 --maxloops {} \
---generator_exe_path aao_norad/build/ \
---filter_exe_path gen_wrapper/run/ \
+--generator_exe_path aao_norad/build/aao_norad.exe \
+--filter_exe_path gen_wrapper/run/lund_filter.exe \
 --xBmin {} \
 --xBmax {} \
 --w2min {} \
