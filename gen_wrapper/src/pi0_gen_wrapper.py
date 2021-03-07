@@ -149,9 +149,11 @@ def gen_events(args,repo_base_dir):
             else:
                 args.trig = round(args.trig/ratio)
             print("Due to filtering, need to rerun and produce {} raw events, to end up with {} filtered events".format(args.trig,num_desired_events))
-        
-        
-        
+
+
+## Q2 filter doesn't seem to be working?
+#should consider changing filtering method so if we generate more than enough valid events, we can just delete some at random       
+#Should add logic checks that all the executables exist where they should exist
 #Make filtering more general for other processes, and include e.g. basic kinematics
 #Include aao_rad functionality
 

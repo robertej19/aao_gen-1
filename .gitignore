@@ -13,3 +13,4 @@ depends
 .sconsign.dblite
 *.sum
 output/*
+submission_warehouse/*
