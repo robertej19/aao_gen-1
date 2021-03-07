@@ -58,6 +58,7 @@ cp {3} gen_wrapper/run/
 --maxloops {} \
 --generator_exe_path aao_norad/build/aao_norad.exe \
 --filter_exe_path gen_wrapper/run/lund_filter.exe \
+--outdir output/
 --xBmin {} \
 --xBmax {} \
 --w2min {} \
