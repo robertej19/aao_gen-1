@@ -12,4 +12,5 @@ depends
 *.s
 .sconsign.dblite
 *.sum
-
+output/*
+submission_warehouse/*
