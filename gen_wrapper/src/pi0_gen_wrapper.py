@@ -78,6 +78,8 @@ def filter_lund(args):
                     "--q2max", str(args.q2max),
                     "--xBmin", str(args.xBmin),
                     "--xBmax", str(args.xBmax),
+                    "--tmin", str(args.tmin),
+                    "--tmax", str(args.tmax),
                     "--w2min", str(args.w2min),
                     "--w2max", str(args.w2max)])
         return 0
@@ -229,6 +231,8 @@ if __name__ == "__main__":
     parser.add_argument("--xBmax",type=float,help='maximum Bjorken X value',default=10)
     parser.add_argument("--w2min",type=float,help='minimum w2 value, in GeV^2',default=-1)
     parser.add_argument("--w2max",type=float,help='maximum w2 value, in GeV^2',default=100)
+    parser.add_argument("--tmin",type=float,help='minimum t value, in GeV^2',default=-1)
+    parser.add_argument("--tmax",type=float,help='maximum t value, in GeV^2',default=100)
 
     #Specify output directory for lund file
     parser.add_argument("--outdir",help="Specify full or relative path to output directory final lund file",default=output_file_path)
