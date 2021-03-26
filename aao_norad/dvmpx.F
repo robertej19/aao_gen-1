@@ -69,7 +69,7 @@ C      H_T and E_T convolutions depends on Q2, xB and t.
 C      See the HT and ET functions for more details
 C      Valery Kubarovsky
 C
-C------------------------------------  23 April 2019
+C------------------------------------  March 2021
        REAL AM(2)
        DATA AM/0.134976,0.547300/
        INTEGER K
