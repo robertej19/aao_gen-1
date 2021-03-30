@@ -7,10 +7,10 @@ you can observe with the command line arguement -h, and gives as output a single
 in lund format (https://gemc.jlab.org/gemc/html/documentation/generator/lund.html)
 
 Requirements for inclusion on clas12-mcgen: (check requirements at https://github.com/JeffersonLab/clas12-mcgen)
---NEED-- C++ and Fortran: software should compile using gcc > 8.
---NEED-- An executable with the same name as the github repository name, installed at the top level dir
---NEED-- The generator output file name must be the same name as the exectuable + ".dat". For example, the output of clasdis must be clasdis.dat
---done-- If --seed is ignored, the generator is responsible for choosing unique random seeds (without preserving state between jobs), which could be done from a millisecond or better precision system clock.
+--done-- C++ and Fortran: software should compile using gcc > 8.
+--done-- An executable with the same name as the github repository name, installed at the top level dir
+--done-- The generator output file name must be the same name as the exectuable + ".dat". For example, the output of clasdis must be clasdis.dat
+--NEED-- If --seed is ignored, the generator is responsible for choosing unique random seeds (without preserving state between jobs), which could be done from a millisecond or better precision system clock.
 --done-- The argument --seed <integer value> is added on the OSG to all executable. This option must be ignored or it can be used by the executable to set the generator random seed using <integer value>
 --done-- To specify the number of events, the option "--trig" must be used
 --done-- The argument --docker is added on the OSG to all executable. This option must be ignored or it can be used by the executable to set conditions to run on the OSG container
@@ -73,7 +73,7 @@ def filter_lund(args):
     try:
         subprocess.run([args.filter_exe_path,
                     "--infile",args.outdir+"aao_norad.lund",
-                    "--outfile",args.outdir+"pi0_gen.dat",
+                    "--outfile",args.outdir+"aao_gen.dat",
                     "--q2min", str(args.q2min),
                     "--q2max", str(args.q2max),
                     "--xBmin", str(args.xBmin),
@@ -113,7 +113,7 @@ def gen_events(args,repo_base_dir):
     ratio = 0
 
     max_num_loops = args.maxloops
-    gen_rate = 0.0005 #seconds per event for aao_norad
+    gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
     for loop_counter in range(0,max_num_loops+1):
         print("generating {} raw events".format(args.trig))
         gen_input_file(args)
@@ -153,7 +153,6 @@ def gen_events(args,repo_base_dir):
             print("Due to filtering, need to rerun and produce {} raw events, to end up with {} filtered events".format(args.trig,num_desired_events))
 
 
-## Q2 filter doesn't seem to be working?
 #should consider changing filtering method so if we generate more than enough valid events, we can just delete some at random       
 #Should add logic checks that all the executables exist where they should exist
 #Make filtering more general for other processes, and include e.g. basic kinematics
