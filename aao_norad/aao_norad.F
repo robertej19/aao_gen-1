@@ -111,13 +111,13 @@ c     ep_*:	scattering electron limits (GeV)
 c     nmax:	number of output events
 c     fmcall:   scale factor for sigm_max
 c     boso:	1=bos output, 0=no bos output
-c     seed_source: 0= use unix timestamp from machine time to generate seed, 1=use external seed generator
+c     seed_source: 0= use unix timestamp from machine time to generate seed, otherwise use given value as seed
 
       read(5,*) phys,flag_ehel,npart,epirea,ebeam,q2_min,q2_max,ep_min,
      1ep_max,nmax,fmcall,boso,seed_source
 
 
-      if (seed_source .ne. 1) seed_source = 0
+      
       if (npart .ne. 3) npart=2
 
       id(1)		= 3		!Geant ID, e-
@@ -187,7 +187,8 @@ c     seed_source: 0= use unix timestamp from machine time to generate seed, 1=u
       idum	= -idum
       else
       idum = seed_source
-      Print *, 'The value of idum is', idum, 'end line'
+      endif
+ !     Print *, 'The value of idum is', idum, ' '
 
       
       
