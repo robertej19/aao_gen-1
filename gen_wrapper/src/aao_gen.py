@@ -10,7 +10,7 @@ Requirements for inclusion on clas12-mcgen: (check requirements at https://githu
 --done-- C++ and Fortran: software should compile using gcc > 8.
 --done-- An executable with the same name as the github repository name, installed at the top level dir
 --done-- The generator output file name must be the same name as the exectuable + ".dat". For example, the output of clasdis must be clasdis.dat
---NEED-- If --seed is ignored, the generator is responsible for choosing unique random seeds (without preserving state between jobs), which could be done from a millisecond or better precision system clock.
+--done-- If --seed is ignored, the generator is responsible for choosing unique random seeds (without preserving state between jobs), which could be done from a millisecond or better precision system clock.
 --done-- The argument --seed <integer value> is added on the OSG to all executable. This option must be ignored or it can be used by the executable to set the generator random seed using <integer value>
 --done-- To specify the number of events, the option "--trig" must be used
 --done-- The argument --docker is added on the OSG to all executable. This option must be ignored or it can be used by the executable to set conditions to run on the OSG container
@@ -45,6 +45,7 @@ def gen_input_file(args):
             "--trig", str(args.trig),
             "--fmcall", str(args.fmcall),
             "--boso", str(args.boso),
+            "--seed", str(args.seed),
             "--out", args.outdir+'aao_input.inp'])
         return 0
     except OSError as e:
@@ -217,6 +218,7 @@ if __name__ == "__main__":
     parser.add_argument("--epmax",help="maximum scattered electron energy limits in GeV",default=10.6)
     parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=1.0)
     parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=1)
+    parser.add_argument("--seed",help="0= use unix timestamp from machine time to generate seed, otherwise use given value as seed",default=0)
     parser.add_argument("--trig",type=int,help="number of generated events",default=10000)
     parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=10)
     parser.add_argument("--maxloops",type=int,help="Enter the number of generation iteration loops permitted to converge to desired number of events",default=10)
@@ -238,7 +240,6 @@ if __name__ == "__main__":
     parser.add_argument("-r",help="Removes all files from output directory, if any existed",default=False,action='store_true')
 
     #For conforming with clas12-mcgen standards
-    parser.add_argument("--seed",help="this arguement is ignored, but needed for inclusion in clas12-mcgen",default="none")
     parser.add_argument("--docker",help="this arguement is ignored, but needed for inclusion in clas12-mcgen",default="none")
 
     args = parser.parse_args()

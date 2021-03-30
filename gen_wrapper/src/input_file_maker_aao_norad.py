@@ -20,9 +20,10 @@ def gen_input(args):
 {}
 {}
 {}
+{}
 """.format(args.physics_model,args.flag_ehel,args.npart,args.epirea,
     args.ebeam,args.q2min,args.q2max,args.epmin,args.epmax,
-    args.trig,args.fmcall,args.boso)
+    args.trig,args.fmcall,args.boso,args.seed)
     outfile.write(string)
     outfile.close()
 
@@ -43,6 +44,7 @@ if __name__ == "__main__":
     parser.add_argument("--trig",help="number of output events",default=10000)
     parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=1.0)
     parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=1)
+    parser.add_argument("--seed",help="0= use unix timestamp from machine time to generate seed, otherwise use given value as seed",default=0)
     parser.add_argument("--outfile",help="output filename",default="aao_norad_input.inp")
     args = parser.parse_args()
 
