@@ -1,5 +1,5 @@
-#!/bin/python
-#cython: language_level=3
+  
+#!/usr/bin/env python3
 
 """
 This is a wrapper for the aao_norad (and aao_rad?) DVPi0 generators. It takes as input command line arguements which 
@@ -189,9 +189,9 @@ if __name__ == "__main__":
 
     slash = "/"
     repo_base_dir = slash.join(full_file_path.split(slash)[:-3])
-    input_file_maker_path = repo_base_dir + "/gen_wrapper/run/input_file_maker_aao_norad.exe"
+    input_file_maker_path = repo_base_dir + "/gen_wrapper/clas12-mcgen-executables/input_file_maker_aao_norad.py"
     aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.exe"
-    lund_filter_path = repo_base_dir + "/gen_wrapper/run/lund_filter.exe"
+    lund_filter_path = repo_base_dir + "/gen_wrapper/clas12-mcgen-executables/lund_filter.py"
     output_file_path = repo_base_dir + "/output/"
 
 
