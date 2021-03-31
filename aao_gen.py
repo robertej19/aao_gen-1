@@ -9,6 +9,9 @@ import shutil
 import time
 import datetime 
 
+import gen_wrapper.clas12-mcgen-executables.input_file_maker_aao_norad as inp_maker
+import gen_wrapper.clas12-mcgen-executables.lund_filter as lund_filter
+
 """
 This is a wrapper for the aao_norad (and aao_rad?) DVPi0 generators. It takes as input command line arguements which 
 you can observe with the command line arguement -h, and gives as output a single .dat output file,
@@ -32,21 +35,7 @@ This should produce a file genName.dat.
 
 def gen_input_file(args):
     try:
-        subprocess.run([args.input_exe_path,
-            "--physics_model",str(args.physics_model),
-            "--flag_ehel", str(args.flag_ehel),
-            "--npart", str(args.npart),
-            "--epirea", str(args.epirea),
-            "--ebeam", str(args.ebeam),
-            "--q2min", str(args.q2min),
-            "--q2max", str(args.q2max),
-            "--epmin", str(args.epmin),
-            "--epmax", str(args.epmax),
-            "--trig", str(args.trig),
-            "--fmcall", str(args.fmcall),
-            "--boso", str(args.boso),
-            "--seed", str(args.seed),
-            "--out", args.outdir+'aao_input.inp'])
+        inp_maker.gen_input(args)
         return 0
     except OSError as e:
         print("\nError creating generator input file")
@@ -72,17 +61,7 @@ def run_generator(args,repo_base_dir):
 
 def filter_lund(args):
     try:
-        subprocess.run([args.filter_exe_path,
-                    "--infile",args.outdir+"aao_norad.lund",
-                    "--outfile",args.outdir+"aao_gen.dat",
-                    "--q2min", str(args.q2min),
-                    "--q2max", str(args.q2max),
-                    "--xBmin", str(args.xBmin),
-                    "--xBmax", str(args.xBmax),
-                    "--tmin", str(args.tmin),
-                    "--tmax", str(args.tmax),
-                    "--w2min", str(args.w2min),
-                    "--w2max", str(args.w2max)])
+        lund_filter.filter_lund(args)
         return 0
     except OSError as e:
         print("\nError filtering generated events")
@@ -189,9 +168,7 @@ if __name__ == "__main__":
 
     slash = "/"
     repo_base_dir = slash.join(full_file_path.split(slash)[:-1])
-    input_file_maker_path = repo_base_dir + "/gen_wrapper/clas12-mcgen-executables/input_file_maker_aao_norad.py"
     aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.exe"
-    lund_filter_path = repo_base_dir + "/gen_wrapper/clas12-mcgen-executables/lund_filter.py"
     output_file_path = repo_base_dir + "/output/"
 
 
