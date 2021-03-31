@@ -183,7 +183,6 @@ if __name__ == "__main__":
     parser.add_argument("--rad",help="Uses radiative generator instead of nonradiative one, CURRENTLY NOT WORKING",default=False,action='store_true')
 
     #For step 1: input_file_maker_aao_norad
-    parser.add_argument("--input_exe_path",help="Path to input file maker executable",default=input_file_maker_path)
     parser.add_argument("--physics_model",help="Physics model: 1=A0, 4=MAID98, 5=MAID2000",default=5)
     parser.add_argument("--flag_ehel",help="0= no polarized electron, 1=polarized electron",default=1)
     parser.add_argument("--npart",help="number of particles in BOS banks: 2=(e-,h+), 3=(e-,h+,h0)",default=3)
@@ -204,7 +203,6 @@ if __name__ == "__main__":
     parser.add_argument("--generator_exe_path",help="Path to generator executable",default=aao_norad_path)
 
     #For step3: (optional) set path to lund filter script and get filtering arguemnets
-    parser.add_argument("--filter_exe_path",help="Path to lund filter executable",default=lund_filter_path)
     parser.add_argument("--xBmin",type=float,help='minimum Bjorken X value',default=-1)
     parser.add_argument("--xBmax",type=float,help='maximum Bjorken X value',default=10)
     parser.add_argument("--w2min",type=float,help='minimum w2 value, in GeV^2',default=-1)
