@@ -219,7 +219,7 @@ if __name__ == "__main__":
     parser.add_argument("-r",help="Removes all files from output directory, if any existed",default=False,action='store_true')
 
     #For conforming with clas12-mcgen standards
-    parser.add_argument("--docker",help="this arguement is ignored, but needed for inclusion in clas12-mcgen",default="none")
+    parser.add_argument("--docker",help="this arguement is ignored, but needed for inclusion in clas12-mcgen",default=False,action='store_true')
 
     args = parser.parse_args()
 
