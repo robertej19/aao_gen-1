@@ -194,10 +194,6 @@ if __name__ == "__main__":
     lund_filter_path = repo_base_dir + "/gen_wrapper/clas12-mcgen-executables/lund_filter.py"
     output_file_path = repo_base_dir + "/output/"
 
-    print("locatiosn are")
-    print(repo_base_dir)
-    sys.exit()
-
 
     parser = argparse.ArgumentParser(description="""CURRENTLY ONLY WORKS WITH AAO_NORAD 4 PARTICLE FINAL STATE \n
                                 This script: \n
