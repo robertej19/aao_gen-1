@@ -1,6 +1,14 @@
   
 #!/usr/bin/env python3
 
+import random 
+import sys
+import os, subprocess
+import argparse
+import shutil
+import time
+import datetime 
+
 """
 This is a wrapper for the aao_norad (and aao_rad?) DVPi0 generators. It takes as input command line arguements which 
 you can observe with the command line arguement -h, and gives as output a single .dat output file,
@@ -21,14 +29,6 @@ genName --trig 10 --docker --seed 1448577483
 
 This should produce a file genName.dat.
 """
-
-import random 
-import sys
-import os, subprocess
-import argparse
-import shutil
-import time
-import datetime 
 
 def gen_input_file(args):
     try:
@@ -188,11 +188,15 @@ if __name__ == "__main__":
     # │       └── pi0_gen_wrapper.py
 
     slash = "/"
-    repo_base_dir = slash.join(full_file_path.split(slash)[:-3])
+    repo_base_dir = slash.join(full_file_path.split(slash)[:-1])
     input_file_maker_path = repo_base_dir + "/gen_wrapper/clas12-mcgen-executables/input_file_maker_aao_norad.py"
     aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.exe"
     lund_filter_path = repo_base_dir + "/gen_wrapper/clas12-mcgen-executables/lund_filter.py"
     output_file_path = repo_base_dir + "/output/"
+
+    print("locatiosn are")
+    print(repo_base_dir)
+    sys.exit()
 
 
     parser = argparse.ArgumentParser(description="""CURRENTLY ONLY WORKS WITH AAO_NORAD 4 PARTICLE FINAL STATE \n
