@@ -48,8 +48,8 @@ def run_generator(args,repo_base_dir):
         runstring = "{} < {}".format(args.generator_exe_path,args.input_filename)
         process = subprocess.Popen(runstring,stdout=subprocess.PIPE,shell=True)
         process.wait()
-        process2 = subprocess.Popen("mv aao_norad.lund {}aao_norad.lund".format(args.outdir),shell=True)
-        process2.wait()
+        #process2 = subprocess.Popen("mv aao_norad.lund {}aao_norad.lund".format(args.outdir),shell=True)
+        #process2.wait()
         #shutil.move(repo_base_dir+"/aao_norad.lund", args.outdir+"aao_norad.lund")
         print("Moved lund file to new directory")
         return 0
