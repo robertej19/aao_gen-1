@@ -1,6 +1,6 @@
 # Commands to get running:
 ## clone the repository
-git clone https://github.com/JeffersonLab/aao_gen.git
+git clone https://github.com/robertej19/aao_gen.git
  
 ## Move into the generator repository
 cd aao_gen/aao_norad/
