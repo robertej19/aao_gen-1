@@ -64,6 +64,8 @@ def filter_lund(args):
                 outlines.append(c)
                 outlines.append(d)
                 outlines.append(e)
+        if (len(outlines)/5 == args.trig):
+            break
                             
     print("Original length {}, filtered length {}".format(len(txtlst)/5,len(outlines)/5))
     print(output_filename)
@@ -84,6 +86,7 @@ if __name__ == "__main__":
     parser.add_argument("--w2max",type=float,help='maximum w2 value, in GeV^2',default=100)
     parser.add_argument("--tmin",type=float,help='minimum t value, in GeV^2',default=-1)
     parser.add_argument("--tmax",type=float,help='maximum t value, in GeV^2',default=100)
+    parser.add_argument("--trig",type=int,help="number of desired generated events",default=10000)
     args = parser.parse_args()
 
     
