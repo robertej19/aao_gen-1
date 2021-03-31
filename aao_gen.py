@@ -130,7 +130,7 @@ def gen_events(args,repo_base_dir):
                 #This means no events made it past filtering, and we need to increase our stastics by a large factor
                 args.trig = round(100* args.trig)
             else:
-                args.trig = round(args.trig/ratio)
+                args.trig = round(args.trig/ratio)+20
             print("Due to filtering, need to rerun and produce {} raw events, to end up with {} filtered events".format(args.trig,num_desired_events))
 
 
