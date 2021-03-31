@@ -9,8 +9,8 @@ import shutil
 import time
 import datetime 
 
-import gen_wrapper.clas12-mcgen-executables.input_file_maker_aao_norad as inp_maker
-import gen_wrapper.clas12-mcgen-executables.lund_filter as lund_filter
+import gen_wrapper.clas12_mcgen_executables.input_file_maker_aao_norad as inp_maker
+import gen_wrapper.clas12_mcgen_executables.lund_filter as lund_filter
 
 """
 This is a wrapper for the aao_norad (and aao_rad?) DVPi0 generators. It takes as input command line arguements which 
