@@ -120,7 +120,7 @@ def gen_events(args,repo_base_dir):
         ratio = compare_raw_to_filt(args,num_desired_events)
         
         #if abs(ratio-1) < args.precision/100:
-        if ratio > 1:
+        if (ratio > 1) and (abs(ratio-1) < args.precision/100):
             break
         elif loop_counter == max_num_loops:
             print("WARNING: Could not produce desired number of events after {} iterations".format(loop_counter))
@@ -197,7 +197,7 @@ if __name__ == "__main__":
     parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=1)
     parser.add_argument("--seed",help="0= use unix timestamp from machine time to generate seed, otherwise use given value as seed",default=0)
     parser.add_argument("--trig",type=int,help="number of generated events",default=10000)
-    parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=10)
+    parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=5)
     parser.add_argument("--maxloops",type=int,help="Enter the number of generation iteration loops permitted to converge to desired number of events",default=10)
     parser.add_argument("--input_filename",help="filename for aao_norad",default="aao_norad_input.inp")
 
