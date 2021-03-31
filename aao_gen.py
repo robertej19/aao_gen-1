@@ -45,7 +45,7 @@ def gen_input_file(args):
 
 def run_generator(args,repo_base_dir):
     try:
-        runstring = "{} < {}aao_input.inp".format(args.generator_exe_path,args.outdir)
+        runstring = "{} < {}".format(args.generator_exe_path,args.input_filename)
         process = subprocess.Popen(runstring,stdout=subprocess.PIPE,shell=True)
         process.wait()
         process2 = subprocess.Popen("mv aao_norad.lund {}aao_norad.lund".format(args.outdir),shell=True)
