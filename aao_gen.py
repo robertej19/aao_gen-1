@@ -198,6 +198,7 @@ if __name__ == "__main__":
     parser.add_argument("--trig",type=int,help="number of generated events",default=10000)
     parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=10)
     parser.add_argument("--maxloops",type=int,help="Enter the number of generation iteration loops permitted to converge to desired number of events",default=10)
+    parser.add_argument("--input_filename",help="filename for aao_norad",default="aao_norad_input.inp")
 
     #For step2: (optional) set path to aao_norad generator
     parser.add_argument("--generator_exe_path",help="Path to generator executable",default=aao_norad_path)
