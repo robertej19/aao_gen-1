@@ -16,5 +16,5 @@ python3 aao_gen.py -h
 
 ## Example usage to generate 1000 events with minimum xB 0.1 and minimum W2 of 3:
 python3 aao_gen.py --xBmin 0.1 --w2min 3 --trig 1000  
-## output datafile is in output/pi0_gen.dat
+## output datafile is in aao_gen.dat
 
