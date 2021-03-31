@@ -71,7 +71,7 @@ def filter_lund(args):
 
 def compare_raw_to_filt(args,num_desired_events):
     try:
-        filtered_lund = args.outdir+"pi0_gen.dat"
+        filtered_lund = args.outdir+"aao_gen.dat"
         with open(filtered_lund,"r") as f:
             filtered_num = len(f.readlines())/5
         ratio = filtered_num/num_desired_events
@@ -210,8 +210,8 @@ if __name__ == "__main__":
     parser.add_argument("--w2max",type=float,help='maximum w2 value, in GeV^2',default=100)
     parser.add_argument("--tmin",type=float,help='minimum t value, in GeV^2',default=-1)
     parser.add_argument("--tmax",type=float,help='maximum t value, in GeV^2',default=100)
-    parser.add_argument("--filter_infile",help="specify input lund file name. Currently only works for 4-particle final state DVPiP",default="aao_norad.dat")
-    parser.add_argument("--filter_outfile",help='specify processed lund output file name',default="filtered_lund_file.dat")
+    parser.add_argument("--filter_infile",help="specify input lund file name. Currently only works for 4-particle final state DVPiP",default="aao_norad.lund")
+    parser.add_argument("--filter_outfile",help='specify processed lund output file name',default="aao_gen.dat")
    
     #Specify output directory for lund file
     parser.add_argument("--outdir",help="Specify full or relative path to output directory final lund file",default=output_file_path)
