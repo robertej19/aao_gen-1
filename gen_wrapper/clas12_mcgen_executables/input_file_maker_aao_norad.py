@@ -9,7 +9,7 @@ import sys
 
 def gen_input(args):
     outfile = open(args.input_filename,"w")
-    print("generating aao_norad_input file named {}".format(args.outfile))
+    print("generating aao_norad_input file named {}".format(args.input_filename))
     string = """{}
 {}
 {}
