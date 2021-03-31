@@ -119,7 +119,8 @@ def gen_events(args,repo_base_dir):
         print("Now counting the effect of filtering")
         ratio = compare_raw_to_filt(args,num_desired_events)
         
-        if abs(ratio-1) < args.precision/100:
+        #if abs(ratio-1) < args.precision/100:
+        if ratio > 1:
             break
         elif loop_counter == max_num_loops:
             print("WARNING: Could not produce desired number of events after {} iterations".format(loop_counter))
