@@ -210,7 +210,9 @@ if __name__ == "__main__":
     parser.add_argument("--w2max",type=float,help='maximum w2 value, in GeV^2',default=100)
     parser.add_argument("--tmin",type=float,help='minimum t value, in GeV^2',default=-1)
     parser.add_argument("--tmax",type=float,help='maximum t value, in GeV^2',default=100)
-
+    parser.add_argument("--filter_infile",help="specify input lund file name. Currently only works for 4-particle final state DVPiP",default="aao_norad.dat")
+    parser.add_argument("--filter_outfile",help='specify processed lund output file name',default="filtered_lund_file.dat")
+   
     #Specify output directory for lund file
     parser.add_argument("--outdir",help="Specify full or relative path to output directory final lund file",default=output_file_path)
     parser.add_argument("-r",help="Removes all files from output directory, if any existed",default=False,action='store_true')

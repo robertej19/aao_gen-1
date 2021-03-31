@@ -24,10 +24,10 @@ target_4mom = (p_mass,0,0,0)
 
 
 def filter_lund(args):
-    infile_name = args.infile
-    output_filename = args.outfile
+    filter_infile_name = args.filter_infile
+    output_filename = args.filter_outfile
 
-    with open(infile_name,"r") as lst:
+    with open(filter_infile_name,"r") as lst:
         txtlst = lst.readlines()
     
     outlines = []
@@ -74,8 +74,8 @@ def filter_lund(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Filters pi0 generated LUND file on ",formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     
-    parser.add_argument("--infile",help="specify input lund file name. Currently only works for 4-particle final state DVPiP",default="aao_norad.dat")
-    parser.add_argument("--outfile",help='specify processed lund output file name',default="filtered_lund_file.dat")
+    parser.add_argument("--filter_infile",help="specify input lund file name. Currently only works for 4-particle final state DVPiP",default="aao_norad.dat")
+    parser.add_argument("--filter_outfile",help='specify processed lund output file name',default="filtered_lund_file.dat")
     parser.add_argument("--q2min",type=float,help='minimum Q2 value, in GeV^2',default=-1)
     parser.add_argument("--q2max",type=float,help='maximum Q2 value, in GeV^2',default=100)
     parser.add_argument("--xBmin",type=float,help='minimum Bjorken X value',default=-1)
@@ -87,5 +87,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     
-    print("trying to process file {}".format(args.infile))
+    print("trying to process file {}".format(args.filter_infile))
     filter_lund(args)
