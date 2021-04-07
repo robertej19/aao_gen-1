@@ -71,7 +71,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       integer flag_ehel
       integer ehel
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-      integer*4 idum
+      integer*8 idum, count_rate, count_max
       integer*4 ntries
       
       real*4 ntp(22)
@@ -83,7 +83,6 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       integer h,nevent,nmax,istat,icycle
       
       character*132 filerz,file_out,file_sum,file_bos, file_lund
-      character*28 ctime
       character*8 recname
 
       DATA PI   /3.1415926/
@@ -176,9 +175,8 @@ c     boso:	1=bos output, 0=no bos output
       ntold		= 0
 
       call timex(itime1)		!Initial seed from internal clock
-      call getunixtime(idum)
-      call getasciitime(idum,ctime)
-      
+      call system_clock(idum, count_rate, count_max)
+
       idum		= -idum
       cstk		= myran(idum)
       write(*,*) cstk
@@ -209,7 +207,7 @@ c     boso:	1=bos output, 0=no bos output
 c      if (boso.eq.1) call bos_ini(recname)
 
       write(12,*)' AO Calculation of Single Pion Production'
-      write(12,*)' Seed:',idum,' from start time ',ctime
+      write(12,*)' Seed:',idum
       write(12,*)' Epirea (1 for pi0, 3 for pi+) =',epirea
       write(12,*)' Target thickness =',t_targ,' (r.l.)'
       write(12,*)' Incident electron energy =',ebeam,' GeV'
@@ -564,11 +562,9 @@ c     electron phase space =2*pi*uq2rng*eprng
  50   call hrout(0,icycle,' ')
       call hrend('AONORAD')
 c      if (boso.eq.1) call bos_end(recname)
-      call getasciitime(idum,ctime)
       
       write(14,*)' AO Calculation of Single Pion Production',
      + ' without radiative corrections'
-      write(14,*) ' ending time ', ctime
       write(14,*)' Epirea (1 for pi0, 3 for pi+) =',epirea
       write(14,*)' Target thickness =',t_targ,' (r.l.)'
       write(14,*)' Incident electron energy =',ebeam,' GeV'
@@ -607,7 +603,7 @@ C
       SAVE
 C
 C Function parameters
-      INTEGER IDUM
+      INTEGER*8 IDUM
       REAL    MYRAN
 C
 C Local parameters
@@ -721,7 +717,7 @@ c     missing mass, the proton momenta and pion momenta.
       real wmin
       real wreal
 
-      integer*4 idum
+      integer*8 idum
 c
 
       mp	= .938
@@ -897,7 +893,7 @@ C-   Outputs : get_spin
 C----------------------------------------------------------------------
       implicit none
       integer get_spin
-      integer iseed
+      integer*8 iseed
       real    random, myran 
 
       random = myran(iseed)
