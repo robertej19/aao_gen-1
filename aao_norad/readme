@@ -21,4 +21,6 @@ epmin epmax  minimum and maximum scattered electron energy limits in GeV
 nmax         number of output events
 fmcall       factor to adjust the maximum cross section, used in M.C. selection
 boso         1=bos output, 0=no bos output
+seed         0= use unix timestamp from machine time to generate seed, otherwise use given value as seed
+
 

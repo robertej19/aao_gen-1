@@ -1,5 +1,5 @@
-#!/bin/python
-#cython: language_level=3
+  
+#!/usr/bin/env python3
 
 import os
 import argparse
@@ -8,8 +8,8 @@ import sys
 "Consult aao_norad generator repository README for options descriptions"
 
 def gen_input(args):
-    outfile = open(args.outfile,"w")
-    print("generating aao_norad_input file named {}".format(args.outfile))
+    outfile = open(args.input_filename,"w")
+    print("generating aao_norad_input file named {}".format(args.input_filename))
     string = """{}
 {}
 {}
@@ -20,9 +20,10 @@ def gen_input(args):
 {}
 {}
 {}
+{}
 """.format(args.physics_model,args.flag_ehel,args.npart,args.epirea,
     args.ebeam,args.q2min,args.q2max,args.epmin,args.epmax,
-    args.trig,args.fmcall,args.boso)
+    args.trig,args.fmcall,args.boso,args.seed)
     outfile.write(string)
     outfile.close()
 
@@ -43,7 +44,9 @@ if __name__ == "__main__":
     parser.add_argument("--trig",help="number of output events",default=10000)
     parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=1.0)
     parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=1)
-    parser.add_argument("--outfile",help="output filename",default="aao_norad_input.inp")
+    parser.add_argument("--seed",help="0= use unix timestamp from machine time to generate seed, otherwise use given value as seed",default=0)
+    parser.add_argument("--input_filename",help="filename for aao_norad",default="aao_norad_input.inp")
+
     args = parser.parse_args()
 
     gen_input(args)

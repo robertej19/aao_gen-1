@@ -20,6 +20,8 @@ def calc_inv_mass_squared(four_vector):
 e_mass = 0.00051099895
 Ebeam_4mom = (10.6,0,0,10.6)
 p_mass = 0.9382721
+target_4mom = (p_mass,0,0,0)
+
 
 def filter_lund(args):
     infile_name = args.infile
@@ -43,19 +45,25 @@ def filter_lund(args):
                 cols = sub_line.split()
                 if cols[3]=='11':
                     e_4mom = (float(cols[9]),float(cols[6]),float(cols[7]),float(cols[8]))
+                
+                if cols[3]=='2212':
+                    pro_4mom = (float(cols[9]),float(cols[6]),float(cols[7]),float(cols[8]))
 
-                    virtual_gamma = vec_subtract(Ebeam_4mom,e_4mom)
-                    Q2 = -1*calc_inv_mass_squared(virtual_gamma)
-                    W2 = calc_inv_mass_squared(vec_subtract(vec_add(Ebeam_4mom,(p_mass,0,0,0)),e_4mom))
-                    nu = virtual_gamma[0]
-                    xB = Q2/(2*p_mass*nu)
 
-                    if Q2> args.q2min and Q2< args.q2max and W2> args.w2min and W2< args.w2max and xB > args.xBmin and xB < args.xBmax:
-                        outlines.append(a)
-                        outlines.append(b)
-                        outlines.append(c)
-                        outlines.append(d)
-                        outlines.append(e)
+            virtual_gamma = vec_subtract(Ebeam_4mom,e_4mom)
+            Q2 = -1*calc_inv_mass_squared(virtual_gamma)
+            W2 = calc_inv_mass_squared(vec_subtract(vec_add(Ebeam_4mom,target_4mom),e_4mom))
+            nu = virtual_gamma[0]
+            xB = Q2/(2*p_mass*nu)
+            t = -1*calc_inv_mass_squared(vec_subtract(target_4mom,pro_4mom))
+
+
+            if t> args.tmin and t< args.tmax and Q2> args.q2min and Q2< args.q2max and W2> args.w2min and W2< args.w2max and xB > args.xBmin and xB < args.xBmax:
+                outlines.append(a)
+                outlines.append(b)
+                outlines.append(c)
+                outlines.append(d)
+                outlines.append(e)
                             
     print("Original length {}, filtered length {}".format(len(txtlst)/5,len(outlines)/5))
     print(output_filename)
@@ -74,6 +82,8 @@ if __name__ == "__main__":
     parser.add_argument("--xBmax",type=float,help='maximum Bjorken X value',default=10)
     parser.add_argument("--w2min",type=float,help='minimum w2 value, in GeV^2',default=-1)
     parser.add_argument("--w2max",type=float,help='maximum w2 value, in GeV^2',default=100)
+    parser.add_argument("--tmin",type=float,help='minimum t value, in GeV^2',default=-1)
+    parser.add_argument("--tmax",type=float,help='maximum t value, in GeV^2',default=100)
     args = parser.parse_args()
 
     
