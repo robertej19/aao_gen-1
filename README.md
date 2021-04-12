@@ -20,20 +20,6 @@ python3 aao_gen.py --xBmin 0.1 --w2min 3 --trig 1000
 
 ## To get command line options: ./aao_gen.py -h
 
-## Options:
-./aao_gen.py [-h] [--rad] [--physics_model PHYSICS_MODEL]
-                  [--flag_ehel FLAG_EHEL] [--npart NPART] [--epirea EPIREA]
-                  [--ebeam EBEAM] [--q2min Q2MIN] [--q2max Q2MAX]
-                  [--epmin EPMIN] [--epmax EPMAX] [--fmcall FMCALL]
-                  [--boso BOSO] [--seed SEED] [--trig TRIG]
-                  [--precision PRECISION] [--maxloops MAXLOOPS]
-                  [--input_filename INPUT_FILENAME]
-                  [--generator_exe_path GENERATOR_EXE_PATH] [--xBmin XBMIN]
-                  [--xBmax XBMAX] [--w2min W2MIN] [--w2max W2MAX]
-                  [--tmin TMIN] [--tmax TMAX] [--filter_infile FILTER_INFILE]
-                  [--filter_outfile FILTER_OUTFILE] [--outdir OUTDIR] [-r]
-                  [--docker]
-
 ```
 optional arguments:
   -h, --help            show this help message and exit
