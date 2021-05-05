@@ -1,7 +1,7 @@
 import os
 
 path = ['/usr/bin']
-env = Environment(ENV = {'PATH':path}, CERN = os.environ['CERN'])
+env = Environment(ENV = {'PATH':path})
 env.Append(FORTRANFLAGS = ['-fno-automatic', '-ffixed-line-length-none', '-fno-second-underscore', '-funroll-loops', '-fomit-frame-pointer'])
 
 env.Append(LIBPATH = ['/apps/cernlib/x86_64_rhel7/2005/lib'])
