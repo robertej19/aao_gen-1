@@ -224,6 +224,21 @@ if __name__ == "__main__":
     parser.add_argument("--maxloops",type=int,help="Enter the number of generation iteration loops permitted to converge to desired number of events",default=10)
     parser.add_argument("--input_filename",help="filename for aao_norad",default="aao_norad_input.inp")
 
+
+
+    parser.add_argument("--int_region",help="the sizes of the integration regions",default =".20 .12 .20 .20")
+    parser.add_argument("--err_max",help="limit on the error in (mm)**2",default=0.2)
+    parser.add_argument("--target_len",help="target cell length (cm)",default=5)
+    parser.add_argument("--target_rad",help="target cell cylinder radius",default=0.43)
+    parser.add_argument("--cord_x",help="x-coord of beam position",default=0.0)
+    parser.add_argument("--cord_y",help="y-coord of beam position",default=0.0)
+    parser.add_argument("--cord_z",help="z-coord of beam position",default=0.0)
+    parser.add_argument("--rad_emin",help="minimum photon energy for integration",default=0.005)
+    parser.add_argument("--sigr_max_mult",help="a multiplication factor for sigr_max",default=0.0)
+    parser.add_argument("--sigr_max",help="sigr_max",default=0.005)
+
+
+
     #For step2: (optional) set path to aao_norad generator
     parser.add_argument("--generator_exe_path",help="Path to generator executable",default=aao_norad_path)
 
