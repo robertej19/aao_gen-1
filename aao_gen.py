@@ -170,6 +170,7 @@ if __name__ == "__main__":
     slash = "/"
     repo_base_dir = slash.join(full_file_path.split(slash)[:-1])
     aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.exe"
+    aao_rad_path = repo_base_dir + "/aao_rad/build/aao_rad.exe"
     output_file_path = repo_base_dir + "/output/"
 
 
