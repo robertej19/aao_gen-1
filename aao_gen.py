@@ -251,6 +251,10 @@ if __name__ == "__main__":
     if (args.rad and args.filter_infile == "aao_norad.lund"):
         args.filter_infile = "aao_rad.lund" #change to using radiative generator
 
+
+    if (args.rad and args.input_filename == "aao_norad_input.inp"):
+        args.input_filename = "aao_rad_input.inp" #change to using radiative generator
+
     if not os.path.isdir(args.outdir):
         print(args.outdir+" is not present, creating now")
         subprocess.call(['mkdir','-p',args.outdir])
