@@ -11,24 +11,24 @@ def gen_input(args):
     print("in rad input file generator")
     outfile = open(args.input_filename,"w")
     print("generating aao_norad_input file named {}".format(args.input_filename))
-    string = """{} physics_model
-{} flag_ehel
-{} int_region
-{} npart
-{} epirea
-{} err_max
-{} target_len
-{} target_rad
-{} cord_x
-{} cord_y
-{} cord_z
-{} ebeam
-{} {} q2min q2max
-{} {} epmin epmax
-{} rad_emin
-{} trig
-{} sigr_max_mult
-{} sigr_max
+    string = """{}     ! physics_model
+{}     ! flag_ehel
+{}     ! int_region
+{}     ! npart
+{}     ! epirea
+{}     ! err_max
+{}     ! target_len
+{}     ! target_rad
+{}     ! cord_x
+{}     ! cord_y
+{}     ! cord_z
+{}     ! ebeam
+{}  {}     ! q2min q2max
+{}  {}     ! epmin epmax
+{}     ! rad_emin
+{}     ! trig
+{}     ! sigr_max_mult
+{}     ! sigr_max
 """.format(args.physics_model,
 args.flag_ehel,
 args.int_region,
