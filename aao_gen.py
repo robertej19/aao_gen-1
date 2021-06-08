@@ -8,8 +8,11 @@ import shutil
 import time
 import datetime 
 
-import gen_wrapper.clas12_mcgen_executables.input_file_maker_aao_norad as inp_maker
-import gen_wrapper.clas12_mcgen_executables.lund_filter as lund_filter
+import gen_wrapper.clas12_mcgen_executables.input_file_maker_aao_norad as inp_maker_norad
+import gen_wrapper.clas12_mcgen_executables.input_file_maker_aao_norad as inp_maker_rad
+import gen_wrapper.clas12_mcgen_executables.lund_filter as lund_filter_norad
+import gen_wrapper.clas12_mcgen_executables.lund_filter_rad as lund_filter_rad
+
 
 """
 This is a wrapper for the aao_norad (and aao_rad?) DVPi0 generators. It takes as input command line arguements which 
@@ -34,7 +37,10 @@ This should produce a file genName.dat.
 
 def gen_input_file(args):
     try:
-        inp_maker.gen_input(args)
+        if args.rad:
+            inp_maker_rad.gen_input(args)
+        else:
+            inp_maker_norad.gen_input(args)
         return 0
     except OSError as e:
         print("\nError creating generator input file")
@@ -60,7 +66,10 @@ def run_generator(args,repo_base_dir):
 
 def filter_lund(args):
     try:
-        lund_filter.filter_lund(args)
+        if args.rad:
+            lund_filter_rad(args)
+        else:
+            lund_filter_norad.filter_lund(args)
         return 0
     except OSError as e:
         print("\nError filtering generated events")
@@ -95,6 +104,9 @@ def gen_events(args,repo_base_dir):
     gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
     for loop_counter in range(0,max_num_loops+1):
         print("generating {} raw events".format(args.trig))
+
+        #X11
+
         gen_input_file(args)
         print("Created generator input file, now trying to run generator")
 
@@ -104,7 +116,12 @@ def gen_events(args,repo_base_dir):
         end_time_hr = datetime.datetime.fromtimestamp(end_time).strftime('%d %B %Y %H:%M:%S')
         print("Generator starting at {} ".format(start_time_hr))
         print("Estimated finish time at {}".format(end_time_hr))
+
+
+        #X22
         run_generator(args,repo_base_dir)
+
+
         seconds_elapsed = time.time() - start_time
         gen_rate = seconds_elapsed/args.trig
         print("Generator took {} seconds to run".format(seconds_elapsed))
@@ -112,8 +129,12 @@ def gen_events(args,repo_base_dir):
         print("Event generation complete, now trying to filter")
         print("Note: currently, filtering only works for aao_norad with 4 generated particles (e,p,g,g)")
         
+
+        #X33
         filter_lund(args)
         print("Lund file filtered, now comparing event sizes")
+
+
 
         print("Now counting the effect of filtering")
         ratio = compare_raw_to_filt(args,num_desired_events)
@@ -224,6 +245,11 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    if (args.rad and args.generator_exe_path==aao_norad_path):
+        args.generator_exe_path = aao_rad_path #change to using radiative generator
+
+    if (args.rad and args.filter_infile == "aao_norad.lund"):
+        args.filter_infile = "aao_rad.lund" #change to using radiative generator
 
     if not os.path.isdir(args.outdir):
         print(args.outdir+" is not present, creating now")
