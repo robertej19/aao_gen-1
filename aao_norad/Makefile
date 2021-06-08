@@ -1,0 +1,21 @@
+OBJ=  aao.o aao_norad.o cgln_amps.o daresbury.o dsigma.o dvmpw.o dvmpx.o helicity_amps.o interp.o legendre.o maid_lee.o multipole_amps.o read_sf_file.o splie2.o splin2.o spline.o splint.o xsection.o 
+OBJC=  unixtime.o 
+
+CERNLIBS =  -L/apps/cernlib/x86_64_rhel6_4.7.2/2005/lib  -lmathlib  -lpacklib 
+ 
+aao_rad : $(OBJ) $(OBJC)
+	gfortran  -o   aao_rad  $(addprefix build/, $(OBJ)) build/$(OBJC) $(CERNLIBS) 
+$(OBJ) : %.o: %.F
+	gfortran -fno-automatic -ffixed-line-length-none -fno-second-underscore -funroll-loops -fomit-frame-pointer  -c $< -o build/$@  
+$(OBJC) : %.o: %.c
+	gcc  -c $<  -o build/$@ 
+clean:
+	rm -f build/aao_rad   build/$(OBJ) build/$(OBJC)
+
+
+
+##g77  -O2 -fno-automatic -finit-local-zero -ffixed-line-length-none -fno-second-underscore \
+##        -DLinux \
+##        -I. -I./ -I/group/clas/builds/release-4-14/packages/include -I/group/clas/builds/release-4-14/packages/inc_derived -I/apps/tcl/include -I/usr/X11R6/include -c \
+##        aac.F  -o /home/avakian/w6/tmp/obj/LinuxRHEL3/generator/aac.o
+
