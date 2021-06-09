@@ -65,7 +65,7 @@ def filter_lund(args):
             t = -1*calc_inv_mass_squared(vec_subtract(target_4mom,pro_4mom))
 
 
-            if t> args.tmin and t< args.tmax and Q2> args.q2min and Q2< args.q2max and W2> args.w2min and W2< args.w2max and xB > args.xBmin and xB < args.xBmax:
+            if t> float(args.tmin) and t< float(args.tmax) and Q2> float(args.q2min) and Q2< float(args.q2max) and W2> float(args.w2min) and W2< float(args.w2max) and xB > float(args.xBmin) and xB < float(args.xBmax):
                 outlines.append(a)
                 outlines.append(b)
                 outlines.append(c)
