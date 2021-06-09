@@ -8,7 +8,6 @@ import sys
 "Consult aao_norad generator repository README for options descriptions"
 
 def gen_input(args):
-    print("in rad input file generator")
     outfile = open(args.input_filename,"w")
     print("generating aao_norad_input file named {}".format(args.input_filename))
     string = """{}     ! physics_model

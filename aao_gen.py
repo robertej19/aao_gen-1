@@ -38,7 +38,6 @@ This should produce a file genName.dat.
 def gen_input_file(args):
     try:
         if args.rad:
-            print('using radiative input generator')
             inp_maker_rad.gen_input(args)
         else:
             inp_maker_norad.gen_input(args)
@@ -106,7 +105,6 @@ def gen_events(args,repo_base_dir):
     for loop_counter in range(0,max_num_loops+1):
         print("generating {} raw events".format(args.trig))
 
-        #X11
 
         gen_input_file(args)
         print("Created generator input file, now trying to run generator")
@@ -119,7 +117,6 @@ def gen_events(args,repo_base_dir):
         print("Estimated finish time at {}".format(end_time_hr))
 
 
-        #X22
         run_generator(args,repo_base_dir)
 
 
@@ -128,20 +125,16 @@ def gen_events(args,repo_base_dir):
         print("Generator took {} seconds to run".format(seconds_elapsed))
 
         print("Event generation complete, now trying to filter")
-        #print("Note: currently, filtering only works for aao_norad with 4 generated particles (e,p,g,g)")
         
 
-        #X33
         filter_lund(args)
         print("Lund file filtered, now comparing event sizes")
-
-
 
         print("Now counting the effect of filtering")
         ratio = compare_raw_to_filt(args,num_desired_events)
         
         #if abs(ratio-1) < args.precision/100:
-        if (ratio > 1) and (abs(ratio-1) < args.precision/100): #This should be replaced to just truncate once the desired number of events are made
+        if (ratio > 1):# and (abs(ratio-1) < args.precision/100): #This should be replaced to just truncate once the desired number of events are made
         #if (ratio ==1):
             break
         elif loop_counter == max_num_loops:
