@@ -9,10 +9,10 @@ import shutil
 import time
 import datetime 
 
-import gen_wrapper.clas12_mcgen_executables.input_file_maker_aao_norad as inp_maker_norad
-import gen_wrapper.clas12_mcgen_executables.input_file_maker_aao_rad as inp_maker_rad
-import gen_wrapper.clas12_mcgen_executables.lund_filter as lund_filter_norad
-import gen_wrapper.clas12_mcgen_executables.lund_filter_rad as lund_filter_rad
+#import gen_wrapper.clas12_mcgen_executables.input_file_maker_aao_norad as inp_maker_norad
+#import gen_wrapper.clas12_mcgen_executables.input_file_maker_aao_rad as inp_maker_rad
+#import gen_wrapper.clas12_mcgen_executables.lund_filter as lund_filter_norad
+#import gen_wrapper.clas12_mcgen_executables.lund_filter_rad as lund_filter_rad
 
 
 """

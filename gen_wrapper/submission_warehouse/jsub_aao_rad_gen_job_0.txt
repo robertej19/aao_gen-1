@@ -22,3 +22,4 @@ SINGLE_JOB: true
 
 OUTPUT_DATA: output/pi0_gen.dat
 OUTPUT_TEMPLATE:/volatile/clas12/robertej/pi0_gen0.lund
+
