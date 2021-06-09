@@ -138,12 +138,12 @@ if __name__ == "__main__":
 
     slash = "/"
     repo_base_dir = slash.join(full_file_path.split(slash)[:-3])
-    input_file_maker_path = repo_base_dir + "/gen_wrapper/run/input_file_maker_aao_norad.exe"
-    aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.exe"
-    lund_filter_path = repo_base_dir + "/gen_wrapper/run/lund_filter.exe"
+    input_file_maker_path = repo_base_dir + "/run/rad/input_file_maker_aao_rad.exe"
+    aao_norad_path = repo_base_dir + "/../../aao_rad/build/aao_rad.exe"
+    lund_filter_path = repo_base_dir + "/run/rad/lund_filter_rad.exe"
     output_file_path = repo_base_dir + "/output/"
     jsub_textdir_path = repo_base_dir + "/submission_warehouse/"
-    pi0_gen_path = repo_base_dir + "/gen_wrapper/run/pi0_gen_wrapper.exe"
+    pi0_gen_path = repo_base_dir + "/run/aao_gen.exe"
 
 
     parser = argparse.ArgumentParser(description="""CURRENTLY ONLY WORKS WITH AAO_NORAD 4 PARTICLE FINAL STATE \n
