@@ -1,0 +1,24 @@
+PROJECT: clas12
+JOBNAME: aao_rad_gen_0
+
+TRACK: analysis
+DISK_SPACE: 4 GB
+
+MEMORY: 1024 MB
+
+COMMAND:
+
+mkdir -p aao_rad/build
+mkdir -p gen_wrapper/run
+cp /mnt/c/Users/rober/Dropbox/Bobby/Linux/work/CLAS12/mit-clas12-analysis/theana/paragon/aao_gen/gen_wrapper/gen_wrapper/run/input_file_maker_aao_norad.exe gen_wrapper/run/
+cp /mnt/c/Users/rober/Dropbox/Bobby/Linux/work/CLAS12/mit-clas12-analysis/theana/paragon/aao_gen/gen_wrapper/aao_norad/build/aao_norad.exe aao_rad/build/
+cp /mnt/c/Users/rober/Dropbox/Bobby/Linux/work/CLAS12/mit-clas12-analysis/theana/paragon/aao_gen/gen_wrapper/gen_wrapper/run/lund_filter.exe gen_wrapper/run/
+cp /mnt/c/Users/rober/Dropbox/Bobby/Linux/work/CLAS12/mit-clas12-analysis/theana/paragon/aao_gen/gen_wrapper/gen_wrapper/run/pi0_gen_wrapper.exe gen_wrapper/run/
+
+
+./gen_wrapper/run/aao_gen.exe --input_exe_path gen_wrapper/run/input_file_maker_aao_rad.exe --physics_model 5 --flag_ehel 1 --npart 3 --epirea 1 --ebeam 10.6 --q2min 0.2 --q2max 10.6 --epmin 0.2 --epmax 10.6 --fmcall 1.0 --boso 1 --trig 10000 --precision 10 --maxloops 10 --generator_exe_path aao_rad/build/aao_rad.exe --filter_exe_path gen_wrapper/run/lund_filter_rad.exe --outdir output/ --xBmin -1 --xBmax 10 --w2min -1 --w2max 100 --tmin -1 --tmax 100 --seed none --int_region 3 --err_max .20 .12 .20 .20 --target_len 0.2 --target_rad 5 --cord_x 0.43 --cord_y 0.0 --cord_z 0.0 --rad_emin 0.0 --sigr_max_mult 0.005 --sigr_max 0.0 --docker 0.005
+
+SINGLE_JOB: true
+
+OUTPUT_DATA: output/pi0_gen.dat
+OUTPUT_TEMPLATE:/volatile/clas12/robertej/pi0_gen0.lund

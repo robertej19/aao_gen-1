@@ -14,9 +14,9 @@ import time
 import datetime 
 
 def gen_jsub(args,count):
-    outfile = open(args.jsub_textdir+"jsub_lund_job_{}.txt".format(count),"w")
+    outfile = open(args.jsub_textdir+"jsub_aao_rad_gen_job_{}.txt".format(count),"w")
     header = """PROJECT: clas12
-JOBNAME: pi0gen_{0}
+JOBNAME: aao_rad_gen_{0}
 
 TRACK: {1}
 DISK_SPACE: 4 GB
@@ -27,10 +27,10 @@ COMMAND:
 """.format(count,args.track)
 
     setup = """
-mkdir -p aao_norad/build
+mkdir -p aao_rad/build
 mkdir -p gen_wrapper/run
 cp {0} gen_wrapper/run/
-cp {1} aao_norad/build/
+cp {1} aao_rad/build/
 cp {2} gen_wrapper/run/
 cp {3} gen_wrapper/run/
 
@@ -40,8 +40,8 @@ cp {3} gen_wrapper/run/
         args.pi0_gen_exe_path)
 
     run_command = """
-./gen_wrapper/run/pi0_gen_wrapper.exe \
---input_exe_path gen_wrapper/run/input_file_maker_aao_norad.exe \
+./gen_wrapper/run/aao_gen.exe \
+--input_exe_path gen_wrapper/run/input_file_maker_aao_rad.exe \
 --physics_model {} \
 --flag_ehel {} \
 --npart {} \
@@ -56,8 +56,8 @@ cp {3} gen_wrapper/run/
 --trig {} \
 --precision {} \
 --maxloops {} \
---generator_exe_path aao_norad/build/aao_norad.exe \
---filter_exe_path gen_wrapper/run/lund_filter.exe \
+--generator_exe_path aao_rad/build/aao_rad.exe \
+--filter_exe_path gen_wrapper/run/lund_filter_rad.exe \
 --outdir output/ \
 --xBmin {} \
 --xBmax {} \
@@ -66,14 +66,36 @@ cp {3} gen_wrapper/run/
 --tmin {} \
 --tmax {} \
 --seed {} \
+--int_region {} \
+--err_max {} \
+--target_len {} \
+--target_rad {} \
+--cord_x {} \
+--cord_y {} \
+--cord_z {} \
+--rad_emin {} \
+--sigr_max_mult {} \
+--sigr_max {} \
 --docker {}
 """.format(args.physics_model,
     args.flag_ehel,args.npart,args.epirea,args.ebeam,
     args.q2min,args.q2max,args.epmin,args.epmax,args.fmcall,
     args.boso,args.trig,args.precision,args.maxloops,
     args.xBmin,args.xBmax,args.w2min,args.w2max,
-    args.tmin,args.tmax,
-    args.seed,args.docker)
+    args.tmin,args.tmax,args.seed,
+    args.npart,
+    args.int_region,
+    args.err_max,
+    args.target_len,
+    args.target_rad,
+    args.cord_x,
+    args.cord_y,
+    args.cord_z,
+    args.rad_emin,
+    args.sigr_max_mult,
+    args.sigr_max,
+    args.docker)
+
 
     footer = """
 SINGLE_JOB: true
@@ -162,6 +184,19 @@ if __name__ == "__main__":
     parser.add_argument("--w2max",type=float,help='maximum w2 value, in GeV^2',default=100)
     parser.add_argument("--tmin",type=float,help='minimum t value, in GeV^2',default=-1)
     parser.add_argument("--tmax",type=float,help='maximum t value, in GeV^2',default=100)
+
+    #Arguements specific to aao_rad
+    parser.add_argument("--int_region",help="the sizes of the integration regions",default =".20 .12 .20 .20")
+    parser.add_argument("--err_max",help="limit on the error in (mm)**2",default=0.2)
+    parser.add_argument("--target_len",help="target cell length (cm)",default=5)
+    parser.add_argument("--target_rad",help="target cell cylinder radius",default=0.43)
+    parser.add_argument("--cord_x",help="x-coord of beam position",default=0.0)
+    parser.add_argument("--cord_y",help="y-coord of beam position",default=0.0)
+    parser.add_argument("--cord_z",help="z-coord of beam position",default=0.0)
+    parser.add_argument("--rad_emin",help="minimum photon energy for integration",default=0.005)
+    parser.add_argument("--sigr_max_mult",help="a multiplication factor for sigr_max",default=0.0)
+    parser.add_argument("--sigr_max",help="sigr_max",default=0.005)
+
 
     #Specify output directory for lund file
     parser.add_argument("--outdir",help="Specify full or relative path to output directory final lund file",default=output_file_path)
