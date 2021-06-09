@@ -68,7 +68,7 @@ def run_generator(args,repo_base_dir):
 def filter_lund(args):
     try:
         if args.rad:
-            lund_filter_rad(args)
+            lund_filter_rad.filter_lund(args)
         else:
             lund_filter_norad.filter_lund(args)
         return 0
