@@ -35,29 +35,29 @@ This should produce a file genName.dat.
 def gen_input_file(args):
     try:
         if args.rad:
-        subprocess.run([args.input_exe_path,
-            "--physics_model", str(args.physics_model),
-            "--flag_ehel", str(args.flag_ehel),
-            "--int_region", str(args.int_region),
-            "--npart", str(args.npart),
-            "--epirea", str(args.epirea), 
-            "--err_max", str(args.err_max),
-            "--target_len", str(args.target_len),
-            "--target_rad", str(args.target_rad),
-            "--cord_x", str(args.cord_x),
-            "--cord_y", str(args.cord_y),
-            "--cord_z", str(args.cord_z),
-            "--ebeam", str(args.ebeam),
-            "--q2min", str(args.q2min),
-            "--q2max", str(args.q2max),
-            "--epmin", str(args.epmin),
-            "--epmax", str(args.epmax),
-            "--rad_emin", str(args.rad_emin),
-            "--trig", str(args.trig),
-            "--sigr_max_mult", str(args.sigr_max_mult),
-            "--sigr_max", str(args.sigr_max),
-            "--seed", str(args.seed),
-            "--input_filename" str(args.input_filename)])
+            subprocess.run([args.input_exe_path,
+                "--physics_model", str(args.physics_model),
+                "--flag_ehel", str(args.flag_ehel),
+                "--int_region", str(args.int_region),
+                "--npart", str(args.npart),
+                "--epirea", str(args.epirea), 
+                "--err_max", str(args.err_max),
+                "--target_len", str(args.target_len),
+                "--target_rad", str(args.target_rad),
+                "--cord_x", str(args.cord_x),
+                "--cord_y", str(args.cord_y),
+                "--cord_z", str(args.cord_z),
+                "--ebeam", str(args.ebeam),
+                "--q2min", str(args.q2min),
+                "--q2max", str(args.q2max),
+                "--epmin", str(args.epmin),
+                "--epmax", str(args.epmax),
+                "--rad_emin", str(args.rad_emin),
+                "--trig", str(args.trig),
+                "--sigr_max_mult", str(args.sigr_max_mult),
+                "--sigr_max", str(args.sigr_max),
+                "--seed", str(args.seed),
+                "--input_filename", str(args.input_filename)])
         else:
             subprocess.run([args.input_exe_path,
                 "--physics_model",str(args.physics_model),
@@ -138,19 +138,6 @@ def filter_lund(args):
         print("The error message was:\n %s - %s." % (e.filename, e.strerror))
         print("Exiting\n")
         return -1
-
-
-    parser.add_argument("--filter_infile",help="specify input lund file name. Currently only works for 4-particle final state DVPiP",default="aao_norad.dat")
-    parser.add_argument("--filter_outfile",help='specify processed lund output file name',default="filtered_lund_file.dat")
-    parser.add_argument("--q2min",type=float,help='minimum Q2 value, in GeV^2',default=-1)
-    parser.add_argument("--q2max",type=float,help='maximum Q2 value, in GeV^2',default=100)
-    parser.add_argument("--xBmin",type=float,help='minimum Bjorken X value',default=-1)
-    parser.add_argument("--xBmax",type=float,help='maximum Bjorken X value',default=10)
-    parser.add_argument("--w2min",type=float,help='minimum w2 value, in GeV^2',default=-1)
-    parser.add_argument("--w2max",type=float,help='maximum w2 value, in GeV^2',default=100)
-    parser.add_argument("--tmin",type=float,help='minimum t value, in GeV^2',default=-1)
-    parser.add_argument("--tmax",type=float,help='maximum t value, in GeV^2',default=100)
-    parser.add_argument("--trig",type=int,help="number of desired generated events",default=10000)
 
 
 def compare_raw_to_filt(args,num_desired_events):
