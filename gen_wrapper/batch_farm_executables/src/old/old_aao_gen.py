@@ -104,6 +104,11 @@ def compare_raw_to_filt(args,num_desired_events):
         print("Exiting\n")  
         return -1
 
+
+
+
+
+
 def gen_events(args,repo_base_dir):
 
     num_desired_events = args.trig
