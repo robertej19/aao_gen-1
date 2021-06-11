@@ -42,6 +42,7 @@ cp {3} gen_wrapper/run/
     run_command = """
 ./gen_wrapper/run/aao_gen.exe \
 --input_exe_path gen_wrapper/run/input_file_maker_aao_rad.exe \
+--rad \
 --physics_model {} \
 --flag_ehel {} \
 --npart {} \
@@ -75,8 +76,7 @@ cp {3} gen_wrapper/run/
 --cord_z {} \
 --rad_emin {} \
 --sigr_max_mult {} \
---sigr_max {} \
---docker {}
+--sigr_max {}
 """.format(args.physics_model,
     args.flag_ehel,args.npart,args.epirea,args.ebeam,
     args.q2min,args.q2max,args.epmin,args.epmax,args.fmcall,
@@ -93,8 +93,7 @@ cp {3} gen_wrapper/run/
     args.cord_z,
     args.rad_emin,
     args.sigr_max_mult,
-    args.sigr_max,
-    args.docker)
+    args.sigr_max)
 
 
     footer = """

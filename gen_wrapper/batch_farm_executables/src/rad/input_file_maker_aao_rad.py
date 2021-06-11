@@ -75,6 +75,10 @@ if __name__ == "__main__":
     parser.add_argument("--sigr_max_mult",help="a multiplication factor for sigr_max",default=0.0)
     parser.add_argument("--sigr_max",help="sigr_max",default=0.005)
 
+
+    parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=1.0)
+    parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=1)
+    
     parser.add_argument("--seed",help="0= use unix timestamp from machine time to generate seed, otherwise use given value as seed",default=0)
     parser.add_argument("--input_filename",help="filename for aao_norad",default="aao_rad_input.inp")
 
