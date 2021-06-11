@@ -142,7 +142,7 @@ def filter_lund(args):
 
 def compare_raw_to_filt(args,num_desired_events):
     try:
-        filtered_lund = args.outdir+"aao_gen.dat"
+        filtered_lund = "aao_gen_filtered.dat"
         with open(filtered_lund,"r") as f:
             filtered_num = len(f.readlines())/5
         ratio = filtered_num/num_desired_events

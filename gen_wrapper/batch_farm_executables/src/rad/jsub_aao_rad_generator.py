@@ -99,7 +99,7 @@ cp {3} gen_wrapper/run/
     footer = """
 SINGLE_JOB: true
 
-OUTPUT_DATA: output/pi0_gen.dat
+OUTPUT_DATA: aao_gen_filtered.dat
 OUTPUT_TEMPLATE:{0}pi0_gen{1}.lund
 """.format(args.return_dir,count)
 
