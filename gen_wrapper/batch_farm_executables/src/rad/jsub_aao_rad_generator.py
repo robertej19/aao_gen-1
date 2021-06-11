@@ -66,7 +66,7 @@ cp {3} gen_wrapper/run/
 --tmin {} \
 --tmax {} \
 --seed {} \
---int_region {} \
+--int_region "{}" \
 --err_max {} \
 --target_len {} \
 --target_rad {} \
