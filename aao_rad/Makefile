@@ -1,10 +1,10 @@
 OBJ=  aao.o aao_rad.o cgln_amps.o daresbury.o dsigma.o dvmpw.o dvmpx.o helicity_amps.o interp.o legendre.o maid_lee.o multipole_amps.o read_sf_file.o sigmao.o splie2.o splin2.o spline.o splint.o strlen.o xsection.o
 OBJC=  unixtime.o 
 
-CERNLIBS =  -L/apps/cernlib/x86_64_rhel6_4.7.2/2005/lib  -lmathlib  -lpacklib 
+#CERNLIBS =  -L/apps/cernlib/x86_64_rhel6_4.7.2/2005/lib  -lmathlib  -lpacklib 
  
 aao_rad : $(OBJ) $(OBJC)
-	gfortran  -o   aao_rad  $(addprefix build/, $(OBJ)) build/$(OBJC) $(CERNLIBS) 
+	gfortran  -o   aao_rad  $(addprefix build/, $(OBJ)) build/$(OBJC) 
 $(OBJ) : %.o: %.F
 	gfortran -fno-automatic -ffixed-line-length-none -fno-second-underscore -funroll-loops -fomit-frame-pointer  -c $< -o build/$@  
 $(OBJC) : %.o: %.c
