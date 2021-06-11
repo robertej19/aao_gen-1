@@ -91,7 +91,7 @@ def run_generator(args,repo_base_dir):
         process.wait()
         #process2 = subprocess.Popen("mv aao_norad.lund {}aao_norad.lund".format(args.outdir),shell=True)
         #process2.wait()
-        #shutil.move(repo_base_dir+"/aao_norad.lund", args.outdir+"aao_norad.lund")
+        shutil.move(repo_base_dir+"/aao_rad.lund", args.outdir+"aao_rad.lund")
         print("Moved lund file to new directory")
         return 0
     except OSError as e:
