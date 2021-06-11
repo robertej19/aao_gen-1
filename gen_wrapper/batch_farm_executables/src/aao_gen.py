@@ -91,7 +91,7 @@ def run_generator(args,repo_base_dir):
         process.wait()
         #process2 = subprocess.Popen("mv aao_norad.lund {}aao_norad.lund".format(args.outdir),shell=True)
         #process2.wait()
-        shutil.move(repo_base_dir+"/aao_rad.lund", args.outdir+"aao_rad.lund")
+        #shutil.move(repo_base_dir+"/aao_rad.lund", args.outdir+"aao_rad.lund")
         print("Moved lund file to new directory")
         return 0
     except OSError as e:
@@ -108,8 +108,8 @@ def filter_lund(args):
     try:
         if args.rad:
             subprocess.run([args.filter_exe_path,
-                    "--filter_infile",args.outdir+"aao_rad.lund",
-                    "--filter_outfile",args.outdir+"aao_gen.dat",
+                    "--filter_infile","aao_rad.lund",
+                    "--filter_outfile","aao_gen.dat",
                     "--q2min", str(args.q2min),
                     "--q2max", str(args.q2max),
                     "--xBmin", str(args.xBmin),
