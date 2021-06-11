@@ -6,7 +6,7 @@
 * Kernlib
 *
 *
-#include "kernnum/pilot.h"
+Clcs#include "kernnum/pilot.h"
           FUNCTION FINT(NARG,ARG,NENT,ENT,TABLE)
 C
 C   INTERPOLATION ROUTINE. AUTHOR C. LETERTRE.
@@ -41,7 +41,10 @@ C
              GOTO 30
   10         LOCB  =  LMAX + 1
   11         LOCC  =  (LOCA+LOCB) / 2
-             IF(X-ENT(LOCC))  12, 20, 13
+             IF(X-ENT(LOCC) .LT. 0) GOTO 12
+             IF(X-ENT(LOCC) .EQ. 0) GOTO 20
+             IF(X-ENT(LOCC) .GT. 0) GOTO 13
+Clcs             IF(X-ENT(LOCC))  12, 20, 13
   12         LOCB  =  LOCC
              GOTO 14
   13         LOCA  =  LOCC
@@ -69,15 +72,16 @@ C
              FINT  =  FINT + WEIGHT(K) * TABLE(I)
  200         CONTINUE
           RETURN
- 300      CALL KERMTR('E104.1',LGFILE,MFLAG,RFLAG)
-          IF(MFLAG) THEN
-             IF(LGFILE .EQ. 0) THEN
+ 300      CONTINUE
+Clcs         CALL KERMTR('E104.1',LGFILE,MFLAG,RFLAG)
+Clcs          IF(MFLAG) THEN
+Clcs             IF(LGFILE .EQ. 0) THEN
                 WRITE(*,1000) NARG
-             ELSE
-                WRITE(LGFILE,1000) NARG
-             ENDIF
-          ENDIF
-          IF(.NOT. RFLAG) CALL ABEND
+Clcs             ELSE
+Clcs                WRITE(LGFILE,1000) NARG
+Clcs             ENDIF
+Clcs          ENDIF
+Clcs          IF(.NOT. RFLAG) CALL ABEND
           RETURN
 1000      FORMAT( 7X, 24HFUNCTION FINT ... NARG =,I6,
      +              17H NOT WITHIN RANGE)
