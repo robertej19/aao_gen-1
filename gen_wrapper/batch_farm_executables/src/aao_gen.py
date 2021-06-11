@@ -108,7 +108,7 @@ def filter_lund(args):
     try:
         if args.rad:
             subprocess.run([args.filter_exe_path,
-                    "--filter_infile",args.outdir+"aao_norad.lund",
+                    "--filter_infile",args.outdir+"aao_rad.lund",
                     "--filter_outfile",args.outdir+"aao_gen.dat",
                     "--q2min", str(args.q2min),
                     "--q2max", str(args.q2max),
