@@ -77,8 +77,8 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       
       real*4 ntp(22)
 
-      common /pawc/h(1000000)
-      common/quest/iquest(100)
+clcs      common /pawc/h(1000000)
+clcs      common/quest/iquest(100)
       common/ntup/ntp
       
       integer h,nevent,nmax,istat,icycle
@@ -205,16 +205,16 @@ c     seed_source: 0= use unix timestamp from machine time to generate seed, oth
       open(unit=14,file=file_sum)
       open(unit=13,file=file_lund)
 
-      call hlimit(1000000)
-      iquest(10)	= 65000
-      call hropen(1,'AONORAD',filerz,'NQ',8191,istat)
-      call hbset('BSIZE',8176,istat)
-      call hbnt(10,'AONORAD',' ')
-      call hbname(10,' ',0,'$clear')
-      call hbname(10,'AONORAD',ntp(1),'ES:R,EP:R,THETE:R,
-     *W:R,PPX:R,PPY:R,PPZ:R,EPROT:R,PPIX:R,PPIY:R,PPIZ:R,
-     *EPI:R,CSTCM:R,PHICM:R,MM:R,QX:R,QZ:R,Q0:R,CSTHE:R,
-     *HEL:R,ASYM:R,Q2:R')
+clcs      call hlimit(1000000)
+clcs      iquest(10)	= 65000
+clcs      call hropen(1,'AONORAD',filerz,'NQ',8191,istat)
+clcs      call hbset('BSIZE',8176,istat)
+clcs      call hbnt(10,'AONORAD',' ')
+clcs      call hbname(10,' ',0,'$clear')
+clcs      call hbname(10,'AONORAD',ntp(1),'ES:R,EP:R,THETE:R,
+clcs     *W:R,PPX:R,PPY:R,PPZ:R,EPROT:R,PPIX:R,PPIY:R,PPIZ:R,
+clcs     *EPI:R,CSTCM:R,PHICM:R,MM:R,QX:R,QZ:R,Q0:R,CSTHE:R,
+clcs     *HEL:R,ASYM:R,Q2:R')
 
       bosout = file_bos
       recname = 'MCEVENT'
@@ -396,7 +396,7 @@ c     if mcall .gt. 0 generate mcall n-tuple events.
         ntp(21)     = asym_p
         ntp(22)     = q2
 
-        call hfnt(10)
+clcs        call hfnt(10)
         
         nevent = nevent+1
         
@@ -573,8 +573,9 @@ c     electron phase space =2*pi*uq2rng*eprng
       if (nevent .gt. nmax) go to 50
  30   go to 20
 
- 50   call hrout(0,icycle,' ')
-      call hrend('AONORAD')
+ 50   continue
+clcs      call hrout(0,icycle,' ')
+clcs      call hrend('AONORAD')
 c      if (boso.eq.1) call bos_end(recname)
       
       write(14,*)' AO Calculation of Single Pion Production',
@@ -597,7 +598,7 @@ c      if (boso.eq.1) call bos_end(recname)
      *    ,' seconds'
       close(unit=12)
       close(unit=14)
-      close(unit=1)
+clcs      close(unit=1)
 
  99   continue
  
