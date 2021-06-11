@@ -3,6 +3,7 @@ c
 c     This program makes an n-tuple that can be used with Paw and GSIM to
 c     make distributions of energies, angles, resonance mass resulting 
 c     from non-radiative pion production on a proton.
+c
 c     The n-tuple contains the true hadronic invariant mass (W), the components 
 c     of the proton momentum (PPX, PPY, PPZ),
 c     the proton energy (EP), the pion momentum (PPIX, PPIY, PPIZ) and
@@ -643,7 +644,7 @@ C
       ENDIF
 C
       J = 1 + (97*IY)/M
-      IF(J.GT.97 .OR. J.LT.1) PAUSE
+      IF(J.GT.97 .OR. J.LT.1) STOP
       IY   = IR(J)
       MYRAN = IY*RM
       IDUM = MOD(IA*IDUM+IC,M)
