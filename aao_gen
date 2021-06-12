@@ -8,6 +8,9 @@ import shutil
 import time
 import datetime 
 
+if os.getenv("AAO_GEN_DIR") is not None:
+    sys.path.append(os.getenv("AAO_GEN_DIR"))
+
 import gen_wrapper.clas12_mcgen_executables.input_file_maker_aao_norad as inp_maker
 import gen_wrapper.clas12_mcgen_executables.lund_filter as lund_filter
 
@@ -168,10 +171,12 @@ if __name__ == "__main__":
     # │       └── pi0_gen_wrapper.py
 
     slash = "/"
-    repo_base_dir = slash.join(full_file_path.split(slash)[:-1])
+    if os.getenv('AAO_GEN_DIR') is not None:
+        repo_base_dir = os.getenv('AAO_GEN_DIR')
+    else:
+        repo_base_dir = slash.join(full_file_path.split(slash)[:-1])
     aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad"
     output_file_path = repo_base_dir + "/output/"
-
 
     parser = argparse.ArgumentParser(description="""CURRENTLY ONLY WORKS WITH AAO_NORAD 4 PARTICLE FINAL STATE \n
                                 This script: \n
