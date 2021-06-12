@@ -4,10 +4,13 @@ OBJC=  unixtime.o
 #CERNLIBS =  -L/apps/cernlib/x86_64_rhel6_4.7.2/2005/lib  -lmathlib  -lpacklib 
  
 aao_rad : $(OBJ) $(OBJC)
+	mkdir -p build
 	gfortran -o build/aao_norad $(addprefix build/, $(OBJ)) build/$(OBJC) 
 $(OBJ) : %.o: %.F
+	mkdir -p build
 	gfortran -fno-automatic -ffixed-line-length-none -fno-second-underscore -funroll-loops -fomit-frame-pointer  -c $< -o build/$@  
 $(OBJC) : %.o: %.c
+	mkdir -p build
 	gcc -c $< -o build/$@ 
 clean:
 	rm -f build/aao_norad $(addprefix build/, $(OBJ)) $(addprefix build/, $(OBJC)) 
