@@ -14,3 +14,4 @@ depends
 *.sum
 output/*
 submission_warehouse/*
+__pycache__
