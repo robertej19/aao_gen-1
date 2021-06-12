@@ -13,7 +13,7 @@ $(OBJC) : %.o: %.c
 	mkdir -p build
 	gcc  -c $<  -o build/$@ 
 clean:
-	rm -f build/aao_rad   build/$(OBJ) build/$(OBJC)
+	rm -f build/aao_rad $(addprefix build/, $(OBJ)) $(addprefix build/, $(OBJC))
 
 
 
