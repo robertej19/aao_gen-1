@@ -5,13 +5,13 @@ OBJC=  unixtime.o
  
 aao_rad : $(OBJ) $(OBJC)
 	mkdir -p build
-	gfortran  -o   aao_rad  $(addprefix build/, $(OBJ)) build/$(OBJC) 
+	gfortran  -o build/aao_rad  $(addprefix build/, $(OBJ)) build/$(OBJC) 
 $(OBJ) : %.o: %.F
 	mkdir -p build
-	gfortran -fno-automatic -ffixed-line-length-none -fno-second-underscore -funroll-loops -fomit-frame-pointer  -c $< -o build/$@  
+	gfortran -fno-automatic -ffixed-line-length-none -fno-second-underscore -funroll-loops -fomit-frame-pointer -c $< -o build/$@  
 $(OBJC) : %.o: %.c
 	mkdir -p build
-	gcc  -c $<  -o build/$@ 
+	gcc  -c $< -o build/$@ 
 clean:
 	rm -f build/aao_rad $(addprefix build/, $(OBJ)) $(addprefix build/, $(OBJC))
 
