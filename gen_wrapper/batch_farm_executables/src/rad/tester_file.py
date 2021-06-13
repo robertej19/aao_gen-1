@@ -168,7 +168,7 @@ def gen_events(args,repo_base_dir):
     #This wouldn't bias things. If someone can verify that it doesn't bias anything, then this part of code should be restructured.
     ratio = 0
 
-    max_num_loops = args.maxloops
+    max_num_loops = int(args.maxloops)
     gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
     print('hello3')
     for loop_counter in range(0,max_num_loops+1):
