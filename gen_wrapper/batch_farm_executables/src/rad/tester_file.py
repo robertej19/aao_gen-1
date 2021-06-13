@@ -161,7 +161,7 @@ This should produce a file genName.dat.
 
 def gen_events(args,repo_base_dir):
     print('hello3')
-    for i in range(0,6):
+    for i in range(0,int(args.maxloops)):
         print("ehllo")
     # num_desired_events = args.trig
     # #If the number of events is not close enough to the desired number, generate recursively.
