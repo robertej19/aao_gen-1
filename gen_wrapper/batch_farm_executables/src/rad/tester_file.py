@@ -159,30 +159,30 @@ This should produce a file genName.dat.
 
 
 
-# def gen_events(args,repo_base_dir):
+def gen_events(args,repo_base_dir):
 
-#     num_desired_events = args.trig
-#     #If the number of events is not close enough to the desired number, generate recursively.
-#     #It would be computationally better to just run the generator again and again until more than enough events are created,
-#     #And then just cut out the last few events to get exactly the desired number of events, but I'm not sure that 
-#     #This wouldn't bias things. If someone can verify that it doesn't bias anything, then this part of code should be restructured.
-#     ratio = 0
+    num_desired_events = args.trig
+    #If the number of events is not close enough to the desired number, generate recursively.
+    #It would be computationally better to just run the generator again and again until more than enough events are created,
+    #And then just cut out the last few events to get exactly the desired number of events, but I'm not sure that 
+    #This wouldn't bias things. If someone can verify that it doesn't bias anything, then this part of code should be restructured.
+    ratio = 0
 
-#     max_num_loops = args.maxloops
-#     gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
-#     for loop_counter in range(0,max_num_loops+1):
-#         print("generating {} raw events".format(args.trig))
+    max_num_loops = args.maxloops
+    gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
+    for loop_counter in range(0,max_num_loops+1):
+        print("generating {} raw events".format(args.trig))
 
 
-#         gen_input_file(args)
-#         print("Created generator input file, now trying to run generator")
+        # gen_input_file(args)
+        # print("Created generator input file, now trying to run generator")
 
-#         start_time = time.time()
-#         start_time_hr = datetime.datetime.fromtimestamp(start_time).strftime('%d %B %Y %H:%M:%S')
-#         end_time = start_time+gen_rate*args.trig
-#         end_time_hr = datetime.datetime.fromtimestamp(end_time).strftime('%d %B %Y %H:%M:%S')
-#         print("Generator starting at {} ".format(start_time_hr))
-#         print("Estimated finish time at {}".format(end_time_hr))
+        # start_time = time.time()
+        # start_time_hr = datetime.datetime.fromtimestamp(start_time).strftime('%d %B %Y %H:%M:%S')
+        # end_time = start_time+gen_rate*args.trig
+        # end_time_hr = datetime.datetime.fromtimestamp(end_time).strftime('%d %B %Y %H:%M:%S')
+        # print("Generator starting at {} ".format(start_time_hr))
+        # print("Estimated finish time at {}".format(end_time_hr))
 
 
 #         run_generator(args,repo_base_dir)
@@ -374,5 +374,6 @@ if __name__ == "__main__":
 
     print("Generating {} DVPiP Events".format(args.trig))
 
-    print("hellow")
+    print("hellow2")
+    gen_events(args,repo_base_dir)
 
