@@ -371,6 +371,8 @@ if __name__ == "__main__":
                     print("WARNING COULD NOT CLEAR OUTPUT DIRECTORY")
             subprocess.call(['mkdir','-p',args.outdir])
 
+
+    print("Generating {} DVPiP Events".format(args.trig))
+
     print("hellow")
 
-    # print("Generating {} DVPiP Events".format(args.trig))
