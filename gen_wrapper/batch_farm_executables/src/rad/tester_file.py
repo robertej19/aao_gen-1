@@ -342,30 +342,30 @@ if __name__ == "__main__":
             args.generator_exe_path = aao_rad_path #change to using radiative generator
         if args.filter_infile == "aao_norad.lund":
             args.filter_infile = "aao_rad.lund" #change to using radiative generator
-        if args.input_exe_path == norad_input_file_maker_path:
-            args.input_exe_path = rad_input_file_maker_path
-        if args.input_filename == "aao_norad_input.inp":
-            args.input_filename = "aao_rad_input.inp" #change to using radiative generator
-        if args.filter_exe_path == norad_lund_filter_path:
-            args.filter_exe_path = rad_lund_filter_path
+    #     if args.input_exe_path == norad_input_file_maker_path:
+    #         args.input_exe_path = rad_input_file_maker_path
+    #     if args.input_filename == "aao_norad_input.inp":
+    #         args.input_filename = "aao_rad_input.inp" #change to using radiative generator
+    #     if args.filter_exe_path == norad_lund_filter_path:
+    #         args.filter_exe_path = rad_lund_filter_path
 
-    if not os.path.isdir(args.outdir):
-        print(args.outdir+" is not present, creating now")
-        subprocess.call(['mkdir','-p',args.outdir])
-    else:
-        print(args.outdir + "exists already")
-        if args.r:
-            print("trying to remove output dir")
-            try:
-                shutil.rmtree(args.outdir)
-            except OSError as e:
-                print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
-                print("trying to remove dir again")
-                try:
-                    shutil.rmtree(args.outdir)
-                except OSError as e:
-                    print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
-                    print("WARNING COULD NOT CLEAR OUTPUT DIRECTORY")
-            subprocess.call(['mkdir','-p',args.outdir])
+    # if not os.path.isdir(args.outdir):
+    #     print(args.outdir+" is not present, creating now")
+    #     subprocess.call(['mkdir','-p',args.outdir])
+    # else:
+    #     print(args.outdir + "exists already")
+    #     if args.r:
+    #         print("trying to remove output dir")
+    #         try:
+    #             shutil.rmtree(args.outdir)
+    #         except OSError as e:
+    #             print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
+    #             print("trying to remove dir again")
+    #             try:
+    #                 shutil.rmtree(args.outdir)
+    #             except OSError as e:
+    #                 print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
+    #                 print("WARNING COULD NOT CLEAR OUTPUT DIRECTORY")
+    #         subprocess.call(['mkdir','-p',args.outdir])
     
-    print("Generating {} DVPiP Events".format(args.trig))
+    # print("Generating {} DVPiP Events".format(args.trig))
