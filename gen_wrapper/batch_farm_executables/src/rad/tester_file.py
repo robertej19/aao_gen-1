@@ -351,25 +351,26 @@ if __name__ == "__main__":
         if args.filter_exe_path == norad_lund_filter_path:
             args.filter_exe_path = rad_lund_filter_path
 
+
+    if not os.path.isdir(args.outdir):
+        print(args.outdir+" is not present, creating now")
+        subprocess.call(['mkdir','-p',args.outdir])
+    else:
+        print(args.outdir + "exists already")
+        if args.r:
+            print("trying to remove output dir")
+            try:
+                shutil.rmtree(args.outdir)
+            except OSError as e:
+                print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
+                print("trying to remove dir again")
+                try:
+                    shutil.rmtree(args.outdir)
+                except OSError as e:
+                    print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
+                    print("WARNING COULD NOT CLEAR OUTPUT DIRECTORY")
+            subprocess.call(['mkdir','-p',args.outdir])
+
     print("hellow")
 
-    # if not os.path.isdir(args.outdir):
-    #     print(args.outdir+" is not present, creating now")
-    #     subprocess.call(['mkdir','-p',args.outdir])
-    # else:
-    #     print(args.outdir + "exists already")
-    #     if args.r:
-    #         print("trying to remove output dir")
-    #         try:
-    #             shutil.rmtree(args.outdir)
-    #         except OSError as e:
-    #             print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
-    #             print("trying to remove dir again")
-    #             try:
-    #                 shutil.rmtree(args.outdir)
-    #             except OSError as e:
-    #                 print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
-    #                 print("WARNING COULD NOT CLEAR OUTPUT DIRECTORY")
-    #         subprocess.call(['mkdir','-p',args.outdir])
-    
     # print("Generating {} DVPiP Events".format(args.trig))
