@@ -9,10 +9,9 @@ import sys
 import os
 import argparse
 
-# import subprocess
-# import shutil
-#import time
-#import datetime 
+import subprocess
+import shutil
+ 
 
 def gen_jsub(args,count):
     outfile = open(args.jsub_textdir+"jsub_aao_rad_gen_job_{}.txt".format(count),"w")
@@ -120,6 +119,22 @@ if __name__ == "__main__":
     else:
         full_file_path = os.path.abspath(__file__) #This sets the path for interpreted python
 
+    #File structure:
+    # repository head
+    # ├── aao_norad
+    # │   ├── build
+    # │   │   └── aao_norad.exe
+    # ├── aao_rad
+    # ├── gen_wrapper
+    # │   ├── run
+    # │   │   ├── input_file_maker_aao_norad.exe
+    # │   │   └── lund_filter.exe
+    # │   └── src
+    # │       ├── aao_norad_text.py
+    # │       ├── input_file_maker_aao_norad.py
+    # │       ├── lund_filter.py
+    # │       └── pi0_gen_wrapper.py
+
     slash = "/"
     repo_base_dir = slash.join(full_file_path.split(slash)[:-3])
     input_file_maker_path = repo_base_dir + "/run/rad/input_file_maker_aao_rad.exe"
@@ -203,24 +218,24 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
 
-    # if not os.path.isdir(args.jsub_textdir):
-    #     print(args.jsub_textdir+" is not present, creating now")
-    #     subprocess.call(['mkdir','-p',args.jsub_textdir])
-    # else:
-    #     print(args.jsub_textdir + "exists already")
-    #     if args.r:
-    #         print("trying to remove output dir")
-    #         try:
-    #             shutil.rmtree(args.jsub_textdir)
-    #         except OSError as e:
-    #             print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
-    #             print("trying to remove dir again")
-    #             try:
-    #                 shutil.rmtree(args.jsub_textdir)
-    #             except OSError as e:
-    #                 print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
-    #                 print("WARNING COULD NOT CLEAR OUTPUT DIRECTORY")
-    #         subprocess.call(['mkdir','-p',args.jsub_textdir])
+    if not os.path.isdir(args.jsub_textdir):
+        print(args.jsub_textdir+" is not present, creating now")
+        subprocess.call(['mkdir','-p',args.jsub_textdir])
+    else:
+        print(args.jsub_textdir + "exists already")
+        if args.r:
+            print("trying to remove output dir")
+            try:
+                shutil.rmtree(args.jsub_textdir)
+            except OSError as e:
+                print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
+                print("trying to remove dir again")
+                try:
+                    shutil.rmtree(args.jsub_textdir)
+                except OSError as e:
+                    print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
+                    print("WARNING COULD NOT CLEAR OUTPUT DIRECTORY")
+            subprocess.call(['mkdir','-p',args.jsub_textdir])
     
     print("Generating {} submission files".format(args.n))
     for index in range(0,args.n):
