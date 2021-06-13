@@ -162,7 +162,7 @@ This should produce a file genName.dat.
 def gen_events(args,repo_base_dir):
     print('hello3')
     max_num_loops = int(args.maxloops)
-    for loop_counter in range(0,max_num_loops+1):
+    for loop_counter in range(0,max_num_loops):
         print("hellow")
 
 
