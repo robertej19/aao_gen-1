@@ -138,7 +138,7 @@ if __name__ == "__main__":
     slash = "/"
     repo_base_dir = slash.join(full_file_path.split(slash)[:-3])
     input_file_maker_path = repo_base_dir + "/src/rad/input_file_maker_aao_rad.py"
-    aao_norad_path = repo_base_dir + "/../../aao_rad/build/aao_rad.py"
+    aao_norad_path = repo_base_dir + "/../../aao_rad/build/aao_rad.exe"
     lund_filter_path = repo_base_dir + "/src/rad/lund_filter_rad.py"
     output_file_path = repo_base_dir + "/output/"
     jsub_textdir_path = repo_base_dir + "/submission_warehouse/"
