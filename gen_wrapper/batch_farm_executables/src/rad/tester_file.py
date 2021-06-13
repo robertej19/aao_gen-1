@@ -32,127 +32,127 @@ This should produce a file genName.dat.
 
 
 
-# def gen_input_file(args):
-#     try:
-#         if args.rad:
-#             subprocess.run([args.input_exe_path,
-#                 "--physics_model", str(args.physics_model),
-#                 "--flag_ehel", str(args.flag_ehel),
-#                 "--int_region", str(args.int_region),
-#                 "--npart", str(args.npart),
-#                 "--epirea", str(args.epirea), 
-#                 "--err_max", str(args.err_max),
-#                 "--target_len", str(args.target_len),
-#                 "--target_rad", str(args.target_rad),
-#                 "--cord_x", str(args.cord_x),
-#                 "--cord_y", str(args.cord_y),
-#                 "--cord_z", str(args.cord_z),
-#                 "--ebeam", str(args.ebeam),
-#                 "--q2min", str(args.q2min),
-#                 "--q2max", str(args.q2max),
-#                 "--epmin", str(args.epmin),
-#                 "--epmax", str(args.epmax),
-#                 "--rad_emin", str(args.rad_emin),
-#                 "--trig", str(args.trig),
-#                 "--sigr_max_mult", str(args.sigr_max_mult),
-#                 "--sigr_max", str(args.sigr_max),
-#                 "--seed", str(args.seed),
-#                 "--input_filename", str(args.input_filename)])
-#         else:
-#             subprocess.run([args.input_exe_path,
-#                 "--physics_model",str(args.physics_model),
-#                 "--flag_ehel", str(args.flag_ehel),
-#                 "--npart", str(args.npart),
-#                 "--epirea", str(args.epirea),
-#                 "--ebeam", str(args.ebeam),
-#                 "--q2min", str(args.q2min),
-#                 "--q2max", str(args.q2max),
-#                 "--epmin", str(args.epmin),
-#                 "--epmax", str(args.epmax),
-#                 "--trig", str(args.trig),
-#                 "--fmcall", str(args.fmcall),
-#                 "--boso", str(args.boso),
-#                 "--seed", str(args.seed),
-#                 "--out", args.outdir+'aao_input.inp'])
-#         return 0
-#     except OSError as e:
-#         print("\nError creating generator input file")
-#         print("The error message was:\n %s - %s." % (e.filename, e.strerror))
-#         print("Exiting\n")
-#         return -1
+def gen_input_file(args):
+    try:
+        if args.rad:
+            subprocess.run([args.input_exe_path,
+                "--physics_model", str(args.physics_model),
+                "--flag_ehel", str(args.flag_ehel),
+                "--int_region", str(args.int_region),
+                "--npart", str(args.npart),
+                "--epirea", str(args.epirea), 
+                "--err_max", str(args.err_max),
+                "--target_len", str(args.target_len),
+                "--target_rad", str(args.target_rad),
+                "--cord_x", str(args.cord_x),
+                "--cord_y", str(args.cord_y),
+                "--cord_z", str(args.cord_z),
+                "--ebeam", str(args.ebeam),
+                "--q2min", str(args.q2min),
+                "--q2max", str(args.q2max),
+                "--epmin", str(args.epmin),
+                "--epmax", str(args.epmax),
+                "--rad_emin", str(args.rad_emin),
+                "--trig", str(args.trig),
+                "--sigr_max_mult", str(args.sigr_max_mult),
+                "--sigr_max", str(args.sigr_max),
+                "--seed", str(args.seed),
+                "--input_filename", str(args.input_filename)])
+        else:
+            subprocess.run([args.input_exe_path,
+                "--physics_model",str(args.physics_model),
+                "--flag_ehel", str(args.flag_ehel),
+                "--npart", str(args.npart),
+                "--epirea", str(args.epirea),
+                "--ebeam", str(args.ebeam),
+                "--q2min", str(args.q2min),
+                "--q2max", str(args.q2max),
+                "--epmin", str(args.epmin),
+                "--epmax", str(args.epmax),
+                "--trig", str(args.trig),
+                "--fmcall", str(args.fmcall),
+                "--boso", str(args.boso),
+                "--seed", str(args.seed),
+                "--out", args.outdir+'aao_input.inp'])
+        return 0
+    except OSError as e:
+        print("\nError creating generator input file")
+        print("The error message was:\n %s - %s." % (e.filename, e.strerror))
+        print("Exiting\n")
+        return -1
 
 
 
 
-# def run_generator(args,repo_base_dir):
-#     try:
-#         runstring = "{} < {}".format(args.generator_exe_path,args.input_filename)
-#         process = subprocess.Popen(runstring,stdout=subprocess.PIPE,shell=True)
-#         process.wait()
-#         #process2 = subprocess.Popen("mv aao_norad.lund {}aao_norad.lund".format(args.outdir),shell=True)
-#         #process2.wait()
-#         #shutil.move(repo_base_dir+"/aao_rad.lund", args.outdir+"aao_rad.lund")
-#         print("Moved lund file to new directory")
-#         return 0
-#     except OSError as e:
-#         print("\nError using event generator")
-#         print("The error message was:\n %s - %s." % (e.filename, e.strerror))
-#         print("Exiting\n")  
-#         return -1
+def run_generator(args,repo_base_dir):
+    try:
+        runstring = "{} < {}".format(args.generator_exe_path,args.input_filename)
+        process = subprocess.Popen(runstring,stdout=subprocess.PIPE,shell=True)
+        process.wait()
+        #process2 = subprocess.Popen("mv aao_norad.lund {}aao_norad.lund".format(args.outdir),shell=True)
+        #process2.wait()
+        #shutil.move(repo_base_dir+"/aao_rad.lund", args.outdir+"aao_rad.lund")
+        print("Moved lund file to new directory")
+        return 0
+    except OSError as e:
+        print("\nError using event generator")
+        print("The error message was:\n %s - %s." % (e.filename, e.strerror))
+        print("Exiting\n")  
+        return -1
 
 
 
 
 
-# def filter_lund(args):
-#     try:
-#         if args.rad:
-#             subprocess.run([args.filter_exe_path,
-#                     "--filter_infile","aao_rad.lund",
-#                     "--filter_outfile","aao_gen_filtered.dat",
-#                     "--q2min", str(args.q2min),
-#                     "--q2max", str(args.q2max),
-#                     "--xBmin", str(args.xBmin),
-#                     "--xBmax", str(args.xBmax),
-#                     "--tmin", str(args.tmin),
-#                     "--tmax", str(args.tmax),
-#                     "--w2min", str(args.w2min),
-#                     "--trig", str(args.trig),
-#                     "--w2max", str(args.w2max)])
-#         else:
-#             subprocess.run([args.filter_exe_path,
-#                     "--infile",args.outdir+"aao_norad.lund",
-#                     "--outfile",args.outdir+"aao_gen.dat",
-#                     "--q2min", str(args.q2min),
-#                     "--q2max", str(args.q2max),
-#                     "--xBmin", str(args.xBmin),
-#                     "--xBmax", str(args.xBmax),
-#                     "--tmin", str(args.tmin),
-#                     "--tmax", str(args.tmax),
-#                     "--w2min", str(args.w2min),
-#                     "--trig", str(args.trig),
-#                     "--w2max", str(args.w2max)])
-#         return 0
-#     except OSError as e:
-#         print("\nError filtering generated events")
-#         print("The error message was:\n %s - %s." % (e.filename, e.strerror))
-#         print("Exiting\n")
-#         return -1
+def filter_lund(args):
+    try:
+        if args.rad:
+            subprocess.run([args.filter_exe_path,
+                    "--filter_infile","aao_rad.lund",
+                    "--filter_outfile","aao_gen_filtered.dat",
+                    "--q2min", str(args.q2min),
+                    "--q2max", str(args.q2max),
+                    "--xBmin", str(args.xBmin),
+                    "--xBmax", str(args.xBmax),
+                    "--tmin", str(args.tmin),
+                    "--tmax", str(args.tmax),
+                    "--w2min", str(args.w2min),
+                    "--trig", str(args.trig),
+                    "--w2max", str(args.w2max)])
+        else:
+            subprocess.run([args.filter_exe_path,
+                    "--infile",args.outdir+"aao_norad.lund",
+                    "--outfile",args.outdir+"aao_gen.dat",
+                    "--q2min", str(args.q2min),
+                    "--q2max", str(args.q2max),
+                    "--xBmin", str(args.xBmin),
+                    "--xBmax", str(args.xBmax),
+                    "--tmin", str(args.tmin),
+                    "--tmax", str(args.tmax),
+                    "--w2min", str(args.w2min),
+                    "--trig", str(args.trig),
+                    "--w2max", str(args.w2max)])
+        return 0
+    except OSError as e:
+        print("\nError filtering generated events")
+        print("The error message was:\n %s - %s." % (e.filename, e.strerror))
+        print("Exiting\n")
+        return -1
 
 
-# def compare_raw_to_filt(args,num_desired_events):
-#     try:
-#         filtered_lund = "aao_gen_filtered.dat"
-#         with open(filtered_lund,"r") as f:
-#             filtered_num = len(f.readlines())/5
-#         ratio = filtered_num/num_desired_events
-#         print(r"Produced {}% of desired number of events in kinematic range".format(100*ratio))
-#         return ratio
-#     except OSError as e:
-#         print("\nError extracting filtering ratio")
-#         print("The error message was:\n %s - %s." % (e.filename, e.strerror))
-#         print("Exiting\n")  
-#         return -1
+def compare_raw_to_filt(args,num_desired_events):
+    try:
+        filtered_lund = "aao_gen_filtered.dat"
+        with open(filtered_lund,"r") as f:
+            filtered_num = len(f.readlines())/5
+        ratio = filtered_num/num_desired_events
+        print(r"Produced {}% of desired number of events in kinematic range".format(100*ratio))
+        return ratio
+    except OSError as e:
+        print("\nError extracting filtering ratio")
+        print("The error message was:\n %s - %s." % (e.filename, e.strerror))
+        print("Exiting\n")  
+        return -1
 
 
 
@@ -160,72 +160,62 @@ This should produce a file genName.dat.
 
 
 def gen_events(args,repo_base_dir):
-    print('hello3')
-    max_num_loops = int(args.maxloops)
+
+    num_desired_events = args.trig
+    #If the number of events is not close enough to the desired number, generate recursively.
+    #It would be computationally better to just run the generator again and again until more than enough events are created,
+    #And then just cut out the last few events to get exactly the desired number of events, but I'm not sure that 
+    #This wouldn't bias things. If someone can verify that it doesn't bias anything, then this part of code should be restructured.
+    ratio = 0
+
+    max_num_loops = args.maxloops
+    gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
     for loop_counter in range(0,max_num_loops):
-        a = 1 +5
-        print(a)
+        print("generating {} raw events".format(args.trig))
 
 
-    # num_desired_events = args.trig
-    # #If the number of events is not close enough to the desired number, generate recursively.
-    # #It would be computationally better to just run the generator again and again until more than enough events are created,
-    # #And then just cut out the last few events to get exactly the desired number of events, but I'm not sure that 
-    # #This wouldn't bias things. If someone can verify that it doesn't bias anything, then this part of code should be restructured.
-    # ratio = 0
+        gen_input_file(args)
+        print("Created generator input file, now trying to run generator")
 
-    # max_num_loops = int(args.maxloops)+1
-    # gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
-
-
-    # #for i in range(0,6):
-    # for i in range(0,3):
-    #     #print(1)
-    #     print("generating {} raw events".format(args.trig))
+        start_time = time.time()
+        start_time_hr = datetime.datetime.fromtimestamp(start_time).strftime('%d %B %Y %H:%M:%S')
+        end_time = start_time+gen_rate*args.trig
+        end_time_hr = datetime.datetime.fromtimestamp(end_time).strftime('%d %B %Y %H:%M:%S')
+        print("Generator starting at {} ".format(start_time_hr))
+        print("Estimated finish time at {}".format(end_time_hr))
 
 
-        # gen_input_file(args)
-        # print("Created generator input file, now trying to run generator")
-
-        # start_time = time.time()
-        # start_time_hr = datetime.datetime.fromtimestamp(start_time).strftime('%d %B %Y %H:%M:%S')
-        # end_time = start_time+gen_rate*args.trig
-        # end_time_hr = datetime.datetime.fromtimestamp(end_time).strftime('%d %B %Y %H:%M:%S')
-        # print("Generator starting at {} ".format(start_time_hr))
-        # print("Estimated finish time at {}".format(end_time_hr))
+        run_generator(args,repo_base_dir)
 
 
-#         run_generator(args,repo_base_dir)
+        seconds_elapsed = time.time() - start_time
+        gen_rate = seconds_elapsed/args.trig
+        print("Generator took {} seconds to run".format(seconds_elapsed))
 
-
-#         seconds_elapsed = time.time() - start_time
-#         gen_rate = seconds_elapsed/args.trig
-#         print("Generator took {} seconds to run".format(seconds_elapsed))
-
-#         print("Event generation complete, now trying to filter")
+        print("Event generation complete, now trying to filter")
         
 
-#         filter_lund(args)
-#         print("Lund file filtered, now comparing event sizes")
+        filter_lund(args)
+        print("Lund file filtered, now comparing event sizes")
 
-#         print("Now counting the effect of filtering")
-#         ratio = compare_raw_to_filt(args,num_desired_events)
+        print("Now counting the effect of filtering")
+        ratio = compare_raw_to_filt(args,num_desired_events)
         
-#         #if abs(ratio-1) < args.precision/100:
-#         #if (ratio > 1):# and (abs(ratio-1) < args.precision/100): #This should be replaced to just truncate once the desired number of events are made
-#         if abs(ratio-1) < args.precision/100:
-#         #if (ratio ==1):
-#             break
-#         elif loop_counter == max_num_loops:
-#             print("WARNING: Could not produce desired number of events after {} iterations".format(loop_counter))
-#             print("Produced {} events".format(round(ratio*num_desired_events)))
-#         else:
-#             if ratio == 0:
-#                 #This means no events made it past filtering, and we need to increase our stastics by a large factor
-#                 args.trig = round(100* args.trig)
-#             else:
-#                 args.trig = round(args.trig/ratio)
-#             print("Due to filtering, need to rerun and produce {} raw events, to end up with {} filtered events".format(args.trig,num_desired_events))
+        #if abs(ratio-1) < args.precision/100:
+        #if (ratio > 1):# and (abs(ratio-1) < args.precision/100): #This should be replaced to just truncate once the desired number of events are made
+        if abs(ratio-1) < args.precision/100:
+        #if (ratio ==1):
+            break
+        elif loop_counter == max_num_loops:
+            print("WARNING: Could not produce desired number of events after {} iterations".format(loop_counter))
+            print("Produced {} events".format(round(ratio*num_desired_events)))
+        else:
+            if ratio == 0:
+                #This means no events made it past filtering, and we need to increase our stastics by a large factor
+                args.trig = round(100* args.trig)
+            else:
+                args.trig = round(args.trig/ratio)
+            print("Due to filtering, need to rerun and produce {} raw events, to end up with {} filtered events".format(args.trig,num_desired_events))
 
 
 #should consider changing filtering method so if we generate more than enough valid events, we can just delete some at random       
@@ -286,7 +276,7 @@ if __name__ == "__main__":
                                 2.) Generates specified number of events \n
                                 3.) Filters generated events based off specifications \n
                                 4.) Returns .dat data file""",formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-
+   
     #General options
     parser.add_argument("--rad",help="Uses radiative generator instead of nonradiative one, CURRENTLY NOT WORKING",default=False,action='store_true')
 
@@ -324,7 +314,6 @@ if __name__ == "__main__":
 
 
 
-
     #For step2: (optional) set path to aao_norad generator
     parser.add_argument("--generator_exe_path",help="Path to generator executable",default=aao_norad_path)
 
@@ -348,7 +337,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-
     if args.rad:
         if args.generator_exe_path==aao_norad_path:
             args.generator_exe_path = aao_rad_path #change to using radiative generator
@@ -360,7 +348,6 @@ if __name__ == "__main__":
             args.input_filename = "aao_rad_input.inp" #change to using radiative generator
         if args.filter_exe_path == norad_lund_filter_path:
             args.filter_exe_path = rad_lund_filter_path
-
 
     if not os.path.isdir(args.outdir):
         print(args.outdir+" is not present, creating now")
@@ -380,10 +367,6 @@ if __name__ == "__main__":
                     print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
                     print("WARNING COULD NOT CLEAR OUTPUT DIRECTORY")
             subprocess.call(['mkdir','-p',args.outdir])
-
-
+    
     print("Generating {} DVPiP Events".format(args.trig))
-
-    print("hellow2")
     gen_events(args,repo_base_dir)
-
