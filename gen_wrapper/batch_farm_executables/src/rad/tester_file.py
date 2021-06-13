@@ -312,32 +312,33 @@ if __name__ == "__main__":
     parser.add_argument("--sigr_max_mult",help="a multiplication factor for sigr_max",default=0.0)
     parser.add_argument("--sigr_max",help="sigr_max",default=0.005)
 
-    print("hellow")
 
 
 
-    # #For step2: (optional) set path to aao_norad generator
-    # parser.add_argument("--generator_exe_path",help="Path to generator executable",default=aao_norad_path)
+    #For step2: (optional) set path to aao_norad generator
+    parser.add_argument("--generator_exe_path",help="Path to generator executable",default=aao_norad_path)
 
-    # #For step3: (optional) set path to lund filter script and get filtering arguemnets
-    # parser.add_argument("--xBmin",type=float,help='minimum Bjorken X value',default=-1)
-    # parser.add_argument("--xBmax",type=float,help='maximum Bjorken X value',default=10)
-    # parser.add_argument("--w2min",type=float,help='minimum w2 value, in GeV^2',default=-1)
-    # parser.add_argument("--w2max",type=float,help='maximum w2 value, in GeV^2',default=100)
-    # parser.add_argument("--tmin",type=float,help='minimum t value, in GeV^2',default=-1)
-    # parser.add_argument("--tmax",type=float,help='maximum t value, in GeV^2',default=100)
-    # parser.add_argument("--filter_infile",help="specify input lund file name. Currently only works for 4-particle final state DVPiP",default="aao_norad.lund")
-    # parser.add_argument("--filter_outfile",help='specify processed lund output file name',default="aao_gen.dat")
+    #For step3: (optional) set path to lund filter script and get filtering arguemnets
+    parser.add_argument("--xBmin",type=float,help='minimum Bjorken X value',default=-1)
+    parser.add_argument("--xBmax",type=float,help='maximum Bjorken X value',default=10)
+    parser.add_argument("--w2min",type=float,help='minimum w2 value, in GeV^2',default=-1)
+    parser.add_argument("--w2max",type=float,help='maximum w2 value, in GeV^2',default=100)
+    parser.add_argument("--tmin",type=float,help='minimum t value, in GeV^2',default=-1)
+    parser.add_argument("--tmax",type=float,help='maximum t value, in GeV^2',default=100)
+    parser.add_argument("--filter_infile",help="specify input lund file name. Currently only works for 4-particle final state DVPiP",default="aao_norad.lund")
+    parser.add_argument("--filter_outfile",help='specify processed lund output file name',default="aao_gen.dat")
    
-    # #Specify output directory for lund file
-    # parser.add_argument("--filter_exe_path",help="Path to lund filter executable",default=norad_lund_filter_path)
-    # parser.add_argument("--outdir",help="Specify full or relative path to output directory final lund file",default=output_file_path)
-    # parser.add_argument("-r",help="Removes all files from output directory, if any existed",default=False,action='store_true')
+    #Specify output directory for lund file
+    parser.add_argument("--filter_exe_path",help="Path to lund filter executable",default=norad_lund_filter_path)
+    parser.add_argument("--outdir",help="Specify full or relative path to output directory final lund file",default=output_file_path)
+    parser.add_argument("-r",help="Removes all files from output directory, if any existed",default=False,action='store_true')
 
-    # #For conforming with clas12-mcgen standards
-    # parser.add_argument("--docker",help="this arguement is ignored, but needed for inclusion in clas12-mcgen",default=False,action='store_true')
+    #For conforming with clas12-mcgen standards
+    parser.add_argument("--docker",help="this arguement is ignored, but needed for inclusion in clas12-mcgen",default=False,action='store_true')
 
-    # args = parser.parse_args()
+    args = parser.parse_args()
+
+    print("hellow")
 
     # if args.rad:
     #     if args.generator_exe_path==aao_norad_path:
