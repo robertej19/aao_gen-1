@@ -57,7 +57,7 @@ cp {3} gen_wrapper/src/
 --trig {} \
 --precision {} \
 --maxloops {} \
---generator_exe_path aao_rad/build/aao_rad.py \
+--generator_exe_path aao_rad/build/aao_rad.exe \
 --filter_exe_path gen_wrapper/src/lund_filter_rad.py \
 --outdir output/ \
 --xBmin {} \
