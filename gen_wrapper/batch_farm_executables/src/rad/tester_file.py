@@ -369,4 +369,3 @@ if __name__ == "__main__":
             subprocess.call(['mkdir','-p',args.outdir])
     
     print("Generating {} DVPiP Events".format(args.trig))
-    gen_events(args,repo_base_dir)
