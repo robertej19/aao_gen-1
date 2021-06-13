@@ -9,8 +9,8 @@ import sys
 import os
 import argparse
 
-import subprocess
-import shutil
+# import subprocess
+# import shutil
 #import time
 #import datetime 
 
@@ -219,24 +219,24 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
 
-    if not os.path.isdir(args.jsub_textdir):
-        print(args.jsub_textdir+" is not present, creating now")
-        subprocess.call(['mkdir','-p',args.jsub_textdir])
-    else:
-        print(args.jsub_textdir + "exists already")
-        if args.r:
-            print("trying to remove output dir")
-            try:
-                shutil.rmtree(args.jsub_textdir)
-            except OSError as e:
-                print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
-                print("trying to remove dir again")
-                try:
-                    shutil.rmtree(args.jsub_textdir)
-                except OSError as e:
-                    print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
-                    print("WARNING COULD NOT CLEAR OUTPUT DIRECTORY")
-            subprocess.call(['mkdir','-p',args.jsub_textdir])
+    # if not os.path.isdir(args.jsub_textdir):
+    #     print(args.jsub_textdir+" is not present, creating now")
+    #     subprocess.call(['mkdir','-p',args.jsub_textdir])
+    # else:
+    #     print(args.jsub_textdir + "exists already")
+    #     if args.r:
+    #         print("trying to remove output dir")
+    #         try:
+    #             shutil.rmtree(args.jsub_textdir)
+    #         except OSError as e:
+    #             print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
+    #             print("trying to remove dir again")
+    #             try:
+    #                 shutil.rmtree(args.jsub_textdir)
+    #             except OSError as e:
+    #                 print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
+    #                 print("WARNING COULD NOT CLEAR OUTPUT DIRECTORY")
+    #         subprocess.call(['mkdir','-p',args.jsub_textdir])
     
     print("Generating {} submission files".format(args.n))
     for index in range(0,args.n):
