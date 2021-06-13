@@ -6,11 +6,13 @@ This is a text file generator to submit pi0_generator jobs on batch farm at JLab
 """
 
 import sys
-import os, subprocess
+import os
 import argparse
+
+import subprocess
 import shutil
-import time
-import datetime 
+#import time
+#import datetime 
 
 def gen_jsub(args,count):
     outfile = open(args.jsub_textdir+"jsub_aao_rad_gen_job_{}.txt".format(count),"w")
