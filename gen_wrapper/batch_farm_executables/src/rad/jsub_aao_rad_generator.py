@@ -5,7 +5,6 @@
 This is a text file generator to submit pi0_generator jobs on batch farm at JLab
 """
 
-import random 
 import sys
 import os, subprocess
 import argparse
