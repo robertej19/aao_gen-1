@@ -161,8 +161,12 @@ This should produce a file genName.dat.
 
 def gen_events(args,repo_base_dir):
     print('hello3')
-    for i in range(0,int(args.maxloops)):
-        print("ehllo")
+    max_num_loops = args.maxloops
+    gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
+    for loop_counter in range(0,max_num_loops+1):
+        print("generating {} raw events".format(args.trig))
+
+
     # num_desired_events = args.trig
     # #If the number of events is not close enough to the desired number, generate recursively.
     # #It would be computationally better to just run the generator again and again until more than enough events are created,
