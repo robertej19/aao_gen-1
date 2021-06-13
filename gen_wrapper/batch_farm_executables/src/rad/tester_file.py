@@ -277,41 +277,42 @@ if __name__ == "__main__":
                                 3.) Filters generated events based off specifications \n
                                 4.) Returns .dat data file""",formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
+    #General options
+    parser.add_argument("--rad",help="Uses radiative generator instead of nonradiative one, CURRENTLY NOT WORKING",default=False,action='store_true')
+
+    #For step 1: input_file_maker_aao_norad
+    parser.add_argument("--input_exe_path",help="Path to input file maker executable",default=norad_input_file_maker_path)
+    parser.add_argument("--physics_model",help="Physics model: 1=A0, 4=MAID98, 5=MAID2000",default=5)
+    parser.add_argument("--flag_ehel",help="0= no polarized electron, 1=polarized electron",default=1)
+    parser.add_argument("--npart",help="number of particles in BOS banks: 2=(e-,h+), 3=(e-,h+,h0)",default=3)
+    parser.add_argument("--epirea",help="final state hadron: 1=pi0, 3=pi+",default=1)
+    parser.add_argument("--ebeam",help="incident electron beam energy in GeV",default=10.6)
+    parser.add_argument("--q2min",help="minimum Q^2 limit in GeV^2",default=0.2)
+    parser.add_argument("--q2max",help="maximum Q^2 limit in GeV^2",default=10.6)
+    parser.add_argument("--epmin",help="minimum scattered electron energy limits in GeV",default=0.2)
+    parser.add_argument("--epmax",help="maximum scattered electron energy limits in GeV",default=10.6)
+    parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=1.0)
+    parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=1)
+    parser.add_argument("--seed",help="0= use unix timestamp from machine time to generate seed, otherwise use given value as seed",default=0)
+    parser.add_argument("--trig",type=int,help="number of generated events",default=10000)
+    parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=5)
+    parser.add_argument("--maxloops",type=int,help="Enter the number of generation iteration loops permitted to converge to desired number of events",default=10)
+    parser.add_argument("--input_filename",help="filename for aao_norad",default="aao_norad_input.inp")
+
+
+    #Arguements specific to aao_rad
+    parser.add_argument("--int_region",help="the sizes of the integration regions",default =".20 .12 .20 .20")
+    parser.add_argument("--err_max",help="limit on the error in (mm)**2",default=0.2)
+    parser.add_argument("--target_len",help="target cell length (cm)",default=5)
+    parser.add_argument("--target_rad",help="target cell cylinder radius",default=0.43)
+    parser.add_argument("--cord_x",help="x-coord of beam position",default=0.0)
+    parser.add_argument("--cord_y",help="y-coord of beam position",default=0.0)
+    parser.add_argument("--cord_z",help="z-coord of beam position",default=0.0)
+    parser.add_argument("--rad_emin",help="minimum photon energy for integration",default=0.005)
+    parser.add_argument("--sigr_max_mult",help="a multiplication factor for sigr_max",default=0.0)
+    parser.add_argument("--sigr_max",help="sigr_max",default=0.005)
+
     print("hellow")
-    # #General options
-    # parser.add_argument("--rad",help="Uses radiative generator instead of nonradiative one, CURRENTLY NOT WORKING",default=False,action='store_true')
-
-    # #For step 1: input_file_maker_aao_norad
-    # parser.add_argument("--input_exe_path",help="Path to input file maker executable",default=norad_input_file_maker_path)
-    # parser.add_argument("--physics_model",help="Physics model: 1=A0, 4=MAID98, 5=MAID2000",default=5)
-    # parser.add_argument("--flag_ehel",help="0= no polarized electron, 1=polarized electron",default=1)
-    # parser.add_argument("--npart",help="number of particles in BOS banks: 2=(e-,h+), 3=(e-,h+,h0)",default=3)
-    # parser.add_argument("--epirea",help="final state hadron: 1=pi0, 3=pi+",default=1)
-    # parser.add_argument("--ebeam",help="incident electron beam energy in GeV",default=10.6)
-    # parser.add_argument("--q2min",help="minimum Q^2 limit in GeV^2",default=0.2)
-    # parser.add_argument("--q2max",help="maximum Q^2 limit in GeV^2",default=10.6)
-    # parser.add_argument("--epmin",help="minimum scattered electron energy limits in GeV",default=0.2)
-    # parser.add_argument("--epmax",help="maximum scattered electron energy limits in GeV",default=10.6)
-    # parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=1.0)
-    # parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=1)
-    # parser.add_argument("--seed",help="0= use unix timestamp from machine time to generate seed, otherwise use given value as seed",default=0)
-    # parser.add_argument("--trig",type=int,help="number of generated events",default=10000)
-    # parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=5)
-    # parser.add_argument("--maxloops",type=int,help="Enter the number of generation iteration loops permitted to converge to desired number of events",default=10)
-    # parser.add_argument("--input_filename",help="filename for aao_norad",default="aao_norad_input.inp")
-
-
-    # #Arguements specific to aao_rad
-    # parser.add_argument("--int_region",help="the sizes of the integration regions",default =".20 .12 .20 .20")
-    # parser.add_argument("--err_max",help="limit on the error in (mm)**2",default=0.2)
-    # parser.add_argument("--target_len",help="target cell length (cm)",default=5)
-    # parser.add_argument("--target_rad",help="target cell cylinder radius",default=0.43)
-    # parser.add_argument("--cord_x",help="x-coord of beam position",default=0.0)
-    # parser.add_argument("--cord_y",help="y-coord of beam position",default=0.0)
-    # parser.add_argument("--cord_z",help="z-coord of beam position",default=0.0)
-    # parser.add_argument("--rad_emin",help="minimum photon energy for integration",default=0.005)
-    # parser.add_argument("--sigr_max_mult",help="a multiplication factor for sigr_max",default=0.0)
-    # parser.add_argument("--sigr_max",help="sigr_max",default=0.005)
 
 
 
