@@ -166,10 +166,11 @@ def gen_events(args,repo_base_dir):
     #It would be computationally better to just run the generator again and again until more than enough events are created,
     #And then just cut out the last few events to get exactly the desired number of events, but I'm not sure that 
     #This wouldn't bias things. If someone can verify that it doesn't bias anything, then this part of code should be restructured.
-    # ratio = 0
+    ratio = 0
 
-    # max_num_loops = args.maxloops
-    # gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
+    max_num_loops = args.maxloops
+    gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
+    print('hello3')
     # for loop_counter in range(0,max_num_loops+1):
     #     print("generating {} raw events".format(args.trig))
 
