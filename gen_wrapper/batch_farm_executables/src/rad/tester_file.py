@@ -338,19 +338,20 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    print("hellow")
 
-    # if args.rad:
-    #     if args.generator_exe_path==aao_norad_path:
-    #         args.generator_exe_path = aao_rad_path #change to using radiative generator
-    #     if args.filter_infile == "aao_norad.lund":
-    #         args.filter_infile = "aao_rad.lund" #change to using radiative generator
-    #     if args.input_exe_path == norad_input_file_maker_path:
-    #         args.input_exe_path = rad_input_file_maker_path
-    #     if args.input_filename == "aao_norad_input.inp":
-    #         args.input_filename = "aao_rad_input.inp" #change to using radiative generator
-    #     if args.filter_exe_path == norad_lund_filter_path:
-    #         args.filter_exe_path = rad_lund_filter_path
+    if args.rad:
+        if args.generator_exe_path==aao_norad_path:
+            args.generator_exe_path = aao_rad_path #change to using radiative generator
+        if args.filter_infile == "aao_norad.lund":
+            args.filter_infile = "aao_rad.lund" #change to using radiative generator
+        if args.input_exe_path == norad_input_file_maker_path:
+            args.input_exe_path = rad_input_file_maker_path
+        if args.input_filename == "aao_norad_input.inp":
+            args.input_filename = "aao_rad_input.inp" #change to using radiative generator
+        if args.filter_exe_path == norad_lund_filter_path:
+            args.filter_exe_path = rad_lund_filter_path
+
+    print("hellow")
 
     # if not os.path.isdir(args.outdir):
     #     print(args.outdir+" is not present, creating now")
