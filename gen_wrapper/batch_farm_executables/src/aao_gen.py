@@ -256,15 +256,15 @@ if __name__ == "__main__":
     #repo_base_dir = slash.join(full_file_path.split(slash)[:-3])
     output_file_path = repo_base_dir + "/output/"
 
-    norad_input_file_maker_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/run/norad/input_file_maker_aao_norad.exe"
-    rad_input_file_maker_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/run/rad/input_file_maker_aao_rad.exe"
+    norad_input_file_maker_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/src/norad/input_file_maker_aao_norad.py"
+    rad_input_file_maker_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/src/rad/input_file_maker_aao_rad.py"
 
-    norad_lund_filter_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/run/norad/lund_filter_norad.exe"
-    rad_lund_filter_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/run/rad/lund_filter_rad.exe"
+    norad_lund_filter_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/src/norad/lund_filter_norad.py"
+    rad_lund_filter_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/src/rad/lund_filter_rad.py"
 
 
-    aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.exe"
-    aao_rad_path = repo_base_dir + "/aao_rad/build/aao_rad.exe"
+    aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.py"
+    aao_rad_path = repo_base_dir + "/aao_rad/build/aao_rad.py"
 
 
 

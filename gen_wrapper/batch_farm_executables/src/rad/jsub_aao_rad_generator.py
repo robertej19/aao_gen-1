@@ -28,11 +28,11 @@ COMMAND:
 
     setup = """
 mkdir -p aao_rad/build
-mkdir -p gen_wrapper/run
-cp {0} gen_wrapper/run/
+mkdir -p gen_wrapper/src
+cp {0} gen_wrapper/src/
 cp {1} aao_rad/build/
-cp {2} gen_wrapper/run/
-cp {3} gen_wrapper/run/
+cp {2} gen_wrapper/src/
+cp {3} gen_wrapper/src/
 
 """.format(args.input_exe_path,
         args.generator_exe_path,
@@ -40,8 +40,8 @@ cp {3} gen_wrapper/run/
         args.pi0_gen_exe_path)
 
     run_command = """
-./gen_wrapper/run/aao_gen.exe \
---input_exe_path gen_wrapper/run/input_file_maker_aao_rad.exe \
+./gen_wrapper/src/aao_gen.py \
+--input_exe_path gen_wrapper/src/input_file_maker_aao_rad.py \
 --rad \
 --physics_model {} \
 --flag_ehel {} \
@@ -57,8 +57,8 @@ cp {3} gen_wrapper/run/
 --trig {} \
 --precision {} \
 --maxloops {} \
---generator_exe_path aao_rad/build/aao_rad.exe \
---filter_exe_path gen_wrapper/run/lund_filter_rad.exe \
+--generator_exe_path aao_rad/build/aao_rad.py \
+--filter_exe_path gen_wrapper/src/lund_filter_rad.py \
 --outdir output/ \
 --xBmin {} \
 --xBmax {} \
@@ -123,12 +123,12 @@ if __name__ == "__main__":
     # repository head
     # ├── aao_norad
     # │   ├── build
-    # │   │   └── aao_norad.exe
+    # │   │   └── aao_norad.py
     # ├── aao_rad
     # ├── gen_wrapper
     # │   ├── run
-    # │   │   ├── input_file_maker_aao_norad.exe
-    # │   │   └── lund_filter.exe
+    # │   │   ├── input_file_maker_aao_norad.py
+    # │   │   └── lund_filter.py
     # │   └── src
     # │       ├── aao_norad_text.py
     # │       ├── input_file_maker_aao_norad.py
@@ -137,12 +137,12 @@ if __name__ == "__main__":
 
     slash = "/"
     repo_base_dir = slash.join(full_file_path.split(slash)[:-3])
-    input_file_maker_path = repo_base_dir + "/run/rad/input_file_maker_aao_rad.exe"
-    aao_norad_path = repo_base_dir + "/../../aao_rad/build/aao_rad.exe"
-    lund_filter_path = repo_base_dir + "/run/rad/lund_filter_rad.exe"
+    input_file_maker_path = repo_base_dir + "/src/rad/input_file_maker_aao_rad.py"
+    aao_norad_path = repo_base_dir + "/../../aao_rad/build/aao_rad.py"
+    lund_filter_path = repo_base_dir + "/src/rad/lund_filter_rad.py"
     output_file_path = repo_base_dir + "/output/"
     jsub_textdir_path = repo_base_dir + "/submission_warehouse/"
-    pi0_gen_path = repo_base_dir + "/run/aao_gen.exe"
+    pi0_gen_path = repo_base_dir + "/src/aao_gen.py"
 
 
     parser = argparse.ArgumentParser(description="""CURRENTLY ONLY WORKS WITH AAO_NORAD 4 PARTICLE FINAL STATE \n
