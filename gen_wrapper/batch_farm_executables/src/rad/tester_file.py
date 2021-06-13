@@ -9,7 +9,27 @@ import shutil
 import time
 import datetime 
 
-"Consult aao_norad generator repository README for options descriptions"
+"""
+This is a wrapper for the aao_norad (and aao_rad?) DVPi0 generators. It takes as input command line arguements which 
+you can observe with the command line arguement -h, and gives as output a single .dat output file,
+in lund format (https://gemc.jlab.org/gemc/html/documentation/generator/lund.html)
+
+Requirements for inclusion on clas12-mcgen: (check requirements at https://github.com/JeffersonLab/clas12-mcgen)
+--done-- C++ and Fortran: software should compile using gcc > 8.
+--done-- An executable with the same name as the github repository name, installed at the top level dir
+--done-- The generator output file name must be the same name as the exectuable + ".dat". For example, the output of clasdis must be clasdis.dat
+--done-- If --seed is ignored, the generator is responsible for choosing unique random seeds (without preserving state between jobs), which could be done from a millisecond or better precision system clock.
+--done-- The argument --seed <integer value> is added on the OSG to all executable. This option must be ignored or it can be used by the executable to set the generator random seed using <integer value>
+--done-- To specify the number of events, the option "--trig" must be used
+--done-- The argument --docker is added on the OSG to all executable. This option must be ignored or it can be used by the executable to set conditions to run on the OSG container
+
+To verify all requirements are met, the executable must pass the following test:
+
+genName --trig 10 --docker --seed 1448577483
+
+This should produce a file genName.dat.
+"""
+
 
 def gen_input(args):
     outfile = open(args.input_filename,"w")
@@ -55,6 +75,21 @@ args.sigr_max)
 
 if __name__ == "__main__":
 
+    #File structure:
+    # repository head
+    # ├── aao_norad
+    # │   ├── build
+    # │   │   └── aao_norad.exe
+    # ├── aao_rad
+    # ├── gen_wrapper
+    # │   ├── run
+    # │   │   ├── input_file_maker_aao_norad.exe
+    # │   │   └── lund_filter.exe
+    # │   └── src
+    # │       ├── aao_norad_text.py
+    # │       ├── input_file_maker_aao_norad.py
+    # │       ├── lund_filter.py
+    # │       └── pi0_gen_wrapper.py
 
     parser = argparse.ArgumentParser(description="This generates an input file with specifications for the aao_norad pi0 generator",formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
