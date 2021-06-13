@@ -171,8 +171,10 @@ def gen_events(args,repo_base_dir):
     max_num_loops = args.maxloops
     gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
     print('hello3')
-    for loop_counter in range(0,max_num_loops+1):
-         print("generating {} raw events".format(args.trig))
+    #for loop_counter in range(0,max_num_loops+1):
+    for i in range(0,3):
+        print(1)
+        #print("generating {} raw events".format(args.trig))
 
 
         # gen_input_file(args)
