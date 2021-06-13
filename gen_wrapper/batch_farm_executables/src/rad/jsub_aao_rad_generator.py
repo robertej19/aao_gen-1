@@ -120,22 +120,6 @@ if __name__ == "__main__":
     else:
         full_file_path = os.path.abspath(__file__) #This sets the path for interpreted python
 
-    #File structure:
-    # repository head
-    # ├── aao_norad
-    # │   ├── build
-    # │   │   └── aao_norad.exe
-    # ├── aao_rad
-    # ├── gen_wrapper
-    # │   ├── run
-    # │   │   ├── input_file_maker_aao_norad.exe
-    # │   │   └── lund_filter.exe
-    # │   └── src
-    # │       ├── aao_norad_text.py
-    # │       ├── input_file_maker_aao_norad.py
-    # │       ├── lund_filter.py
-    # │       └── pi0_gen_wrapper.py
-
     slash = "/"
     repo_base_dir = slash.join(full_file_path.split(slash)[:-3])
     input_file_maker_path = repo_base_dir + "/run/rad/input_file_maker_aao_rad.exe"
