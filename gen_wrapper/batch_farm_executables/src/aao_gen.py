@@ -252,8 +252,8 @@ if __name__ == "__main__":
     # │       └── pi0_gen_wrapper.py
 
     slash = "/"
-    repo_base_dir = slash.join(full_file_path.split(slash)[:-1])
-    #repo_base_dir = slash.join(full_file_path.split(slash)[:-3])
+    #repo_base_dir = slash.join(full_file_path.split(slash)[:-1])
+    repo_base_dir = slash.join(full_file_path.split(slash)[:-4])
     output_file_path = repo_base_dir + "/output/"
 
     norad_input_file_maker_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/src/norad/input_file_maker_aao_norad.py"
@@ -348,6 +348,9 @@ if __name__ == "__main__":
             args.input_filename = "aao_rad_input.inp" #change to using radiative generator
         if args.filter_exe_path == norad_lund_filter_path:
             args.filter_exe_path = rad_lund_filter_path
+        if args.npart == 3:
+            args.npart = 4
+
 
     if not os.path.isdir(args.outdir):
         print(args.outdir+" is not present, creating now")
