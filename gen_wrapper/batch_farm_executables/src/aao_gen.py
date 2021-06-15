@@ -256,11 +256,11 @@ if __name__ == "__main__":
     repo_base_dir = slash.join(full_file_path.split(slash)[:-4])
     output_file_path = repo_base_dir + "/output/"
 
-    norad_input_file_maker_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/src/norad/input_file_maker_aao_norad.py"
-    rad_input_file_maker_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/src/rad/input_file_maker_aao_rad.py"
+    norad_input_file_maker_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/norad/input_file_maker_aao_norad.py"
+    rad_input_file_maker_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/rad/input_file_maker_aao_rad.py"
 
-    norad_lund_filter_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/src/norad/lund_filter_norad.py"
-    rad_lund_filter_path = repo_base_dir + "/gen_wrapper/batch-farm-executables/src/rad/lund_filter_rad.py"
+    norad_lund_filter_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/norad/lund_filter_norad.py"
+    rad_lund_filter_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/rad/lund_filter_rad.py"
 
 
     aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.exe"
@@ -348,8 +348,7 @@ if __name__ == "__main__":
             args.input_filename = "aao_rad_input.inp" #change to using radiative generator
         if args.filter_exe_path == norad_lund_filter_path:
             args.filter_exe_path = rad_lund_filter_path
-        if args.npart == 3:
-            args.npart = 4
+        args.npart = 4 #for now, mandatory switch
 
 
     if not os.path.isdir(args.outdir):
