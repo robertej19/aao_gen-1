@@ -29,11 +29,11 @@ COMMAND:
 
     setup = """
 mkdir -p aao_norad/build
-mkdir -p gen_wrapper/run
-cp {0} gen_wrapper/run/
+mkdir -p gen_wrapper/src
+cp {0} gen_wrapper/src/
 cp {1} aao_norad/build/
-cp {2} gen_wrapper/run/
-cp {3} gen_wrapper/run/
+cp {2} gen_wrapper/src/
+cp {3} gen_wrapper/src/
 
 """.format(args.input_exe_path,
         args.generator_exe_path,
@@ -41,8 +41,8 @@ cp {3} gen_wrapper/run/
         args.pi0_gen_exe_path)
 
     run_command = """
-./gen_wrapper/run/pi0_gen_wrapper.exe \
---input_exe_path gen_wrapper/run/input_file_maker_aao_norad.exe \
+./gen_wrapper/src/aao_gen.py \
+--input_exe_path gen_wrapper/src/input_file_maker_aao_norad.py \
 --physics_model {} \
 --flag_ehel {} \
 --npart {} \
@@ -58,7 +58,7 @@ cp {3} gen_wrapper/run/
 --precision {} \
 --maxloops {} \
 --generator_exe_path aao_norad/build/aao_norad.exe \
---filter_exe_path gen_wrapper/run/lund_filter_norad.exe \
+--filter_exe_path gen_wrapper/src/lund_filter_norad.py \
 --outdir output/ \
 --xBmin {} \
 --xBmax {} \
@@ -117,12 +117,12 @@ if __name__ == "__main__":
 
     slash = "/"
     repo_base_dir = slash.join(full_file_path.split(slash)[:-3])
-    input_file_maker_path = repo_base_dir + "/gen_wrapper/run/input_file_maker_aao_norad.exe"
+    input_file_maker_path = repo_base_dir + "/gen_wrapper/src/norad/input_file_maker_aao_norad.py"
     aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.exe"
-    lund_filter_path = repo_base_dir + "/gen_wrapper/run/lund_filter.exe"
+    lund_filter_path = repo_base_dir + "/gen_wrapper/src/norad/lund_filter_norad.py"
     output_file_path = repo_base_dir + "/output/"
     jsub_textdir_path = repo_base_dir + "/submission_warehouse/"
-    pi0_gen_path = repo_base_dir + "/gen_wrapper/run/pi0_gen_wrapper.exe"
+    pi0_gen_path = repo_base_dir + "/src/aao_gen.py"
 
 
     parser = argparse.ArgumentParser(description="""CURRENTLY ONLY WORKS WITH AAO_NORAD 4 PARTICLE FINAL STATE \n
