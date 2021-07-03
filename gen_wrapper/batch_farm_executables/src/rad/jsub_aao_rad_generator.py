@@ -1,4 +1,5 @@
 #!/bin/python
+# -*- coding: utf-8 -*-
 #cython: language_level=3
 
 """
@@ -199,7 +200,6 @@ if __name__ == "__main__":
 
     #Specify output directory for lund file
     parser.add_argument("--outdir",help="Specify full or relative path to output directory final lund file",default=output_file_path)
-    parser.add_argument("-r",help="Removes all files from output directory, if any existed",default=False,action='store_true')
 
     #For conforming with clas12-mcgen standards
     parser.add_argument("--seed",help="this arguement is ignored, but needed for inclusion in clas12-mcgen",default="none")
@@ -222,20 +222,8 @@ if __name__ == "__main__":
         print(args.jsub_textdir+" is not present, creating now")
         subprocess.call(['mkdir','-p',args.jsub_textdir])
     else:
-        print(args.jsub_textdir + "exists already")
-        if args.r:
-            print("trying to remove output dir")
-            try:
-                shutil.rmtree(args.jsub_textdir)
-            except OSError as e:
-                print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
-                print("trying to remove dir again")
-                try:
-                    shutil.rmtree(args.jsub_textdir)
-                except OSError as e:
-                    print ("Error removing dir: %s - %s." % (e.filename, e.strerror))
-                    print("WARNING COULD NOT CLEAR OUTPUT DIRECTORY")
-            subprocess.call(['mkdir','-p',args.jsub_textdir])
+        print(args.jsub_textdir + "exists already, delete it and try again")
+       sys.exit()
     
     print("Generating {} submission files".format(args.n))
     for index in range(0,args.n):
