@@ -20,10 +20,11 @@ def gen_input(args):
 {}
 {}
 {}
-{}
+0
 """.format(args.physics_model,args.flag_ehel,args.npart,args.epirea,
     args.ebeam,args.q2min,args.q2max,args.epmin,args.epmax,
-    args.trig,args.fmcall,args.boso,args.seed)
+    args.trig,args.fmcall,args.boso)
+    #NOTE: Args.seed was removed for testing
     outfile.write(string)
     outfile.close()
 
