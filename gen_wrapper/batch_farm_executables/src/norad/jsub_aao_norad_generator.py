@@ -169,7 +169,7 @@ if __name__ == "__main__":
     parser.add_argument("--outdir",help="Specify full or relative path to output directory final lund file",default=output_file_path)
 
     #For conforming with clas12-mcgen standards
-    parser.add_argument("--seed",help="this arguement is ignored, but needed for inclusion in clas12-mcgen",default="none")
+    parser.add_argument("--seed",help="this arguement is ignored, but needed for inclusion in clas12-mcgen",default=0)
     parser.add_argument("--docker",help="this arguement is ignored, but needed for inclusion in clas12-mcgen",default="none")
 
 
