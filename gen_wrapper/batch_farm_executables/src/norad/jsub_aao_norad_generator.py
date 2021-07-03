@@ -34,6 +34,8 @@ cp {0} gen_wrapper/src/
 cp {1} aao_norad/build/
 cp {2} gen_wrapper/src/
 cp {3} gen_wrapper/src/
+chmod +x gen_wrapper/src/*
+chmod +x aao_norad/build/*
 
 """.format(args.input_exe_path,
         args.generator_exe_path,
@@ -67,14 +69,13 @@ cp {3} gen_wrapper/src/
 --tmin {} \
 --tmax {} \
 --seed {} \
---docker {}
 """.format(args.physics_model,
     args.flag_ehel,args.npart,args.epirea,args.ebeam,
     args.q2min,args.q2max,args.epmin,args.epmax,args.fmcall,
     args.boso,args.trig,args.precision,args.maxloops,
     args.xBmin,args.xBmax,args.w2min,args.w2max,
     args.tmin,args.tmax,
-    args.seed,args.docker)
+    args.seed)
 
     footer = """
 SINGLE_JOB: true
