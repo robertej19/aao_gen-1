@@ -73,7 +73,7 @@ def gen_input_file(args):
                 "--fmcall", str(args.fmcall),
                 "--boso", str(args.boso),
                 "--seed", str(args.seed),
-                "--out", args.outdir+'aao_input.inp'])
+                "--out", str(args.input_filename)])
         return 0
     except OSError as e:
         print("\nError creating generator input file")
