@@ -121,8 +121,8 @@ def filter_lund(args):
                     "--w2max", str(args.w2max)])
         else:
             subprocess.run([args.filter_exe_path,
-                    "--infile",args.outdir+"aao_norad.lund",
-                    "--outfile",args.outdir+"aao_gen.dat",
+                    "--infile","aao_norad.lund",
+                    "--outfile","aao_gen_filtered.dat",
                     "--q2min", str(args.q2min),
                     "--q2max", str(args.q2max),
                     "--xBmin", str(args.xBmin),
