@@ -13,6 +13,8 @@ import argparse
 import shutil
 import time
 import datetime 
+import math
+
 
 def gen_jsub(args,count):
     outfile = open(args.jsub_textdir+"jsub_lund_job_{}.txt".format(count),"w")
@@ -134,6 +136,7 @@ if __name__ == "__main__":
                                 4.) Returns .dat data file""",formatter_class=argparse.ArgumentDefaultsHelpFormatter)
    
     #General options
+    parser.add_argument("--multi_phase_space",help="split xbmin-xmax q2min-q2max over smaller phase spaces",default=False,action='store_true')
     parser.add_argument("--rad",help="Uses radiative generator instead of nonradiative one, CURRENTLY NOT WORKING",default=False,action='store_true')
 
     #For step 1: input_file_maker_aao_norad
@@ -181,7 +184,6 @@ if __name__ == "__main__":
     parser.add_argument("--pi0_gen_exe_path",help="Path to lund filter executable",default=pi0_gen_path)
 
 
-
     args = parser.parse_args()
 
 
@@ -192,7 +194,54 @@ if __name__ == "__main__":
         print(args.jsub_textdir + "exists already, remove it and try again")
         sys.exit()
 
-    print("Generating {} submission files".format(args.n))
-    for index in range(0,args.n):
-        print("Creating submission file {} of {}".format(index+1,args.n))
-        gen_jsub(args,index)
+    if args.multi_phase_space:
+        # delta_xb = 0.1
+        # delta_q2 = 1
+        # min_xb = float(args.xBmin)
+        # min_q2 = float(args.q2min)
+        # max_xb = float(args.xBmax)
+        # max_q2 = float(args.q2max)
+        # range_xb = max_xb - min_xb
+        # range_q2 = max_q2 - min_q2
+        n = int(args.n/19)+1 #19 is just the hard coded number of sets
+        sets = [[0,    0.2,  0.5,  1.5, n  ],
+                [0.2,  0.4,  0.5,  1.5, n  ],
+                [0.4,  0.6,  0.5,  1.5, n  ],
+                [0,    0.2,  1.5,  2.5, n  ],
+                [0.2,  0.4,  1.5,  2.5, n  ],
+                [0.4,  0.6,  1.5,  2.5, n  ],
+                [0,    0.2,  2.5,  3.5, n/2],
+                [0.2,  0.4,  2.5,  3.5, n  ],
+                [0.4,  0.6,  2.5,  3.5, n  ],
+                [0.6,  1.0,  2.5,  3.5, n/2],
+                [0,    0.2,  3.5,  4.5, n/2  ],
+                [0.2,  0.4,  3.5,  4.5, n  ],
+                [0.4,  0.6,  3.5,  4.5, n  ],
+                [0.2,  0.4,  4.5,  6.5, n  ],
+                [0.4,  0.6,  4.5,  6.5, n  ],
+                [0.6,  1.0,  4.5,  6.5, n/10],
+                [0,    0.4,  6.5,  12.5, n/10],
+                [0.4,  0.6,  6.5,  12.5, n  ],
+                [0.6,  1.0,  6.5,  12.5, n/2]]
+        submission_index = 0
+        for set in sets:
+            args.xBmin = set[0]
+            args.xBmax = set[1]
+            args.q2min = set[2]
+            args.q2max = set[3]
+            args.n = int(math.ceil(set[4]))
+            print("CEILING IS ",args.n)
+            print("Generating {} submission files".format(args.n))
+            for index in range(0,args.n):
+                print("Creating submission file {} of {}".format(index+1,args.n))
+                print("xB range: {} - {}, q2 range: {} - {}".format(args.xBmin,args.xBmax,args.q2min,args.q2max))
+                gen_jsub(args,submission_index)
+                submission_index+=1
+        print("Created submission files for {} jobs".format(submission_index))
+    else:
+        print("Generating {} submission files".format(args.n))
+        for index in range(0,args.n):
+            print("Creating submission file {} of {}".format(index+1,args.n))
+            gen_jsub(args,index)
+
+
