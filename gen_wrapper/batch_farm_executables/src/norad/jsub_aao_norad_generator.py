@@ -230,7 +230,6 @@ if __name__ == "__main__":
             args.q2min = set[2]
             args.q2max = set[3]
             args.n = int(math.ceil(set[4]))
-            print("CEILING IS ",args.n)
             print("Generating {} submission files".format(args.n))
             for index in range(0,args.n):
                 print("Creating submission file {} of {}".format(index+1,args.n))
