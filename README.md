@@ -85,11 +85,8 @@ python3 aao_gen.py -h
 ## aao_norad
 
 5            ! Physics model: 1=A0, 4=MAID98, 5=MAID2000
-
 1            ! 0= no polarized electron, 1=polarized electron
-
 3            ! number of particles in BOS banks: 2=(e-,h+), 3=(e-,h+,h0)
-
 1            ! final state hadron: 1=pi0, 3=pi+
 
 10.6         ! incident electron beam energy in GeV
@@ -141,8 +138,8 @@ python3 aao_gen.py -h
 
 1000              ! number of events
 
-0.                ! a multiplication factor for sigr_max
-1.                
-2.0               ! sigr_max
+0.0                ! a multiplication factor for sigr_max
+                
+1.0               ! sigr_max
 
 1.7		             ! minimum W (GeV) only for physics model 11
