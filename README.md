@@ -100,7 +100,7 @@ python3 aao_gen.py -h
 ## aao_rad
 ```
 11                         ! Physics model (1=AO, 4=MAID, 11=dvmp)  
-1	                    ! 1 for polarized electron, 0 for unpolarized electron  
+1	                  ! 1 for polarized electron, 0 for unpolarized electron  
 .20 .12 .20 .20            ! the sizes of the integration regions  
 4                          ! npart  
 1                          ! 1: pi0 , 3:pi+, 5:eta  
@@ -117,5 +117,5 @@ python3 aao_gen.py -h
 1000                       ! number of events  
 0.0                        ! a multiplication factor for sigr_max                  
 1.0                        ! sigr_max  
-1.7		                  ! minimum W (GeV) only for physics model 11
+1.7		              ! minimum W (GeV) only for physics model 11
 ```
