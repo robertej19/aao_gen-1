@@ -100,7 +100,7 @@ python3 aao_gen.py -h
 ## aao_rad
 ```
 11                         ! Physics model (1=AO, 4=MAID, 11=dvmp)  
-1	                         !  1 for polarized electron, 0 for unpolarized electron  
+1	                         ! 1 for polarized electron, 0 for unpolarized electron  
 .20 .12 .20 .20            ! the sizes of the integration regions  
 4                          ! npart  
 1                          ! 1: pi0 , 3:pi+, 5:eta  
