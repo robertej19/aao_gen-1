@@ -159,7 +159,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Parameters for the n-tuple, which is named func1 and contains
 c     15 elements per event.
 
-      common /pawc/h(5000000)
+clcs      common /pawc/h(5000000)
       integer h,n,nevent,nmax,lrecl,istat,icycle
       parameter (n=32)
       real*4 ntp(n)
@@ -460,9 +460,9 @@ c     set up the ntuple file
 
       lrecl	= 1024
       
-      call hlimit(5000000)
-      call hropen(1,'aaoradgen',filerz,'n',lrecl,istat)
-      call hbookn(10,'func1',n,'aaoradgen',1000,tag)
+Clcs      call hlimit(5000000)
+Clcs      call hropen(1,'aaoradgen',filerz,'n',lrecl,istat)
+Clcs      call hbookn(10,'func1',n,'aaoradgen',1000,tag)
 
       open(unit=12,file=file_out)
 
@@ -1107,7 +1107,7 @@ c     Calculate the members of the n-tuple and ouput it to the rz file.
          ntp(31)= ehel
          ntp(32)= asym_p
 
-         call hfn(10,ntp)
+Clcs         call hfn(10,ntp)
 c         nevent	= nevent+1
         
          do jj = 1,npart
@@ -1279,8 +1279,9 @@ c     Do we have enough events in the n-tuple?
 
 c     Close out the n-tuple file
 
- 50   call hrout(0,icycle,' ')
-      call hrend('aaoradgen')
+ 50   continue
+Clcs      call hrout(0,icycle,' ')
+Clcs      call hrend('aaoradgen')
 
 
       close(12)

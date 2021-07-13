@@ -1,5 +1,6 @@
 #include <time.h>
 #include <stdio.h>
+#include <string.h>
 
 /**********************************************************
   Provides a FORTRAN wrapper for a call to get the ascii
