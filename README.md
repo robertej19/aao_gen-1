@@ -79,3 +79,39 @@ cd ..
 
 ## See all options for wrapper:
 python3 aao_gen.py -h
+
+
+#  Generator Options to Use for Deeply Virtual Neutral Pion Production at CLAS12:
+## aao_norad
+5            ! Physics model: 1=A0, 4=MAID98, 5=MAID2000
+1            ! 0= no polarized electron, 1=polarized electron
+3            ! number of particles in BOS banks: 2=(e-,h+), 3=(e-,h+,h0)
+1            ! final state hadron: 1=pi0, 3=pi+
+10.6         ! incident electron beam energy in GeV
+0.2 14       ! minimum and maximum Q^2 limits in GeV^2
+0.2 10.6     ! minimum and maximum scattered electron energy limits in GeV
+1000         ! number of output events
+1.0          ! factor to adjust the maximum cross section, used in M.C. selection
+1            ! 1=bos output, 0=no bos output
+0            ! 0= use unix timestamp from machine time to generate seed, otherwise use given value as seed
+
+## aao_rad
+11                ! Physics model (1=AO, 4=MAID, 11=dvmp)
+1	                !  1 for polarized electron, 0 for unpolarized electron 
+.20 .12 .20 .20   ! the sizes of the integration regions
+4                 ! npart
+1                 ! 1: pi0 , 3:pi+, 5:eta
+.4                ! a limit on the error in (mm)**2
+5                 ! target cell length (cm)
+.775              ! radius of target cyclinder
+.000              ! x-coord of beam position
+.000              ! y-coord of beam position
+-66.0             ! z-coord of beam positio
+10.6              ! beam energy
+0.9 14.0          ! Q2_min, Q2_max
+0.2 10.6          ! scattered electron momentum min and max
+.001              ! minimum photon energy for integration
+1000              ! number of events
+0.                ! a multiplication factor for sigr_max
+1.0               ! sigr_max
+1.7		             ! minimum W (GeV) only for physics model 11
