@@ -84,7 +84,7 @@ python3 aao_gen.py -h
 #  Generator Options to Use for Deeply Virtual Neutral Pion Production at CLAS12:
 ## aao_norad
 
-5             Physics model: 1=A0, 4=MAID98, 5=MAID2000  
+5                  Physics model: 1=A0, 4=MAID98, 5=MAID2000  
 1             0= no polarized electron, 1=polarized electron  
 3             number of particles in BOS banks: 2=(e-,h+), 3=(e-,h+,h0)  
 1             final state hadron: 1=pi0, 3=pi+  
