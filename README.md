@@ -84,17 +84,17 @@ python3 aao_gen.py -h
 #  Generator Options to Use for Deeply Virtual Neutral Pion Production at CLAS12:
 ## aao_norad
 ```
-5          &emsp;&emsp; Physics model: 1=A0, 4=MAID98, 5=MAID2000  
-1          &emsp;&emsp;         0= no polarized electron, 1=polarized electron  
-3          &emsp;&emsp;         number of particles in BOS banks: 2=(e-,h+), 3=(e-,h+,h0)  
-1            &emsp;&emsp;                  final state hadron: 1=pi0, 3=pi+  
-10.6              &emsp;&emsp;     incident electron beam energy in GeV  
-0.2 14              &emsp;&emsp;   minimum and maximum Q^2 limits in GeV^2  
-0.2 10.6            &emsp;&emsp;   minimum and maximum scattered electron energy limits in GeV  
-1000            &emsp;&emsp;       number of output events  
-1.0           &emsp;&emsp;         factor to adjust the maximum cross section, used in M.C. selection  
-1             &emsp;&emsp;       1=bos output, 0=no bos output  
-0             &emsp;&emsp;         0= use unix timestamp from machine time to generate seed, otherwise use given value as seed
+5                Physics model: 1=A0, 4=MAID98, 5=MAID2000  
+1                0= no polarized electron, 1=polarized electron  
+3                number of particles in BOS banks: 2=(e-,h+), 3=(e-,h+,h0)  
+1                final state hadron: 1=pi0, 3=pi+  
+10.6             incident electron beam energy in GeV  
+0.2 14           minimum and maximum Q^2 limits in GeV^2  
+0.2 10.6         minimum and maximum scattered electron energy limits in GeV  
+1000             number of output events  
+1.0              factor to adjust the maximum cross section, used in M.C. selection  
+1                1=bos output, 0=no bos output  
+0                0= use unix timestamp from machine time to generate seed, otherwise use given value as seed
 ```
 
 ## aao_rad
