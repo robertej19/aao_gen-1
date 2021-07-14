@@ -8,6 +8,7 @@ import argparse
 import shutil
 import time
 import datetime 
+import json
 
 """
 This is a wrapper for the aao_norad (and aao_rad?) DVPi0 generators. It takes as input command line arguements which 
@@ -34,12 +35,14 @@ This should produce a file genName.dat.
 
 def gen_input_file(args):
     try:
-        if args.rad:
-            subprocess.run([args.input_exe_path,
-                "--physics_model", str(args.physics_model),
+        subprocess.run([args.input_exe_path,
+                "--generator_type", str(args.generator_type),
+                "--physics_model_rad", str(args.physics_model_rad),
+                "--physics_model_norad",str(args.physics_model_norad),
+                "--npart_norad", str(args.npart_norad),
+                "--npart_rad", str(args.npart_rad),
                 "--flag_ehel", str(args.flag_ehel),
                 "--int_region", str(args.int_region),
-                "--npart", str(args.npart),
                 "--epirea", str(args.epirea), 
                 "--err_max", str(args.err_max),
                 "--target_len", str(args.target_len),
@@ -57,23 +60,10 @@ def gen_input_file(args):
                 "--sigr_max_mult", str(args.sigr_max_mult),
                 "--sigr_max", str(args.sigr_max),
                 "--seed", str(args.seed),
-                "--input_filename", str(args.input_filename)])
-        else:
-            subprocess.run([args.input_exe_path,
-                "--physics_model",str(args.physics_model),
-                "--flag_ehel", str(args.flag_ehel),
-                "--npart", str(args.npart),
-                "--epirea", str(args.epirea),
-                "--ebeam", str(args.ebeam),
-                "--q2min", str(args.q2min),
-                "--q2max", str(args.q2max),
-                "--epmin", str(args.epmin),
-                "--epmax", str(args.epmax),
-                "--trig", str(args.trig),
                 "--fmcall", str(args.fmcall),
                 "--boso", str(args.boso),
-                "--seed", str(args.seed),
-                "--out", str(args.input_filename)])
+                "--input_filename_rad", str(args.input_filename_rad),
+                "--input_filename_norad", str(args.input_filename_norad)])
         return 0
     except OSError as e:
         print("\nError creating generator input file")
@@ -105,33 +95,20 @@ def run_generator(args,repo_base_dir):
 
 
 def filter_lund(args):
+    infile_name = "aao_rad.lund" if args.generator_type == "rad" else "aao_norad.lund"
     try:
-        if args.rad:
-            subprocess.run([args.filter_exe_path,
-                    "--filter_infile","aao_rad.lund",
-                    "--filter_outfile","aao_gen_filtered.dat",
-                    "--q2min", str(args.q2min),
-                    "--q2max", str(args.q2max),
-                    "--xBmin", str(args.xBmin),
-                    "--xBmax", str(args.xBmax),
-                    "--tmin", str(args.tmin),
-                    "--tmax", str(args.tmax),
-                    "--w2min", str(args.w2min),
-                    "--trig", str(args.trig),
-                    "--w2max", str(args.w2max)])
-        else:
-            subprocess.run([args.filter_exe_path,
-                    "--infile","aao_norad.lund",
-                    "--outfile","aao_gen_filtered.dat",
-                    "--q2min", str(args.q2min),
-                    "--q2max", str(args.q2max),
-                    "--xBmin", str(args.xBmin),
-                    "--xBmax", str(args.xBmax),
-                    "--tmin", str(args.tmin),
-                    "--tmax", str(args.tmax),
-                    "--w2min", str(args.w2min),
-                    "--trig", str(args.trig),
-                    "--w2max", str(args.w2max)])
+        subprocess.run([args.filter_exe_path,
+                "--filter_infile",infile_name,
+                "--filter_outfile","aao_gen_filtered.dat",
+                "--q2min", str(args.q2min),
+                "--q2max", str(args.q2max),
+                "--xBmin", str(args.xBmin),
+                "--xBmax", str(args.xBmax),
+                "--tmin", str(args.tmin),
+                "--tmax", str(args.tmax),
+                "--w2min", str(args.w2min),
+                "--trig", str(args.trig),
+                "--w2max", str(args.w2max)])
         return 0
     except OSError as e:
         print("\nError filtering generated events")
@@ -176,6 +153,7 @@ def gen_events(args,repo_base_dir):
 
         gen_input_file(args)
         print("Created generator input file, now trying to run generator")
+        sys.exit()
 
         start_time = time.time()
         start_time_hr = datetime.datetime.fromtimestamp(start_time).strftime('%d %B %Y %H:%M:%S')
@@ -223,6 +201,11 @@ def gen_events(args,repo_base_dir):
 #Make filtering more general for other processes, and include e.g. basic kinematics
 #Include aao_rad functionality
 
+class Dict2Class(object):
+      
+    def __init__(self, my_dict):        
+        for key in my_dict:
+            setattr(self, key, my_dict[key])
 
 if __name__ == "__main__":
     # The following is needed since an executable does not have __file__ defined, but when working in interpreted mode,
@@ -256,16 +239,21 @@ if __name__ == "__main__":
     repo_base_dir = slash.join(full_file_path.split(slash)[:-4])
     output_file_path = repo_base_dir + "/output/"
 
-    norad_input_file_maker_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/norad/input_file_maker_aao_norad.py"
-    rad_input_file_maker_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/rad/input_file_maker_aao_rad.py"
 
-    norad_lund_filter_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/norad/lund_filter_norad.py"
-    rad_lund_filter_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/rad/lund_filter_rad.py"
+
+    input_file_maker_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/aao_input_file_maker.py"
+    lund_filter_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/lund_filter.py"
 
 
     aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.exe"
     aao_rad_path = repo_base_dir + "/aao_rad/build/aao_rad.exe"
 
+    
+    with open('default_generator_args.json') as fjson:
+        d = json.load(fjson)
+
+    norad = Dict2Class(d["aao_norad"][0])
+    rad = Dict2Class(d["aao_rad"][0])
 
     #with open('utils/histo_config.json') as fjson:
     #hftm = json.load(fjson)
@@ -278,40 +266,51 @@ if __name__ == "__main__":
                                 3.) Filters generated events based off specifications \n
                                 4.) Returns .dat data file""",formatter_class=argparse.ArgumentDefaultsHelpFormatter)
    
-    #General options
-    parser.add_argument("--rad",help="Uses radiative generator instead of nonradiative one, CURRENTLY NOT WORKING",default=False,action='store_true')
+    #general options
+    parser.add_argument("--generator_type",help="rad | norad, lets you build input for either aao_rad or aao_norad generators",default="norad")
+    parser.add_argument("--input_filename_rad",help="filename for aao_rad",default="aao_rad_input.inp")
+    parser.add_argument("--input_filename_norad",help="filename for aao_norad",default="aao_norad_input.inp")
 
-    #For step 1: input_file_maker_aao_norad
-    parser.add_argument("--input_exe_path",help="Path to input file maker executable",default=norad_input_file_maker_path)
-    parser.add_argument("--physics_model",help="Physics model: 1=A0, 4=MAID98, 5=MAID2000",default=5)
-    parser.add_argument("--flag_ehel",help="0= no polarized electron, 1=polarized electron",default=1)
-    parser.add_argument("--npart",help="number of particles in BOS banks: 2=(e-,h+), 3=(e-,h+,h0)",default=3)
-    parser.add_argument("--epirea",help="final state hadron: 1=pi0, 3=pi+",default=1)
-    parser.add_argument("--ebeam",help="incident electron beam energy in GeV",default=10.6)
-    parser.add_argument("--q2min",help="minimum Q^2 limit in GeV^2",default=0.2)
-    parser.add_argument("--q2max",help="maximum Q^2 limit in GeV^2",default=10.6)
-    parser.add_argument("--epmin",help="minimum scattered electron energy limits in GeV",default=0.2)
-    parser.add_argument("--epmax",help="maximum scattered electron energy limits in GeV",default=10.6)
-    parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=1.0)
-    parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=1)
-    parser.add_argument("--seed",help="0= use unix timestamp from machine time to generate seed, otherwise use given value as seed",default=0)
-    parser.add_argument("--trig",type=int,help="number of generated events",default=10000)
+    # common generator options
+    parser.add_argument("--flag_ehel",help="0= no polarized electron, 1=polarized electron",default=norad.flag_ehel)
+    parser.add_argument("--ebeam",help="incident electron beam energy in GeV",default=norad.ebeam)
+    parser.add_argument("--q2min",help="minimum Q^2 limit in GeV^2",default=norad.q2min)
+    parser.add_argument("--q2max",help="maximum Q^2 limit in GeV^2",default=norad.q2max)
+    parser.add_argument("--epmin",help="minimum scattered electron energy limits in GeV",default=norad.epmin)
+    parser.add_argument("--epmax",help="maximum scattered electron energy limits in GeV",default=norad.epmax)
+    parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=norad.fmcall)
+    parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=norad.boso)    
+    parser.add_argument("--seed",help="0= use unix timestamp from machine time to generate seed, otherwise use given value as seed",default=norad.seed)
+    parser.add_argument("--trig",help="number of output events",default=norad.trig)
+    parser.add_argument("--epirea",help="1: pi0 , 3:pi+, 5:eta",default=norad.epirea)
+
+    #aao_rad specific options
+    parser.add_argument("--physics_model_rad",help="Physics model for aao_rad (1=AO, 4=MAID, 11=dvmp)",default=rad.physics_model)
+    parser.add_argument("--int_region",help="the sizes of the integration regions",default =rad.int_region)
+    parser.add_argument("--npart_rad",help="number of particles in BOS banks for rad generator",default=rad.npart_rad)
+    parser.add_argument("--sigr_max_mult",help="a multiplication factor for sigr_max",default=rad.sigr_max_mult)
+    parser.add_argument("--sigr_max",help="sigr_max",default=rad.sigr_max)
+    parser.add_argument("--model_11_min_W",help="minimum W (GeV) only for physics model 11",default=rad.model_11_min_W)
+    parser.add_argument("--rad_emin",help="minimum photon energy for integration",default=rad.rad_emin)
+    parser.add_argument("--err_max",help="limit on the error in (mm)**2",default=rad.err_max)
+    parser.add_argument("--target_len",help="target cell length (cm)",default=rad.target_len)
+    parser.add_argument("--target_rad",help="target cell cylinder radius",default=rad.target_radius)
+    parser.add_argument("--cord_x",help="x-coord of beam position",default=rad.cord_x)
+    parser.add_argument("--cord_y",help="y-coord of beam position",default=rad.cord_y)
+    parser.add_argument("--cord_z",help="z-coord of beam position",default=rad.cord_z)
+
+    # aao_norad specific options
+    parser.add_argument("--physics_model_norad",help="Physics model for norad : 1=A0, 4=MAID98, 5=MAID2000",default=norad.physics_model)
+    parser.add_argument("--npart_norad",help="number of particles in BOS banks for norad: 2=(e-,h+), 3=(e-,h+,h0)",default=norad.npart_norad)
+
+
+    #This one needs to be fixed!
+    parser.add_argument("--input_filename",help="filename for aao_norad",default="aao_norad_input.inp")
+    parser.add_argument("--input_exe_path",help="Path to input file maker executable",default=input_file_maker_path)
+   
     parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=5)
     parser.add_argument("--maxloops",type=int,help="Enter the number of generation iteration loops permitted to converge to desired number of events",default=10)
-    parser.add_argument("--input_filename",help="filename for aao_norad",default="aao_norad_input.inp")
 
-
-    #Arguements specific to aao_rad
-    parser.add_argument("--int_region",help="the sizes of the integration regions",default =".20 .12 .20 .20")
-    parser.add_argument("--err_max",help="limit on the error in (mm)**2",default=0.2)
-    parser.add_argument("--target_len",help="target cell length (cm)",default=5)
-    parser.add_argument("--target_rad",help="target cell cylinder radius",default=0.43)
-    parser.add_argument("--cord_x",help="x-coord of beam position",default=0.0)
-    parser.add_argument("--cord_y",help="y-coord of beam position",default=0.0)
-    parser.add_argument("--cord_z",help="z-coord of beam position",default=0.0)
-    parser.add_argument("--rad_emin",help="minimum photon energy for integration",default=0.005)
-    parser.add_argument("--sigr_max_mult",help="a multiplication factor for sigr_max",default=0.0)
-    parser.add_argument("--sigr_max",help="sigr_max",default=0.005)
 
 
 
@@ -329,7 +328,7 @@ if __name__ == "__main__":
     parser.add_argument("--filter_outfile",help='specify processed lund output file name',default="aao_gen.dat")
    
     #Specify output directory for lund file
-    parser.add_argument("--filter_exe_path",help="Path to lund filter executable",default=norad_lund_filter_path)
+    parser.add_argument("--filter_exe_path",help="Path to lund filter executable",default=lund_filter_path)
     parser.add_argument("--outdir",help="Specify full or relative path to output directory final lund file",default=output_file_path)
     parser.add_argument("-r",help="Removes all files from output directory, if any existed",default=False,action='store_true')
 
@@ -338,18 +337,12 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if args.rad:
+    if args.generator_type == "rad":
         if args.generator_exe_path==aao_norad_path:
             args.generator_exe_path = aao_rad_path #change to using radiative generator
         if args.filter_infile == "aao_norad.lund":
             args.filter_infile = "aao_rad.lund" #change to using radiative generator
-        if args.input_exe_path == norad_input_file_maker_path:
-            args.input_exe_path = rad_input_file_maker_path
-        if args.input_filename == "aao_norad_input.inp":
-            args.input_filename = "aao_rad_input.inp" #change to using radiative generator
-        if args.filter_exe_path == norad_lund_filter_path:
-            args.filter_exe_path = rad_lund_filter_path
-        args.npart = 4 #for now, mandatory switch
+
 
 
     if not os.path.isdir(args.outdir):
