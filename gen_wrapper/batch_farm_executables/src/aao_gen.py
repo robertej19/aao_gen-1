@@ -267,7 +267,8 @@ if __name__ == "__main__":
     aao_rad_path = repo_base_dir + "/aao_rad/build/aao_rad.exe"
 
 
-
+    #with open('utils/histo_config.json') as fjson:
+    #hftm = json.load(fjson)
 
 
     parser = argparse.ArgumentParser(description="""CURRENTLY ONLY WORKS WITH AAO_NORAD 4 PARTICLE FINAL STATE \n

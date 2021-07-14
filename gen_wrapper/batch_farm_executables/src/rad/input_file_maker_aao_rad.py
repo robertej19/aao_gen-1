@@ -28,6 +28,7 @@ def gen_input(args):
 {}     ! trig
 {}     ! sigr_max_mult
 {}     ! sigr_max
+{}     ! minimum W only for physics model 11
 """.format(args.physics_model,
 args.flag_ehel,
 args.int_region,
@@ -45,7 +46,8 @@ args.epmin, args.epmax,
 args.rad_emin,
 args.trig,
 args.sigr_max_mult,
-args.sigr_max)
+args.sigr_max,
+args.model_11_min_W)
     outfile.write(string)
     outfile.close()
 
@@ -74,9 +76,9 @@ if __name__ == "__main__":
     parser.add_argument("--trig",help="number of output events",default=1000)
     parser.add_argument("--sigr_max_mult",help="a multiplication factor for sigr_max",default=0.0)
     parser.add_argument("--sigr_max",help="sigr_max",default=1.0)
+    parser.add_argument("--model_11_min_W",help="minimum W (GeV) only for physics model 11",default=1.9)
 
     ########### NEED TO INCLUDE THIS!!!!!!!
-    parser.add_argument("--genW",help="minimum W (GeV) only for physics model 11",default=1.9)
 
 
     parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=1.0)
