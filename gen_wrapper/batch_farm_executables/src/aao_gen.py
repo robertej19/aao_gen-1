@@ -152,7 +152,6 @@ def gen_events(args,repo_base_dir):
 
         gen_input_file(args)
         print("Created generator input file, now trying to run generator")
-        sys.exit()
 
         start_time = time.time()
         start_time_hr = datetime.datetime.fromtimestamp(start_time).strftime('%d %B %Y %H:%M:%S')
