@@ -305,10 +305,6 @@ if __name__ == "__main__":
     parser.add_argument("--npart_norad",help="number of particles in BOS banks for norad: 2=(e-,h+), 3=(e-,h+,h0)",default=norad.npart_norad)
 
 
-    #This one needs to be fixed!
-    parser.add_argument("--input_filename_norad",help="filename for aao_norad generator",default="aao_norad_input.inp")
-    parser.add_argument("--input_filename_rad",help="filename for aao_rad generator",default="aao_rad_input.inp")
-
     parser.add_argument("--input_exe_path",help="Path to input file maker executable",default=input_file_maker_path)
     parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=5)
     parser.add_argument("--maxloops",type=int,help="Enter the number of generation iteration loops permitted to converge to desired number of events",default=10)
