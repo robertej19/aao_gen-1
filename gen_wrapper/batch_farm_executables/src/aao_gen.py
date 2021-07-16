@@ -72,11 +72,14 @@ def gen_input_file(args):
         return -1
 
 
-
-
 def run_generator(args,repo_base_dir):
+    if args.generator_type == "rad":
+        input_filename_for_generator = args.input_filename_rad
+    else:
+        input_filename_for_generator = args.input_filename_norad
+
     try:
-        runstring = "{} < {}".format(args.generator_exe_path,args.input_filename)
+        runstring = "{} < {}".format(args.generator_exe_path,input_filename_for_generator)
         print("Generator runstring is: {}".format(runstring))
         process = subprocess.Popen(runstring,stdout=subprocess.PIPE,shell=True)
         process.wait()
@@ -303,9 +306,10 @@ if __name__ == "__main__":
 
 
     #This one needs to be fixed!
-    parser.add_argument("--input_filename",help="filename for aao_norad",default="aao_norad_input.inp")
+    parser.add_argument("--input_filename_norad",help="filename for aao_norad generator",default="aao_norad_input.inp")
+    parser.add_argument("--input_filename_rad",help="filename for aao_rad generator",default="aao_rad_input.inp")
+
     parser.add_argument("--input_exe_path",help="Path to input file maker executable",default=input_file_maker_path)
-   
     parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=5)
     parser.add_argument("--maxloops",type=int,help="Enter the number of generation iteration loops permitted to converge to desired number of events",default=10)
 
