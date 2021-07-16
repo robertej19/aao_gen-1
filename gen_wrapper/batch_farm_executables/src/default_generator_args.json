@@ -16,7 +16,7 @@
     }],
 
     "aao_rad": [{
-        "physics_model":"11",
+        "physics_model":"5",
         "int_region":".20 .12 .20 .20",
         "npart_rad":4,
         "err_max":0.2,
@@ -28,6 +28,6 @@
         "rad_emin":0.005,
         "sigr_max_mult":0.0,
         "sigr_max":1.0,
-        "model_11_min_W":1.9
+        "model_5_min_W":1.9
     }]
 }

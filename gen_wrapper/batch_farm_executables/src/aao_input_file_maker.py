@@ -50,7 +50,7 @@ def gen_input_rad(args):
 {}     ! trig
 {}     ! sigr_max_mult
 {}     ! sigr_max
-{}     ! minimum W only for physics model 11
+{}     ! minimum W only for physics model 5
 """.format(args.physics_model_rad,
 args.flag_ehel,
 args.int_region,
@@ -69,7 +69,7 @@ args.rad_emin,
 args.trig,
 args.sigr_max_mult,
 args.sigr_max,
-args.model_11_min_W)
+args.model_5_min_W)
     outfile.write(string)
     outfile.close()
 
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     parser.add_argument("--npart_rad",help="number of particles in BOS banks for rad generator",default=rad.npart_rad)
     parser.add_argument("--sigr_max_mult",help="a multiplication factor for sigr_max",default=rad.sigr_max_mult)
     parser.add_argument("--sigr_max",help="sigr_max",default=rad.sigr_max)
-    parser.add_argument("--model_11_min_W",help="minimum W (GeV) only for physics model 11",default=rad.model_11_min_W)
+    parser.add_argument("--model_5_min_W",help="minimum W (GeV) only for physics model 5",default=rad.model_5_min_W)
     parser.add_argument("--rad_emin",help="minimum photon energy for integration",default=rad.rad_emin)
     parser.add_argument("--err_max",help="limit on the error in (mm)**2",default=rad.err_max)
     parser.add_argument("--target_len",help="target cell length (cm)",default=rad.target_len)
