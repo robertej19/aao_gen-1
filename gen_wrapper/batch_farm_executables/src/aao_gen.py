@@ -77,12 +77,13 @@ def gen_input_file(args):
 def run_generator(args,repo_base_dir):
     try:
         runstring = "{} < {}".format(args.generator_exe_path,args.input_filename)
+        print("Generator runstring is: {}".format(runstring))
         process = subprocess.Popen(runstring,stdout=subprocess.PIPE,shell=True)
         process.wait()
         #process2 = subprocess.Popen("mv aao_norad.lund {}aao_norad.lund".format(args.outdir),shell=True)
         #process2.wait()
         #shutil.move(repo_base_dir+"/aao_rad.lund", args.outdir+"aao_rad.lund")
-        print("Moved lund file to new directory")
+        print("Generated events")
         return 0
     except OSError as e:
         print("\nError using event generator")
@@ -96,6 +97,7 @@ def run_generator(args,repo_base_dir):
 
 def filter_lund(args):
     infile_name = "aao_rad.lund" if args.generator_type == "rad" else "aao_norad.lund"
+    print("trying to filter {}".format(infile_name))
     try:
         subprocess.run([args.filter_exe_path,
                 "--filter_infile",infile_name,
