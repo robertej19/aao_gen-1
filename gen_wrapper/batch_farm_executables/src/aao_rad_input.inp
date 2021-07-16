@@ -1,0 +1,19 @@
+5     ! physics_model
+1     ! flag_ehel
+.20 .12 .20 .20     ! int_region
+4     ! npart
+1     ! epirea
+0.2     ! err_max
+5     ! target_len
+0.43     ! target_rad
+0.0     ! cord_x
+0.0     ! cord_y
+0.0     ! cord_z
+10.6     ! ebeam
+0.9  14     ! q2min q2max
+0.2  10.6     ! epmin epmax
+0.005     ! rad_emin
+1000     ! trig
+0.0     ! sigr_max_mult
+1.0     ! sigr_max
+1.9     ! minimum W only for physics model 5

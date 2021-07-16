@@ -148,7 +148,6 @@ def gen_events(args,repo_base_dir):
     max_num_loops = args.maxloops
     gen_rate = 0.0005 #seconds per event for aao_norad, this is just emperically observed
     for loop_counter in range(0,max_num_loops+1):
-        print("generating {} raw events".format(args.trig))
 
 
         gen_input_file(args)
@@ -243,8 +242,6 @@ if __name__ == "__main__":
 
     input_file_maker_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/aao_input_file_maker.py"
     lund_filter_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/lund_filter.py"
-
-
     aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.exe"
     aao_rad_path = repo_base_dir + "/aao_rad/build/aao_rad.exe"
 
@@ -290,7 +287,7 @@ if __name__ == "__main__":
     parser.add_argument("--npart_rad",help="number of particles in BOS banks for rad generator",default=rad.npart_rad)
     parser.add_argument("--sigr_max_mult",help="a multiplication factor for sigr_max",default=rad.sigr_max_mult)
     parser.add_argument("--sigr_max",help="sigr_max",default=rad.sigr_max)
-    parser.add_argument("--model_11_min_W",help="minimum W (GeV) only for physics model 11",default=rad.model_11_min_W)
+    parser.add_argument("--model_5_min_W",help="minimum W (GeV) only for physics model 11",default=rad.model_5_min_W)
     parser.add_argument("--rad_emin",help="minimum photon energy for integration",default=rad.rad_emin)
     parser.add_argument("--err_max",help="limit on the error in (mm)**2",default=rad.err_max)
     parser.add_argument("--target_len",help="target cell length (cm)",default=rad.target_len)
