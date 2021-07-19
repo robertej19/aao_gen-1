@@ -71,7 +71,7 @@ def filter_lund(args):
                 outlines.append(c)
                 outlines.append(d)
                 outlines.append(e)
-        if (len(outlines)/5 == args.trig):
+        if (len(outlines)/5 == int(args.trig)):
             break
                             
     print("Original length {}, filtered length {}".format(len(txtlst)/5,len(outlines)/5))
