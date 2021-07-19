@@ -42,7 +42,7 @@ cp {0} gen_wrapper/src/
 cp {1} aao_gen/build/aao_generator.exe
 cp {2} gen_wrapper/src/lund_filter.py
 cp {3} gen_wrapper/src/
-cp {4} gen_wrapper/src/
+cp {4} .
 chmod +x gen_wrapper/src/*
 chmod +x aao_gen/build/*
 
@@ -126,10 +126,8 @@ args.cord_y,
 args.cord_z,
 args.physics_model_norad,
 args.npart_norad,
-args.input_exe_path,
 args.precision,
 args.maxloops,
-args.generator_exe_path,
 args.xBmin,
 args.xBmax,
 args.w2min,
@@ -138,7 +136,6 @@ args.tmin,
 args.tmax,
 args.filter_infile,
 args.filter_outfile,
-args.filter_exe_path,
 args.outdir) ########## NOTE: args.r and args.docker are not currently included
 
     footer = """
