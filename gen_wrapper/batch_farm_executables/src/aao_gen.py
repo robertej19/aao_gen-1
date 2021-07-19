@@ -291,7 +291,7 @@ if __name__ == "__main__":
     parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=norad.fmcall)
     parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=norad.boso)    
     parser.add_argument("--seed",help="0= use unix timestamp from machine time to generate seed, otherwise use given value as seed",default=norad.seed)
-    parser.add_argument("--trig",type=float,help="number of output events",default=norad.trig)
+    parser.add_argument("--trig",type=int,help="number of output events",default=norad.trig)
     parser.add_argument("--epirea",help="1: pi0 , 3:pi+, 5:eta",default=norad.epirea)
 
     #aao_rad specific options
