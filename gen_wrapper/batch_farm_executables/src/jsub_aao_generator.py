@@ -42,7 +42,7 @@ cp {0} gen_wrapper/src/
 cp {1} aao_gen/build/aao_generator.exe
 cp {2} gen_wrapper/src/lund_filter.py
 cp {3} gen_wrapper/src/
-cp {4} gen_wrapper/src/
+cp {4}default_generator_args.json gen_wrapper/src/
 chmod +x gen_wrapper/src/*
 chmod +x aao_gen/build/*
 
