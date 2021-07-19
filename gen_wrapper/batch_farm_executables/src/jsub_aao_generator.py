@@ -36,19 +36,21 @@ COMMAND:
 """.format(count,args.track)
 
     setup = """
-mkdir -p aao_norad/build
+mkdir -p aao_gen/build
 mkdir -p gen_wrapper/src
 cp {0} gen_wrapper/src/
-cp {1} aao_norad/build/
-cp {2} gen_wrapper/src/
+cp {1} aao_gen/build/aao_generator.exe
+cp {2} gen_wrapper/src/lund_filter.py
 cp {3} gen_wrapper/src/
+cp {4} gen_wrapper/src/
 chmod +x gen_wrapper/src/*
-chmod +x aao_norad/build/*
+chmod +x aao_gen/build/*
 
 """.format(args.input_exe_path,
         args.generator_exe_path,
         args.filter_exe_path,
-        args.aao_gen_path_exe)
+        args.aao_gen_path_exe,
+        args.json_args_path)
 
     run_command = """
 ./gen_wrapper/src/aao_gen.py \
@@ -81,10 +83,10 @@ chmod +x aao_norad/build/*
 --cord_z {} \
 --physics_model_norad {} \
 --npart_norad {} \
---input_exe_path {} \
+--input_exe_path gen_wrapper/src/aao_input_file_maker.py \
 --precision {} \
 --maxloops {} \
---generator_exe_path {} \
+--generator_exe_path aao_gen/build/aao_generator.exe \
 --xBmin {} \
 --xBmax {} \
 --w2min {} \
@@ -93,10 +95,8 @@ chmod +x aao_norad/build/*
 --tmax {} \
 --filter_infile {} \
 --filter_outfile {} \
---filter_exe_path {} \
+--filter_exe_path gen_wrapper/src/lund_filter.py \
 --outdir {} \
--r {} \
---docker {} \
 """.format(args.generator_type,
 args.input_filename_rad,
 args.input_filename_norad,
@@ -139,9 +139,7 @@ args.tmax,
 args.filter_infile,
 args.filter_outfile,
 args.filter_exe_path,
-args.outdir,
-args.r,
-args.docker)
+args.outdir) ########## NOTE: args.r and args.docker are not currently included
 
     footer = """
 SINGLE_JOB: true
@@ -193,7 +191,7 @@ if __name__ == "__main__":
     lund_filter_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/lund_filter.py"
     aao_norad_path = repo_base_dir + "/aao_norad/build/aao_norad.exe"
     aao_rad_path = repo_base_dir + "/aao_rad/build/aao_rad.exe"
-
+    json_args_path = repo_base_dir + "/gen_wrapper/batch_farm_executables/src/default_generator_args.json"
     
     with open('default_generator_args.json') as fjson:
         d = json.load(fjson)
@@ -259,6 +257,8 @@ if __name__ == "__main__":
     parser.add_argument("--npart_norad",help="number of particles in BOS banks for norad: 2=(e-,h+), 3=(e-,h+,h0)",default=norad.npart_norad)
 
 
+
+    parser.add_argument("--json_args_path",help="Path to default_generator_args.json file ",default=json_args_path)
 
     parser.add_argument("--input_exe_path",help="Path to input file maker executable",default=input_file_maker_path)
     parser.add_argument("--precision",type=float,help="Enter how close, in percent, you want the number of filtered events to be relative to desired events",default=5)
