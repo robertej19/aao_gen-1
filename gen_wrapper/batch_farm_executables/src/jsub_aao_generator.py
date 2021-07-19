@@ -69,7 +69,7 @@ chmod +x aao_gen/build/*
 --trig {} \
 --epirea {} \
 --physics_model_rad {} \
---int_region {} \
+--int_region "{}" \
 --npart_rad {} \
 --sigr_max_mult {} \
 --sigr_max {} \
