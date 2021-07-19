@@ -195,15 +195,15 @@ def gen_events(args,repo_base_dir):
             if ratio == 0:
                 #This means no events made it past filtering, and we need to increase our stastics by a large factor
                 print("RATION IS 0")
-                print("OLD VALUE OF TRIG WAS: {}".format(args.trig)
+                print("OLD VALUE OF TRIG WAS: {}".format(args.trig))
                 args.trig = round(100* args.trig)
-                print("NEW VALUE OF TRIG IS: {}".format(args.trig)
+                print("NEW VALUE OF TRIG IS: {}".format(args.trig))
 
             else:
                 print("RATION IS NOT 0")
-                print("OLD VALUE OF TRIG WAS: {}".format(args.trig)
+                print("OLD VALUE OF TRIG WAS: {}".format(args.trig))
                 args.trig = round(args.trig/ratio)
-                print("NEW VALUE OF TRIG IS: {}".format(args.trig)
+                print("NEW VALUE OF TRIG IS: {}".format(args.trig))
 
             print("Due to filtering, need to rerun and produce {} raw events, to end up with {} filtered events".format(args.trig,num_desired_events))
 
