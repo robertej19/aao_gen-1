@@ -170,6 +170,7 @@ def gen_events(args,repo_base_dir):
 
 
         seconds_elapsed = time.time() - start_time
+        print("ARGS.TRIG IS {}".format(args.trig))
         gen_rate = seconds_elapsed/args.trig
         print("Generator took {} seconds to run".format(seconds_elapsed))
 
