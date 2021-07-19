@@ -24,7 +24,7 @@ def gen_input_norad(args):
 0
 """.format(args.physics_model_norad,args.flag_ehel,args.npart_norad,args.epirea,
     args.ebeam,args.q2min,args.q2max,args.epmin,args.epmax,
-    args.trig,args.fmcall,args.boso)
+    int(args.trig),args.fmcall,args.boso)
     #NOTE: Args.seed was removed for testing
     outfile.write(string)
     outfile.close()
@@ -66,7 +66,7 @@ args.ebeam,
 args.q2min, args.q2max,
 args.epmin, args.epmax,
 args.rad_emin,
-args.trig,
+int(args.trig),
 args.sigr_max_mult,
 args.sigr_max,
 args.model_5_min_W)
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     parser.add_argument("--fmcall",help="factor to adjust the maximum cross section, used in M.C. selection",default=norad.fmcall)
     parser.add_argument("--boso",help="1=bos output, 0=no bos output",default=norad.boso)    
     parser.add_argument("--seed",help="0= use unix timestamp from machine time to generate seed, otherwise use given value as seed",default=norad.seed)
-    parser.add_argument("--trig",help="number of output events",default=norad.trig)
+    parser.add_argument("--trig",type=int,help="number of output events",default=norad.trig)
     parser.add_argument("--epirea",help="1: pi0 , 3:pi+, 5:eta",default=norad.epirea)
 
     #aao_rad specific options
