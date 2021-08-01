@@ -25,7 +25,7 @@ class Dict2Class(object):
 def gen_jsub(args,count):
     outfile = open(args.jsub_textdir+"jsub_lund_job_{}.txt".format(count),"w")
     header = """PROJECT: clas12
-JOBNAME: pi0gen_{0}
+JOBNAME: {2}_{0}
 
 TRACK: {1}
 DISK_SPACE: 4 GB
@@ -33,7 +33,7 @@ DISK_SPACE: 4 GB
 MEMORY: 1024 MB
 
 COMMAND:
-""".format(count,args.track)
+""".format(count,args.track,args.slurm_job_name)
 
     setup = """
 mkdir -p aao_gen/build
@@ -217,7 +217,9 @@ if __name__ == "__main__":
     parser.add_argument("--generator_type",help="rad | norad, lets you build input for either aao_rad or aao_norad generators",default="norad")
     parser.add_argument("--input_filename_rad",help="filename for aao_rad",default="aao_rad_input.inp")
     parser.add_argument("--input_filename_norad",help="filename for aao_norad",default="aao_norad_input.inp")
+    parser.add_argument("--slurm_job_name",help="name for identification in scicomp",default="aao_(no)rad_generator")
 
+    
 
 
 
