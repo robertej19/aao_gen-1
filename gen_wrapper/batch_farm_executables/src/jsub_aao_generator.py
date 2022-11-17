@@ -4,6 +4,7 @@
 
 """
 This is a text file generator to submit pi0_generator jobs on batch farm at JLab
+As of March 2022, this file no longer works, and needs to be rewritten in terms of sbatch
 """
 
 import random 
