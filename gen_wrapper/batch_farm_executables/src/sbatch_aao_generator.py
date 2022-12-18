@@ -34,8 +34,8 @@ def gen_sbatch(args,count):
 #SBATCH --job-name={2}_{0}.job
 #SBATCH --time=24:00:00
 #SBATCH --gres=disk:10000
-#SBATCH --output={3}gen_output/{0}.out
-#SBATCH --error={3}gen_error/{0}.err
+#SBATCH --output={3}../gen_output/{0}.out
+#SBATCH --error={3}../gen_error/{0}.err
 
 cd /scratch/slurm/$SLURM_JOB_ID
 
