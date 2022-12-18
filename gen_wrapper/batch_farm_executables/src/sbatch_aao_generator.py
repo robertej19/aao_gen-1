@@ -30,22 +30,23 @@ def gen_sbatch(args,count):
 #SBATCH --account=clas12
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --mem-per-cpu=2500
+#SBATCH --mem-per-cpu=1000
 #SBATCH --job-name={2}_{0}.job
 #SBATCH --time=24:00:00
 #SBATCH --gres=disk:10000
-#SBATCH --output=/volatile/clas12/robertej/{0}.out
-#SBATCH --error=/volatile/clas12/robertej/{0}.err
-#SBATCH --chdir=/scratch/robertej/
-#
+#SBATCH --output={3}gen_output/{0}.out
+#SBATCH --error={3}gen_error/{0}.err
+
+cd /scratch/slurm/$SLURM_JOB_ID
+
+echo "currently located in:"
+echo $PWD
 
 # Sleep a random amount of time from 0-180s
 # This avoids conflicts when lots of jobs start simultaneously.
 TSLEEP=$[ ( $RANDOM % (180+1) ) ]s
 echo "Sleeping for ${{TSLEEP}} ..."
-sleep $TSLEEP""".format(count,args.track,args.slurm_job_name)
-
-
+sleep $TSLEEP""".format(count,args.track,args.slurm_job_name,args.return_dir)
 
 
     setup = """
