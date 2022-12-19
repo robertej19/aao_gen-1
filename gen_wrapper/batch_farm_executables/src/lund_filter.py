@@ -18,7 +18,7 @@ def calc_inv_mass_squared(four_vector):
     return inv_mass2
 
 e_mass = 0.00051099895
-Ebeam_4mom = (10.6,0,0,10.6)
+Ebeam_4mom = (10.604,0,0,10.604)
 p_mass = 0.9382721
 pi_mass = 0.1349768
 target_4mom = (p_mass,0,0,0)
