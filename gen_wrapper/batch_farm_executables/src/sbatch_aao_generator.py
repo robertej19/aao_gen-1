@@ -30,7 +30,7 @@ def gen_sbatch(args,count):
 #SBATCH --account=clas12
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --mem-per-cpu=50
+#SBATCH --mem-per-cpu=100
 #SBATCH --job-name={2}_{0}.job
 #SBATCH --time=24:00:00
 #SBATCH --gres=disk:10000
