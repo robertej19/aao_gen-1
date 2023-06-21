@@ -81,8 +81,21 @@ class Dict2Class(object):
 
 if __name__ == "__main__":
 
+    try:
+        __file__
+    except NameError:
+        full_file_path = sys.executable #This sets the path for compiled python
+    else:
+        full_file_path = os.path.abspath(__file__) #This sets the path for interpreted python
 
-    with open(args.default_gen_args_loc) as fjson:
+    
+    main_source_dir = "/".join(full_file_path.split("/")[:-3])
+
+    # location of default generator args:
+    location_of_default_generator_args = main_source_dir + "/aao_gen/gen_wrapper/batch_farm_executables/src/default_generator_args.json"
+
+
+    with open(location_of_default_generator_args) as fjson:
         d = json.load(fjson)
 
     norad = Dict2Class(d["aao_norad"][0])
