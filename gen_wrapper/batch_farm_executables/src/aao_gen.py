@@ -129,7 +129,7 @@ def compare_raw_to_filt(args,num_desired_events):
             filtered_num = len(f.readlines())/5
         ratio = filtered_num/num_desired_events
         print(r"Produced {}% of desired number of events in kinematic range".format(100*ratio))
-        return ratio
+        return ratio,filtered_num
     except OSError as e:
         print("\nError extracting filtering ratio")
         print("The error message was:\n %s - %s." % (e.filename, e.strerror))
@@ -158,6 +158,13 @@ def gen_events(args,repo_base_dir):
         gen_input_file(args)
         print("Created generator input file, now trying to run generator")
 
+        if args.trig>400000:
+        # Hard coded limit to protect against using too much memory
+            print("WARNING: You are trying to generate {} events, which is more than 400000".format(args.trig))
+            # tell them to adjust hard coded parameters and adjust memory limit in sbatch file:
+            print("Please adjust the hard coded parameters in gen_wrapper/batch_farm_executables/src/aao_gen.py and in sbatch files")
+            break
+
         start_time = time.time()
         start_time_hr = datetime.datetime.fromtimestamp(start_time).strftime('%d %B %Y %H:%M:%S')
         end_time = start_time+gen_rate*int(args.trig)
@@ -181,7 +188,7 @@ def gen_events(args,repo_base_dir):
         print("Lund file filtered, now comparing event sizes")
 
         print("Now counting the effect of filtering")
-        ratio = compare_raw_to_filt(args,num_desired_events)
+        ratio,filtered_num = compare_raw_to_filt(args,num_desired_events)
         
         #if abs(ratio-1) < args.precision/100:
         #if (ratio > 1):# and (abs(ratio-1) < args.precision/100): #This should be replaced to just truncate once the desired number of events are made
