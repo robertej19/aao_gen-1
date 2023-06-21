@@ -26,7 +26,7 @@ class Dict2Class(object):
 def gen_sbatch(args,count):
     print("FOR DEBUGGING, SLURM JOB NAME IN SBATCH AAO GENERATOR IS: ")
     print(args.slurm_job_name)
-    
+
     outfile = open(args.sbatch_textdir+"sbatch_lund_job_{}.txt".format(count),"w")
     header = """#!/bin/bash
 #
@@ -157,7 +157,7 @@ args.filter_outfile,
 args.outdir) ########## NOTE: args.r and args.docker are not currently included
 
     footer = """
-
+du -sh *
 mv aao_gen_filtered.dat {0}pi0_gen{1}.lund
 """.format(args.return_dir,count)
 
