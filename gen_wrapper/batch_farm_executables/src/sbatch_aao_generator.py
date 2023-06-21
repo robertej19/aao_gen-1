@@ -24,16 +24,19 @@ class Dict2Class(object):
             setattr(self, key, my_dict[key])
 
 def gen_sbatch(args,count):
+    print("FOR DEBUGGING, SLURM JOB NAME IN SBATCH AAO GENERATOR IS: ")
+    print(args.slurm_job_name)
+    
     outfile = open(args.sbatch_textdir+"sbatch_lund_job_{}.txt".format(count),"w")
     header = """#!/bin/bash
 #
 #SBATCH --account=clas12
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --mem-per-cpu=100
-#SBATCH --job-name={2}_{0}.job
+#SBATCH --mem-per-cpu=250
+#SBATCH --job-name={2}_{0}.job  norad_2__0.job
 #SBATCH --time=24:00:00
-#SBATCH --gres=disk:10000
+#SBATCH --gres=disk:250000000
 #SBATCH --output={3}../gen_output/{0}.out
 #SBATCH --error={3}../gen_error/{0}.err
 
