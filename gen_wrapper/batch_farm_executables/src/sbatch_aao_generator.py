@@ -30,10 +30,10 @@ def gen_sbatch(args,count):
 #SBATCH --account=clas12
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --mem-per-cpu=250
+#SBATCH --mem-per-cpu=500
 #SBATCH --job-name={2}_{0}.job
 #SBATCH --time=24:00:00
-#SBATCH --gres=disk:250000000
+#SBATCH --gres=disk:500000000
 #SBATCH --output={3}../gen_output/{0}.out
 #SBATCH --error={3}../gen_error/{0}.err
 
