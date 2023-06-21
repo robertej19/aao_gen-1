@@ -160,9 +160,13 @@ def gen_events(args,repo_base_dir):
 
         if args.trig>480000:
         # Hard coded limit to protect against using too much memory
-            print("WARNING: You are trying to generate {} events, which is more than 480000".format(args.trig))
-            # tell them to adjust hard coded parameters and adjust memory limit in sbatch file:
-            print("Please adjust the hard coded parameters in gen_wrapper/batch_farm_executables/src/aao_gen.py and in sbatch files")
+            message_1 = "WARNING: You are trying to generate {} events, which is more than 480000".format(args.trig)
+            message_2 = "Please adjust the hard coded parameters in gen_wrapper/batch_farm_executables/src/aao_gen.py and in sbatch files"
+            print(message_1)
+            print(message_2)
+            outlines = [message_1,message_2]
+            with open('aao_gen_filtered.dat', 'w') as f:
+                f.write(''.join(outlines))
             break
 
         start_time = time.time()
