@@ -156,6 +156,7 @@ args.outdir) ########## NOTE: args.r and args.docker are not currently included
     footer = """
 du -sh *
 mv aao_gen_filtered.dat {0}pi0_gen{1}.lund
+rm aao*.lund
 """.format(args.return_dir,count)
 
     outfile.write(header+setup+run_command+footer)
