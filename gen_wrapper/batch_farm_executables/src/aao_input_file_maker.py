@@ -82,7 +82,7 @@ class Dict2Class(object):
 if __name__ == "__main__":
 
 
-    with open('default_generator_args.json') as fjson:
+    with open(args.default_gen_args_loc) as fjson:
         d = json.load(fjson)
 
     norad = Dict2Class(d["aao_norad"][0])
@@ -128,6 +128,9 @@ if __name__ == "__main__":
     parser.add_argument("--physics_model_norad",help="Physics model for norad : 1=A0, 4=MAID98, 5=MAID2000",default=norad.physics_model)
     parser.add_argument("--npart_norad",help="number of particles in BOS banks for norad: 2=(e-,h+), 3=(e-,h+,h0)",default=norad.npart_norad)
 
+    #Other
+    parser.add_argument("--default_gen_args_loc",help="location of default generator args json file",default="default_generator_args.json")
+
     args = parser.parse_args()
 
 
@@ -138,3 +141,35 @@ if __name__ == "__main__":
     else:
         print("The selected generator type, '{}', does not exist, try again.".format(args.generator_type))
         sys.exit()
+
+
+
+        subprocess.run([args.generator_input_exe_path,
+                "--generator_type", str(args.generator_type),
+                "--physics_model_rad", str(args.physics_model_rad),
+                "--physics_model_norad",str(args.physics_model_norad),
+                "--npart_norad", str(args.npart_norad),
+                "--npart_rad", str(args.npart_rad),
+                "--flag_ehel", str(args.flag_ehel),
+                "--int_region", str(args.int_region),
+                "--epirea", str(args.epirea), 
+                "--err_max", str(args.err_max),
+                "--target_len", str(args.target_len),
+                "--target_rad", str(args.target_rad),
+                "--cord_x", str(args.cord_x),
+                "--cord_y", str(args.cord_y),
+                "--cord_z", str(args.cord_z),
+                "--ebeam", str(args.ebeam),
+                "--q2min", str(args.q2min),
+                "--q2max", str(args.q2max),
+                "--epmin", str(args.epmin),
+                "--epmax", str(args.epmax),
+                "--rad_emin", str(args.rad_emin),
+                "--trig", str(args.trig),
+                "--sigr_max_mult", str(args.sigr_max_mult),
+                "--sigr_max", str(args.sigr_max),
+                "--seed", str(args.seed),
+                "--fmcall", str(args.fmcall),
+                "--boso", str(args.boso),
+                "--input_filename_rad", str(params.output_location+"/"+args.input_filename_rad),
+                "--input_filename_norad", str(params.output_location+"/"+args.input_filename_norad)])
