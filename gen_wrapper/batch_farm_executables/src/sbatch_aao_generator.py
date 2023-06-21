@@ -31,7 +31,7 @@ def gen_sbatch(args,count):
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --mem-per-cpu=250
-#SBATCH --job-name={2}_{0}.job  norad_2__0.job
+#SBATCH --job-name={2}_{0}.job
 #SBATCH --time=24:00:00
 #SBATCH --gres=disk:250000000
 #SBATCH --output={3}../gen_output/{0}.out
