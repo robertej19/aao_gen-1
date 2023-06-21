@@ -95,7 +95,8 @@ if __name__ == "__main__":
     location_of_default_generator_args = main_source_dir + "/aao_gen/gen_wrapper/batch_farm_executables/src/default_generator_args.json"
 
 
-    with open(location_of_default_generator_args) as fjson:
+    # This should be fixed because it is a local operator! But it can't be loaded through args yet
+    with open('default_generator_args.json') as fjson:
         d = json.load(fjson)
 
     norad = Dict2Class(d["aao_norad"][0])
