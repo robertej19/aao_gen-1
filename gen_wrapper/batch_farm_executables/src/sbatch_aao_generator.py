@@ -24,9 +24,6 @@ class Dict2Class(object):
             setattr(self, key, my_dict[key])
 
 def gen_sbatch(args,count):
-    print("FOR DEBUGGING, SLURM JOB NAME IN SBATCH AAO GENERATOR IS: ")
-    print(args.slurm_job_name)
-
     outfile = open(args.sbatch_textdir+"sbatch_lund_job_{}.txt".format(count),"w")
     header = """#!/bin/bash
 #
