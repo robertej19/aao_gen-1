@@ -30,7 +30,7 @@ def gen_sbatch(args,count):
 #SBATCH --account=clas12
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --mem-per-cpu=500
+#SBATCH --mem-per-cpu={4}
 #SBATCH --job-name={2}_{0}.job
 #SBATCH --time=24:00:00
 #SBATCH --gres=disk:500000000
@@ -44,9 +44,9 @@ echo $PWD
 
 # Sleep a random amount of time from 0-180s
 # This avoids conflicts when lots of jobs start simultaneously.
-TSLEEP=$[ ( $RANDOM % (180+1) ) ]s
+TSLEEP=$[ ( $RANDOM % (240+1) ) ]s
 echo "Sleeping for ${{TSLEEP}} ..."
-sleep $TSLEEP""".format(count,args.track,args.slurm_job_name,args.return_dir)
+sleep $TSLEEP""".format(count,args.track,args.slurm_job_name,args.return_dir,args.memory_request)
 
 
     setup = """
@@ -309,6 +309,10 @@ if __name__ == "__main__":
     parser.add_argument("--aao_gen_path_exe",help="Path to lund filter executable",default=aao_gen_path)
 
 
+    parser.add_argument("--aao_gen_path_exe",help="Path to lund filter executable",default=aao_gen_path)
+
+    parser.add_argument("--memory_request",help="Memory request for sbatch job",default="500")
+
     args = parser.parse_args()
 
 
@@ -320,6 +324,7 @@ if __name__ == "__main__":
         sys.exit()
 
     if args.generator_type == "rad":
+        args.memory_request = "200" #aao_rad uses less memory (not entirely sure why)
         if args.generator_exe_path==aao_norad_path:
             args.generator_exe_path = aao_rad_path #change to using radiative generator
         if args.filter_infile == "aao_norad.lund":
