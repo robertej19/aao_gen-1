@@ -139,6 +139,7 @@ def compare_raw_to_filt(args,num_desired_events):
 
 
 
+#generate list of size n
 
 
 def gen_events(args,repo_base_dir):
