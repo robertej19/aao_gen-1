@@ -308,9 +308,6 @@ if __name__ == "__main__":
     parser.add_argument("--return_dir",type=str,help="Directory you want batch farm files returned to",default="/volatile/clas12/robertej/")
     parser.add_argument("--aao_gen_path_exe",help="Path to lund filter executable",default=aao_gen_path)
 
-
-    parser.add_argument("--aao_gen_path_exe",help="Path to lund filter executable",default=aao_gen_path)
-
     parser.add_argument("--memory_request",help="Memory request for sbatch job",default="500")
 
     args = parser.parse_args()
